@@ -21,7 +21,7 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,6 +29,10 @@ jobs:
           node-version: 22
       - run: node --test scripts/fetch.test.mjs
       - run: node scripts/fetch.mjs
+        env:
+          # Small measurement window while the pipeline is being sized.
+          PUBLISHED_DAYS: "7"
+          ENDING_DAYS: "28"
       - uses: actions/upload-artifact@v4
         with:
           name: contracts

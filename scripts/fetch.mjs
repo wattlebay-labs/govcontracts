@@ -69,7 +69,14 @@ export function merge(map, record) {
 async function fetchWindow(dateType, from, to, stats) {
   let url = `${API}/${dateType}/${from}/${to}`;
   const releases = [];
+  const seen = new Set();
   for (let page = 0; url && page < MAX_PAGES_PER_WINDOW; page++) {
+    if (seen.has(url)) {
+      stats.errors.push({ url, error: "pagination loop" });
+      break;
+    }
+    seen.add(url);
+    stats.pages++;
     let body = null;
     for (let attempt = 1; attempt <= 3 && !body; attempt++) {
       try {
@@ -108,7 +115,8 @@ async function main() {
     ["contractPublished", windows(today - PUBLISHED_DAYS * DAY, today + DAY)],
     ["contractEnd", windows(today, today + ENDING_DAYS * DAY)],
   ];
-  const stats = { requests: 0, errors: [], pagedWindows: new Set() };
+  const stats = { requests: 0, pages: 0, errors: [], pagedWindows: new Set() };
+  const started = Date.now();
   const byId = new Map();
   const perPull = {};
   let maxWindow = 0;
@@ -116,8 +124,10 @@ async function main() {
   for (const [dateType, wins] of plan) {
     let n = 0;
     for (const [from, to] of wins) {
+      const pagesBefore = stats.pages;
       const releases = await fetchWindow(dateType, from, to, stats);
       n += releases.length;
+      console.log(`${dateType} ${from.slice(0, 10)}..${to.slice(0, 10)} releases=${releases.length} pages=${stats.pages - pagesBefore}`);
       maxWindow = Math.max(maxWindow, releases.length);
       for (const r of releases) merge(byId, compact(r));
     }
@@ -137,6 +147,8 @@ async function main() {
     settings: { PUBLISHED_DAYS, ENDING_DAYS, WINDOW_DAYS },
     perPull,
     requests: stats.requests,
+    pages: stats.pages,
+    seconds: Math.round((Date.now() - started) / 1000),
     largestWindow: maxWindow,
     windowsWithMorePages: stats.pagedWindows.size,
     contracts: records.length,

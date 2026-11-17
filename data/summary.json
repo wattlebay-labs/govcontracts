@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-11-17T09:28:02.066Z",
+  "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
+  "settings": {
+    "PUBLISHED_DAYS": 7,
+    "ENDING_DAYS": 28,
+    "WINDOW_DAYS": 7
+  },
+  "perPull": {
+    "contractPublished": {
+      "windows": 2,
+      "releases": 1239
+    },
+    "contractEnd": {
+      "windows": 4,
+      "releases": 4683
+    }
+  },
+  "requests": 66,
+  "pages": 66,
+  "seconds": 202,
+  "largestWindow": 2578,
+  "windowsWithMorePages": 5,
+  "contracts": 4121,
+  "suppliers": 1859,
+  "agencies": 118,
+  "categories": 337,
+  "totalValue": 7886998045,
+  "bytes": 1732087,
+  "errors": [],
+  "errorCount": 0,
+  "sample": [
+    {
+      "id": "CN4289084",
+      "released": "2026-11-16T04:10:00Z",
+      "description": "Booklets",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "CASG",
+      "supplier": "CLARKE MURPHY PRINT LTD & THE TRUSTE FOR KUHAR FAMILY",
+      "supplierAbn": "33908547289",
+      "supplierState": "NSW",
+      "value": 129508.5,
+      "start": "2025-10-28T13:00:00Z",
+      "end": "2025-11-03T13:00:00Z",
+      "unspsc": "14110000",
+      "method": "Limited tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4288231",
+      "released": "2026-11-11T06:59:48Z",
+      "description": "Artists Performance",
+      "agency": "Department of Foreign Affairs and Trade",
+      "agencyAbn": "47065634525",
+      "division": "FINANCE DIVISION",
+      "supplier": "Didge Pty Ltd",
+      "supplierAbn": "77618340784",
+      "supplierState": "NSW",
+      "value": 17415.31,
+      "start": "2026-06-15T14:00:00Z",
+      "end": "2026-06-15T14:00:00Z",
+      "unspsc": "82150000",
+      "method": "Limited tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4288126",
+      "released": "2026-11-11T02:45:46Z",
+      "description": "Traffic Management Services",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "AIRF",
+      "supplier": "CORE TRAFFIC CONTROL",
+      "supplierAbn": "84155689508",
+      "supplierState": "NT",
+      "value": 28891.6,
+      "start": "2026-07-22T14:00:00Z",
+      "end": "2026-07-25T14:00:00Z",
+      "unspsc": "46160000",
+      "method": "Limited tender",
+      "amendment": false
+    }
+  ]
+}

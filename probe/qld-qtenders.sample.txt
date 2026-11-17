@@ -1,0 +1,481 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTenders</title>
+    <base href="/">
+
+    <!-- Start the startup API calls now, in parallel with the WASM download, instead of one after
+         another once the runtime is up: Program.Main awaits app-config before RunAsync, MainLayout
+         then fetches Content/Site before dismissing the loader, and Home then fetches Content/Home
+         before its hero image is even in the DOM. crossorigin="anonymous" matches the mode and
+         credentials of Blazor's HttpClient fetch, so the runtime's request is served from the
+         preload. The URLs must match the code exactly, case included - a mismatch costs a
+         duplicate request and a console warning, nothing worse. -->
+    <link rel="preload" as="fetch" crossorigin="anonymous" href="/api/configuration/app-config">
+    <link rel="preload" as="fetch" crossorigin="anonymous" href="/Content/Site">
+    <script>
+        // Home only: its content and the hero image (the LCP element) are useless elsewhere.
+        if (window.location.pathname === '/') {
+            [['fetch', '/Content/Home'], ['image', '/images/home-heroimage.webp']].forEach(function (r) {
+                var link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = r[0];
+                link.href = r[1];
+                if (r[0] === 'fetch') link.crossOrigin = 'anonymous';
+                else link.fetchPriority = 'high';
+                document.head.appendChild(link);
+            });
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="icon" type="image/png" href="favicon.ico">
+
+    <script type="importmap">{
+  "imports": {
+    "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.kef5qmb50g.js",
+    "./_framework/dotnet.native.js": "./_framework/dotnet.native.oh4mklvcml.js",
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.5nc8i5dl74.js",
+    "./js/download-file.js": "./js/download-file.egbe3xw976.js",
+    "./js/editor-interop.js": "./js/editor-interop.u475uildrb.js",
+    "./js/gtm.js": "./js/gtm.1mhpsp9kbn.js",
+    "./js/localStorageCache.js": "./js/localStorageCache.oqhxmimwxp.js",
+    "./js/pretty-print-json.min.js": "./js/pretty-print-json.min.389ey7o2ve.js",
+    "./js/prettyPrintJsonInterop.js": "./js/prettyPrintJsonInterop.bzdt0yol0s.js",
+    "./js/treeMultiSelect.js": "./js/treeMultiSelect.7p486hwjmq.js",
+    "./js/utils.js": "./js/utils.1hmgbet8oj.js"
+  },
+  "scopes": {},
+  "integrity": {
+    "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/dotnet.js": "sha256-PD9lXZZbdO5cUus++gTrCpXrIJ3beT19YmDYPkkBuZ0=",
+    "./_framework/dotnet.kef5qmb50g.js": "sha256-PD9lXZZbdO5cUus++gTrCpXrIJ3beT19YmDYPkkBuZ0=",
+    "./_framework/dotnet.native.js": "sha256-PLiXbUCNkIhDlwpv3PI01+HtW84MS8BjXejeLtRRqn8=",
+    "./_framework/dotnet.native.oh4mklvcml.js": "sha256-PLiXbUCNkIhDlwpv3PI01+HtW84MS8BjXejeLtRRqn8=",
+    "./_framework/dotnet.runtime.5nc8i5dl74.js": "sha256-/3dBg9sj1yLD3h0PDMHnNUXWs/2zWwIMEzom1Xz3Q40=",
+    "./_framework/dotnet.runtime.js": "sha256-/3dBg9sj1yLD3h0PDMHnNUXWs/2zWwIMEzom1Xz3Q40=",
+    "./js/download-file.egbe3xw976.js": "sha256-goeos9GwYr6yCfMi4FSS+AFVtMmfJItc7kQ4sZneNIY=",
+    "./js/download-file.js": "sha256-goeos9GwYr6yCfMi4FSS+AFVtMmfJItc7kQ4sZneNIY=",
+    "./js/editor-interop.js": "sha256-olZ/8sWoYKHxlfEzMIRI8l5iYymdtEdb9p0dyYBMfRM=",
+    "./js/editor-interop.u475uildrb.js": "sha256-olZ/8sWoYKHxlfEzMIRI8l5iYymdtEdb9p0dyYBMfRM=",
+    "./js/gtm.1mhpsp9kbn.js": "sha256-l6r6SEiHsQDRxT2zSYdqBOI/ZYlTgRjIvtPSNMXsV/8=",
+    "./js/gtm.js": "sha256-l6r6SEiHsQDRxT2zSYdqBOI/ZYlTgRjIvtPSNMXsV/8=",
+    "./js/localStorageCache.js": "sha256-8GmccC44mN+3+Nl5VYe66kgU/m0swPafAdCo6rJ2EPk=",
+    "./js/localStorageCache.oqhxmimwxp.js": "sha256-8GmccC44mN+3+Nl5VYe66kgU/m0swPafAdCo6rJ2EPk=",
+    "./js/pretty-print-json.min.389ey7o2ve.js": "sha256-MwQJ7WZsLVosNqdpoqjh6AFiO4JbCvHaJQCwC+Ih0Yc=",
+    "./js/pretty-print-json.min.js": "sha256-MwQJ7WZsLVosNqdpoqjh6AFiO4JbCvHaJQCwC+Ih0Yc=",
+    "./js/prettyPrintJsonInterop.bzdt0yol0s.js": "sha256-B3SzECz9NcgcXy1T9RSK9y4x7QpqFH2Z4y00qgoXhLM=",
+    "./js/prettyPrintJsonInterop.js": "sha256-B3SzECz9NcgcXy1T9RSK9y4x7QpqFH2Z4y00qgoXhLM=",
+    "./js/treeMultiSelect.7p486hwjmq.js": "sha256-Ncwcp98tptK/hQ0WygKnSt2oBoVPm8GrkCqCn0iWgPk=",
+    "./js/treeMultiSelect.js": "sha256-Ncwcp98tptK/hQ0WygKnSt2oBoVPm8GrkCqCn0iWgPk=",
+    "./js/utils.1hmgbet8oj.js": "sha256-xYjVDN488f19puR0GFyHasBAnbnugQGnwKZk9K8gMD8=",
+    "./js/utils.js": "sha256-xYjVDN488f19puR0GFyHasBAnbnugQGnwKZk9K8gMD8="
+  }
+}</script>
+
+    <!-- Preconnect to speed up DNS/TLS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+
+    <!-- Google Tag Manager. Must load here, outside the Blazor lifecycle: injecting the GTM
+         snippet from a component was tried and Tag Assistant showed no data arriving, which is
+         why this file exists. Do not comment it out - analytics silently stops with no error. -->
+<!--    <script src="js/gtm.1mhpsp9kbn.js"></script>-->
+
+    <!-- Google Fonts: non-blocking load -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&amp;family=Noto+Sans:wght@400;600;900&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+
+    <!-- Stylesheets marked data-before-reveal do not block first paint: the loader needs only
+         app.css and the site CSS. Each is a preload that becomes a stylesheet once downloaded, so
+         it keeps its place in the cascade, and app.reveal() waits for all of them to apply before
+         dismissing the loader - nothing restyles (no fa-* icon or themed component pops in) in
+         front of the visitor. They used to be render-blocking, which held the first paint of the
+         loader itself behind ~1.6 MB of CSS. -->
+    <link rel="preload" as="style" href="/css/all.min.css" data-before-reveal="" onload="this.onload=null;this.rel='stylesheet'" onerror="this.dataset.beforeReveal='failed'">
+
+    <!-- The solid icon font is otherwise discovered only once all.min.css has applied and a glyph
+         is used, which leaves fa-* icons invisible (font-display:block) after the reveal. Must stay
+         crossorigin even though same-origin - fonts are fetched in CORS mode, and a mismatch
+         downloads it twice. The href must match the url() in all.min.css. -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="/webfonts/fa-solid-900.woff2">
+
+    <!-- Vite will replace this line -->
+    <link id="site-css" rel="stylesheet" href="/assets/site-nd3Z69Wy.css">
+
+    
+    <link rel="apple-touch-icon" sizes="128x128" href="content/qg-crest-apple.png">
+    <link rel="icon" sizes="192x192" href="content/qg-crest-android.png">
+    
+    <!-- For Knowledge Graph -->
+    <meta name="DCTERMS.identifier" content="https://www.qld.gov.au">
+    <meta property="kg.title" content="Queensland Government Arrangement Directoty">
+    <meta property="kg.identifier" content="QTENDERS">
+    <!-- END: For Knowledge Graph -->
+
+    <!-- SEO //-->
+    <meta name="description" content="QTenders Queensland Government Tenders Directory.">
+    <meta name="keywords" content="qtenders, tenders, procurement, government, Queensland, QTenders">
+    <meta name="DCTERMS.subject" content="qtenders, tenders, procurement, government, Queensland, QTenders">
+    <meta name="DCTERMS.license" content="https://www.qld.gov.au">
+    <meta name="department" content="Queensland Government">
+
+    <!-- Open Graph //-->
+    <meta property="og:title" content="Queensland Government Tenders Directory">
+    <meta name="twitter:title" content="Queensland Government Tenders Directory">
+    <meta property="og:description" content="Queensland Government Tenders Directory.">
+    <meta name="twitter:description" content="Queensland Government Tenders Directory.">
+    <meta property="og:image" content="https://www.qld.gov.au/__data/assets/image/0012/110460/Opengraph-default-thumbnail.png">
+    <meta name="twitter:image:src" content="https://www.qld.gov.au/__data/assets/image/0012/110460/Opengraph-default-thumbnail.png">
+    <meta property="og:url" content="https://www.qld.gov.au">
+    <meta property="og:type" content="article">
+
+    <!-- Telerik's script (4.6 MB) and theme load only where Telerik is used: the public search
+         pages, /admin and /org, all of which render under TelerikLayout. TelerikLayout awaits
+         app.ensureTelerik before rendering TelerikRootComponent, which needs the script.
+         On a page loaded directly on one of those routes the load starts here, during parsing, with
+         the theme marked data-before-reveal so the loader waits for it as it does for Font Awesome.
+         Elsewhere app.reveal prefetches both once the page has settled, for the next navigation.
+         Plain URLs: package assets publish without a fingerprint (see performance-spec.md). -->
+    <script>
+        window.app = window.app || {};
+        (function () {
+            var base = '_content/Telerik.UI.for.Blazor/';
+            var pending = null;
+
+            function loadTheme(beforeReveal) {
+                var existing = document.getElementById('kendo-theme');
+                if (existing) return existing.telerikApplied;
+                var link = document.createElement('link');
+                link.id = 'kendo-theme';
+                link.rel = 'preload';
+                link.as = 'style';
+                link.href = base + 'css/kendo-theme-default/all.css';
+                if (beforeReveal) link.dataset.beforeReveal = '';
+                link.telerikApplied = new Promise(function (resolve) {
+                    link.onload = function () { link.onload = null; link.rel = 'stylesheet'; resolve(); };
+                    link.onerror = function () { link.dataset.beforeReveal = 'failed'; resolve(); };
+                });
+                document.head.appendChild(link);
+                return link.telerikApplied;
+            }
+
+            function loadScript() {
+                return new Promise(function (resolve, reject) {
+                    var script = document.createElement('script');
+                    script.src = base + 'js/telerik-blazor.js';
+                    script.onload = resolve;
+                    script.onerror = function () {
+                        script.remove();
+                        reject(new Error('telerik-blazor.js failed to load'));
+                    };
+                    document.head.appendChild(script);
+                });
+            }
+
+            // Idempotent. Resolves once the script has run and the theme has applied (a theme that
+            // fails to load does not block). A failed script load is retried on the next call.
+            window.app.ensureTelerik = function (beforeReveal) {
+                if (!pending) {
+                    pending = Promise.all([loadScript(), loadTheme(beforeReveal)]);
+                    pending.catch(function () { pending = null; });
+                }
+                return pending;
+            };
+
+            window.app.prefetchTelerik = function () {
+                if (pending) return;
+                ['js/telerik-blazor.js', 'css/kendo-theme-default/all.css'].forEach(function (path) {
+                    var link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = base + path;
+                    document.head.appendChild(link);
+                });
+            };
+
+            window.app.isTelerikRoute =
+                /^\/(search|tenders\/search|fpp\/search|fpp\/searchresults|admin|org)(\/|$)/i.test(window.location.pathname);
+            if (window.app.isTelerikRoute) window.app.ensureTelerik(true);
+        })();
+    </script>
+
+    <!-- Blazor CSS isolation bundle. Hosted WASM aggregates scoped CSS under the HOST project name
+         (Epw.QTenders.ApiService), not the WASM project name. -->
+    <link rel="preload" as="style" href="Epw.QTenders.ApiService.styles.css" data-before-reveal="" onload="this.onload=null;this.rel='stylesheet'" onerror="this.dataset.beforeReveal='failed'">
+</head>
+
+<body>
+<!-- The loader comes first so it can paint before any script has downloaded. Every script below
+     is deferred - or a module, which is deferred too - so none of them blocks parsing or the
+     first paint, and they still run in document order once the document is parsed. -->
+<div id="initial-loader" aria-hidden="true">
+    <div class="initial-loader__bar" role="progressbar" aria-label="Loading QTenders" aria-valuemin="0" aria-valuemax="100">
+        <span class="initial-loader__bar-fill"></span>
+    </div>
+    <header role="banner">
+        <div class="tw:flex tw:flex-row tw:justify-center tw:bg-brandblue-500 tw:text-white tw:py-2 tw:text-base tw:border-t-1 tw:border-t-lime-600 tw:visited:text-white" style="font-family:'Noto Sans',sans-serif;">
+            <!-- Mirrors SiteHeader's utility bar: full-bleed with a px-5 gutter, not max-w-7xl. -->
+            <div class="tw:flex tw:flex-1 tw:px-5 tw:text-sm tw:items-center tw:justify-between">
+                <div class="tw:hidden tw:md:block tw:text-sm">
+                    Queensland Government
+                </div>
+                <div class="tw:md:hidden">
+                    <img src="images/qgovsmall.svg" alt="Queensland Government" class="tw:h-[1.75rem]">
+                </div>
+                <div class="tw:text-right tw:pr-10"></div>
+            </div>
+        </div>
+
+        <div class="tw:flex tw:flex-row tw:justify-center tw:pt-4 tw:pb-2 tw:mb-6 tw:px-2  tw:bg-white tw:text-brandblue-600">
+            <div class="tw:flex tw:flex-1 tw:items-center tw:gap-4 tw:mt-2 tw:md:px-auto tw:max-w-7xl">
+                <div class="tw:hidden tw:md:block tw:bg-white tw:text-brandblue-600 tw:border-r-lime-600 tw:border-r-2 tw:pr-6">
+                    <img src="images/qld-government-logo.svg" alt="Queensland Government" width="170" height="56" class="tw:text-brandblue-600">
+                </div>
+                <div class="tw:text-2xl tw:font-extrabold tw:leading-tight tw:tracking-tight  tw:font-firasans">
+                    <h1 tabindex="-1">Queensland Government QTenders Website</h1>
+                </div>
+            </div>
+        </div>
+        <nav class="tw:bg-brandgray-200 tw:border-b tw:border-brandgray-200 tw:border-b-lime-600 tw:border-b-8">
+            <div class="tw:mx-auto tw:max-w-7xl">
+                <div class="tw:hidden tw:md:flex tw:items-center tw:h-full">
+                    <div class="tw:h-[67px] tw:-mb-2 tw:px-4 tw:border-b-8 tw:pt-4 tw:pb-4 tw:font-notosans tw:border-b-lime-600">
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search-results shape: full-width search bar, filter rail, result cards. Only rendered on
+         the routes that actually look like this (see the @page directives in Pages/). On "/" it
+         used to promise a search page and then hand over a hero + tile grid, so the handover read
+         as a different site loading no matter how clean the fade was. Removed below when the
+         route does not match; the header and progress bar above are route-independent and stay. -->
+    <section class="initial-loader__content">
+        <div class="initial-loader__skeleton">
+            <div class="skeleton-block skeleton-block--search"></div>
+            <div class="skeleton-row">
+                <div class="skeleton-block skeleton-block--filters"></div>
+                <div class="skeleton-block-group">
+                    <div class="skeleton-block skeleton-block--card tw:animate-pulse"></div>
+                    <div class="skeleton-block skeleton-block--card tw:animate-pulse"></div>
+                    <div class="skeleton-block skeleton-block--card tw:animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        var searchShaped = /^\/(search|tenders\/search|fpp\/search|fpp\/searchresults)\/?$/i;
+        if (!searchShaped.test(window.location.pathname)) {
+            document.querySelector('.initial-loader__content')?.remove();
+        }
+    })();
+</script>
+
+<div id="app"></div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+<script src="_framework/blazor.webassembly.w3qd1tpl0e.js" autostart="false" defer=""></script>
+
+<script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js" defer=""></script>
+<script src="js/utils.1hmgbet8oj.js" defer=""></script>
+
+<!-- Boot. A module rather than a classic inline script, because an inline classic script cannot be
+     deferred: as a module it runs after the deferred scripts above, so Blazor is defined. Module scope keeps its helpers out of window; window.app is the API. -->
+<script type="module">
+    let queue = [];
+    let activeRequests = 0;
+    const maxConcurrent = 50;
+    const maxRetries = 5;
+    const retryDelay = 2000; // 2 seconds
+
+    // Read and parse the importmap (safe fallback to empty object)
+    const importMapEl = document.querySelector('script[type="importmap"]');
+    const assetMap = (function () {
+        try {
+            if (!importMapEl || !importMapEl.textContent) return {};
+            const parsed = JSON.parse(importMapEl.textContent);
+            return (parsed && parsed.imports) ? parsed.imports : {};
+        } catch (err) {
+            console.error('Failed to parse importmap:', err);
+            return {};
+        }
+    })();
+
+    window.app = window.app || {};
+    /**
+     * Resolve an asset name against the parsed import map `assetMap`.
+     *
+     * Behavior:
+     * 1. Try the name exactly as-provided.
+     * 2. Normalize by stripping leading `./` or `/` and try three variants:
+     *    - `./{base}`
+     *    - `/{base}`
+     *    - `{base}`
+     * 3. If a match is found in `assetMap` return the mapped value.
+     * 4. Otherwise return the original `name`.
+     *
+     * @param {string} name - The requested asset identifier (e.g. '/js/gtm.js' or './js/gtm.js').
+     * @returns {string} Resolved asset URL from `assetMap`, or the original `name` if no mapping exists.
+     */
+    window.app.getAsset = (name) => {
+        const asIs = String(name).trim();
+        if (assetMap[asIs]) return assetMap[asIs];
+
+        const stripLeading = (s) => s.replace(/^(\.\/|\/)+/, '');
+        const base = stripLeading(asIs);
+
+        const candidates = [
+            './' + base,
+            '/' + base,
+            base
+        ];
+
+        for (const c of candidates) {
+            if (assetMap[c]) return assetMap[c];
+        }
+
+        return name;
+    };
+    
+    /**
+     * Resolves once every data-before-reveal stylesheet in <head> has applied, or failed. Each is a
+     * preload whose onload switches it to rel="stylesheet", which fires load a second time once
+     * the sheet applies; onerror marks it failed. Those attributes record the state on the element
+     * because this script runs after parsing, by when either event may already have fired.
+     */
+    const stylesApplied = Promise.all([...document.querySelectorAll('link[data-before-reveal]')].map(link =>
+        new Promise(resolve => {
+            const settled = () => (link.rel === 'stylesheet' && link.sheet) || link.dataset.beforeReveal === 'failed';
+            if (settled()) return resolve();
+            link.addEventListener('load', () => settled() && resolve());
+            link.addEventListener('error', resolve);
+        })));
+
+    /**
+     * Dismiss the initial loader. Called by MainLayout once the layout has rendered with its
+     * real content - NOT when Blazor.start() resolves. Blazor.start() resolves as soon as the
+     * runtime is up and root components have had their first render, at which point MainLayout,
+     * the routed page and the header are all still awaiting HTTP, so revealing there uncovered
+     * a half-built page that then visibly filled in.
+     *
+     * Idempotent: the failsafe timer, the boot-error path and the app itself all race to call it.
+     */
+    let revealed = false;
+    window.app.reveal = () => {
+        if (revealed) return;
+        revealed = true;
+        // Wait for the data-before-reveal stylesheets, but never strand the loader on one that
+        // stalls. They are normally applied long before the runtime has even booted.
+        const cap = new Promise(resolve => setTimeout(resolve, 3000));
+        Promise.race([stylesApplied, cap]).then(() => {
+            document.documentElement.classList.add('blazor-ready');
+            // Outlast the 250ms opacity transition in app.css before removing the node.
+            setTimeout(() => document.getElementById('initial-loader')?.remove(), 400);
+            // Off the first visit's critical path: wait until the page has settled and the browser
+            // is idle. Prefetch downloads at the lowest priority and does not execute anything.
+            if (!window.app.isTelerikRoute) {
+                const whenIdle = window.requestIdleCallback ?? (cb => setTimeout(cb, 0));
+                setTimeout(() => whenIdle(window.app.prefetchTelerik), 5000);
+            }
+        });
+    };
+
+    Blazor.start({
+        loadBootResource: function (type, name, defaultUri, integrity) {
+            // Only batch wasm files (your 200 assemblies)
+            if (!name.endsWith('.wasm')) {
+                return defaultUri;
+            }
+
+            // Batch the wasm files
+            return new Promise((resolve, reject) => {
+                queue.push({
+                    defaultUri,
+                    integrity,
+                    resolve,
+                    reject,
+                    retryCount: 0
+                });
+                processQueue();
+            });
+        }
+    }).then(() => { // NOSONAR
+        // Failsafe only: if a content fetch stalls or throws, the app may never call reveal()
+        // and the loader would sit there forever. Reveal an imperfect page rather than nothing.
+        setTimeout(window.app.reveal, 5000);
+    }).catch((err) => {
+        // A boot failure previously left the loader up permanently over a hidden #app,
+        // i.e. a blank white page with no error surfaced.
+        console.error('Blazor failed to start:', err);
+        window.app.reveal();
+    });
+
+    function processQueue() {
+        while (queue.length > 0 && activeRequests < maxConcurrent) {
+            const item = queue.shift();
+            activeRequests++;
+
+            fetch(item.defaultUri, {
+                cache: 'default',
+                integrity: item.integrity
+            })
+                .then(response => {
+                    if (response.status === 504) {
+                        // Rate limit hit - retry after delay
+                        if (item.retryCount < maxRetries) {
+                            item.retryCount++;
+                            console.log(`504 error for ${item.defaultUri}, retry ${item.retryCount}/${maxRetries} in ${retryDelay}ms`);
+
+                            setTimeout(() => {
+                                queue.push(item); // Re-queue at the end
+                                processQueue();
+                            }, retryDelay);
+
+                            activeRequests--;
+                            return;
+                        } else {
+                            throw new Error(`Failed to load ${item.defaultUri} after ${maxRetries} retries: 504 Gateway Timeout`);
+                        }
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${item.defaultUri}: ${response.status}`);
+                    }
+
+                    item.resolve(response);
+                    activeRequests--;
+                    processQueue();
+                })
+                .catch(err => {
+                    // Network errors might also benefit from retry
+                    if (item.retryCount < maxRetries && (err.message.includes('504') || err.message.includes('Failed to fetch'))) {
+                        item.retryCount++;
+                        console.log(`Network error for ${item.defaultUri}, retry ${item.retryCount}/${maxRetries} in ${retryDelay}ms`);
+
+                        setTimeout(() => {
+                            queue.push(item);
+                            processQueue();
+                        }, retryDelay);
+
+                        activeRequests--;
+                    } else {
+                        item.reject(err);
+                        activeRequests--;
+                        processQueue();
+                    }
+                });
+        }
+    }
+</script>
+
+</body></html>

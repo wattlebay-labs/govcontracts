@@ -1,0 +1,44 @@
+name: fetch-data
+# Daily pull of contract notices from the official AusTender OCDS API.
+# The full dataset is kept as a workflow artifact; only the small summary
+# is committed, so the repository does not grow by megabytes a day.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 18 * * *" # 05:17 Melbourne (AEDT)
+  push:
+    paths:
+      - "scripts/fetch.mjs"
+      - ".github/workflows/fetch.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-data
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test scripts/
+      - run: node scripts/fetch.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contracts
+          path: data/contracts.json
+          retention-days: 14
+      - name: Commit summary
+        run: |
+          git config user.name "govcontracts-bot"
+          git config user.email "govcontracts-bot@users.noreply.github.com"
+          git add data/summary.json
+          git commit -m "Data summary $(date -u +%F)" || echo "nothing to commit"
+          git pull --rebase --autostash
+          git push

@@ -1,4 +1,4 @@
-// Run with: node --test scripts/
+// Run with: node --test scripts/fetch.test.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
 import { compact, merge, windows } from "./fetch.mjs";

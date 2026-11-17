@@ -1,0 +1,29 @@
+name: probe-sources
+# One-off diagnostic: fetch each candidate public data source once and
+# commit a small sample so the pipeline can be written against real data.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/probe.yml"
+      - "scripts/probe.mjs"
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/probe.mjs
+      - name: Commit samples
+        run: |
+          git config user.name "govcontracts-bot"
+          git config user.email "govcontracts-bot@users.noreply.github.com"
+          git add probe
+          git commit -m "Probe: source samples" || echo "nothing to commit"
+          git push

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "austender-rss",
+    "url": "https://www.tenders.gov.au/public_data/rss/rss.xml",
+    "status": 403,
+    "finalUrl": "https://www.tenders.gov.au/public_data/rss/rss.xml",
+    "contentType": "text/html",
+    "bytes": 919
+  },
+  {
+    "name": "austender-atm-list",
+    "url": "https://www.tenders.gov.au/atm",
+    "status": 403,
+    "finalUrl": "https://www.tenders.gov.au/atm",
+    "contentType": "text/html",
+    "bytes": 919
+  },
+  {
+    "name": "austender-ocds-contracts",
+    "url": "https://api.tenders.gov.au/ocds/findByDates/contractPublished/2026-11-14T00:00:00Z/2026-11-15T00:00:00Z",
+    "status": 200,
+    "finalUrl": "https://api.tenders.gov.au/ocds/findByDates/contractPublished/2026-11-14T00:00:00Z/2026-11-15T00:00:00Z",
+    "contentType": "application/json",
+    "bytes": 4031
+  },
+  {
+    "name": "nsw-ocds-tenders",
+    "url": "https://www.tenders.nsw.gov.au/?event=public.api.tender.search&ResultsPerPage=20",
+    "status": 403,
+    "finalUrl": "https://buy.nsw.gov.au/",
+    "contentType": "text/html",
+    "bytes": 919
+  },
+  {
+    "name": "nsw-buy-opportunities",
+    "url": "https://buy.nsw.gov.au/opportunity/search",
+    "status": 403,
+    "finalUrl": "https://buy.nsw.gov.au/opportunity/search",
+    "contentType": "text/html",
+    "bytes": 919
+  },
+  {
+    "name": "qld-qtenders",
+    "url": "https://qtenders.epw.qld.gov.au/qtenders/tender/search/tender-search.do?action=advanced-tender-search-open-tender",
+    "status": 200,
+    "finalUrl": "https://qtenders.hpw.qld.gov.au/",
+    "contentType": "text/html",
+    "bytes": 25179
+  },
+  {
+    "name": "vic-tenders",
+    "url": "https://www.tenders.vic.gov.au/tender/search?preset=open",
+    "status": 403,
+    "finalUrl": "https://www.tenders.vic.gov.au/tender/search?preset=open",
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 5671
+  },
+  {
+    "name": "wa-tenders",
+    "url": "https://www.tenders.wa.gov.au/watenders/tender/search/tender-search.do?action=advanced-tender-search-open-tender",
+    "status": 403,
+    "finalUrl": "https://www.tenders.wa.gov.au/watenders/tender/search/tender-search.do?action=advanced-tender-search-open-tender",
+    "contentType": "text/html",
+    "bytes": 1177
+  },
+  {
+    "name": "sa-tenders",
+    "url": "https://www.tenders.sa.gov.au/tender/search?preset=open",
+    "status": 403,
+    "finalUrl": "https://www.tenders.sa.gov.au/tender/search?preset=open",
+    "contentType": "text/html; charset=UTF-8",
+    "bytes": 5671
+  },
+  {
+    "name": "tas-tenders",
+    "url": "https://www.tenders.tas.gov.au/OpenForBids/List",
+    "status": 200,
+    "finalUrl": "https://www.tenders.tas.gov.au/Error/Index",
+    "contentType": "text/html; charset=utf-8",
+    "bytes": 24097
+  }
+]

@@ -29,8 +29,11 @@ or other work out of this repo, its commits and its site.
   early or hits an error is picked up by the next one. A new dataset takes several runs to fill
   (`horizon.complete` in the summary says when it has).
 - Measured 18 Nov 2026: about 3.5 seconds per page of 100 releases; 143 releases a day by publish date;
-  end dates bunch up (the week of 31 December returned 7,378 releases, 75 pages, in one window), so
-  expect the 30 June window to be the longest. `HARD_SECONDS` stops a run before the job time limit.
+  end dates bunch up: the week of 31 December returned 7,378 releases (75 pages) and the week of
+  30 June 25,025 releases (252 pages, 14 minutes) in one window. A window is never cut short by the
+  budget, only by `HARD_SECONDS`, which stops a run before the job time limit.
+- After two runs (18 Nov 2026): 34,947 contracts, 9,116 supplier ABNs, 135 agencies, 486 UNSPSC
+  codes, 15.5 MB of JSON (1.8 MB in the cache), horizon fetched to 30 June 2027.
 - How the API reports amendments (seen in live data): the release is tagged `contractAmendment`,
   `contracts[0].id` stays the parent CN, `contracts[0].amendments[].id` is `CN…-A1`, and
   `value.amount` is the new total contract value, not the change. So the newest release per CN is the

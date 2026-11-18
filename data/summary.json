@@ -1,88 +1,315 @@
 {
-  "generatedAt": "2026-11-18T01:02:16.545Z",
+  "generatedAt": "2026-11-18T09:02:00Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
-    "PUBLISHED_DAYS": 7,
-    "ENDING_DAYS": 28,
-    "WINDOW_DAYS": 7
+    "PUBLISHED_DAYS": 30,
+    "ENDING_DAYS": 365,
+    "WINDOW_DAYS": 7,
+    "OVERLAP_DAYS": 1,
+    "PAUSE_MS": 800,
+    "BUDGET_SECONDS": 720
+  },
+  "resumed": false,
+  "runs": 1,
+  "datasetStarted": "2026-11-18T08:49:35Z",
+  "cursors": {
+    "contractPublished": "2026-11-18T08:49:35Z",
+    "contractLastModified": "2026-11-18T08:49:35Z",
+    "contractEnd": "2027-02-03T00:00:00Z"
+  },
+  "horizon": {
+    "from": "2026-11-18T00:00:00Z",
+    "fetchedTo": "2027-02-03T00:00:00Z",
+    "target": "2027-11-19T00:00:00Z",
+    "complete": false
   },
   "perPull": {
     "contractPublished": {
-      "windows": 2,
-      "releases": 971
+      "windows": 5,
+      "releases": 4432,
+      "from": "2026-10-18T00:00:00Z",
+      "to": "2026-11-18T08:49:35Z",
+      "caughtUp": true,
+      "cursor": "2026-11-18T08:49:35Z"
+    },
+    "contractLastModified": {
+      "windows": 1,
+      "releases": 891,
+      "from": "2026-11-17T00:00:00Z",
+      "to": "2026-11-18T08:49:35Z",
+      "caughtUp": true,
+      "cursor": "2026-11-18T08:49:35Z"
     },
     "contractEnd": {
-      "windows": 4,
-      "releases": 4675
+      "windows": 11,
+      "releases": 17631,
+      "from": "2026-11-18T00:00:00Z",
+      "to": "2027-11-19T00:00:00Z",
+      "caughtUp": false,
+      "cursor": "2027-02-03T00:00:00Z"
     }
   },
-  "requests": 65,
-  "pages": 65,
-  "seconds": 198,
-  "largestWindow": 2578,
-  "windowsWithMorePages": 5,
-  "contracts": 3887,
-  "suppliers": 1801,
-  "agencies": 118,
-  "categories": 334,
-  "totalValue": 7824967672,
-  "bytes": 1635007,
-  "errors": [
-    {
-      "url": "https://api.tenders.gov.au/ocds/findByDates/contractPublished/2026-11-18T00:00:00Z/2026-11-19T00:00:00Z",
-      "status": 400
-    }
-  ],
-  "errorCount": 1,
+  "requests": 256,
+  "pages": 256,
+  "seconds": 745,
+  "budgetSpent": true,
+  "windowsTried": 17,
+  "windowsOk": 17,
+  "largestWindow": 7378,
+  "windowsWithMorePages": 17,
+  "contractsBefore": 0,
+  "contracts": 13633,
+  "contractsEndingWithinHorizon": 11885,
+  "amendedContracts": 3467,
+  "suppliers": 4269,
+  "agencies": 133,
+  "categories": 439,
+  "totalValue": 41354331507,
+  "earliestEnd": "1900-01-01T00:00:00Z",
+  "latestEnd": "2046-10-27T13:00:00Z",
+  "bytes": 6020866,
+  "errors": [],
+  "errorCount": 0,
+  "diagnostics": {
+    "tags": {
+      "contract": 14694,
+      "contractAmendment": 8260
+    },
+    "lastModified": {
+      "releases": 891,
+      "amendments": 489,
+      "alsoInPublishedPull": 183,
+      "newToDataset": 256
+    },
+    "amendmentSamples": [
+      {
+        "dateType": "contractPublished",
+        "ocid": "prod-24cb5553c0c54b2d9bbc2a0fc4d8764f",
+        "releaseDate": "2026-11-13T01:14:32Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4284462",
+          "awardID": "CN4284462-ce9302bba1c447eb93748fc4b4db7a6d",
+          "dateSigned": "2026-10-23T07:51:15Z",
+          "description": "Temporary Personnel Services",
+          "title": "4600031172",
+          "items": [
+            {
+              "id": "80111600-6006351713b1401c975ecd0137e5b92d",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "80111600"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-10-11T13:00:00Z",
+            "endDate": "2027-06-29T14:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "454159.19"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4284462-A1",
+              "releaseID": "prod-24cb5553c0c54b2d9bbc2a0fc4d8764f-e4eea4ae5f2e3ebca0682f1a5171e6e4",
+              "amendsReleaseID": "prod-24cb5553c0c54b2d9bbc2a0fc4d8764f-df2845911691334484a62950ac3a2427"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4284462",
+          "notice": "CN4284462",
+          "released": "2026-10-23T07:51:15Z",
+          "description": "Temporary Personnel Services",
+          "agency": "Department of Foreign Affairs and Trade",
+          "agencyAbn": "47065634525",
+          "division": "FINANCE DIVISION",
+          "supplier": "Bardach Pty Ltd TA Bardach Consulti",
+          "supplierAbn": "46655352300",
+          "supplierState": "ACT",
+          "value": 381987.2,
+          "start": "2026-10-11T13:00:00Z",
+          "end": "2027-06-29T14:00:00Z",
+          "unspsc": "80111600",
+          "method": "Open tender",
+          "amendment": false
+        }
+      },
+      {
+        "dateType": "contractPublished",
+        "ocid": "prod-0b346f6c21064d9a8b9f03cb330d624a",
+        "releaseDate": "2026-10-30T03:25:35Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4284428",
+          "awardID": "CN4284428-d919372d3c6b46ceb98ba383c847962d",
+          "dateSigned": "2026-10-23T05:25:36Z",
+          "description": "IMTS291 BrowserStack",
+          "title": "CON/GAUCON/CON0004483/3",
+          "items": [
+            {
+              "id": "43230000-b18165d0c646481395f471b3712f76eb",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "43230000"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-03-07T13:00:00Z",
+            "endDate": "2027-03-06T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "20000.00"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4284428-A1",
+              "releaseID": "prod-0b346f6c21064d9a8b9f03cb330d624a-55810c07b3e43622bde5a6714dec7093",
+              "amendsReleaseID": "prod-0b346f6c21064d9a8b9f03cb330d624a-db4ce31b52b030f3bba93ce96645ad14"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4284428",
+          "notice": "CN4284428",
+          "released": "2026-10-23T05:25:36Z",
+          "description": "IMTS291 BrowserStack",
+          "agency": "Australian Competition and Consumer Commission",
+          "agencyAbn": "94410483623",
+          "division": "Finance and Corporate Services",
+          "supplier": "BrowserStack Inc",
+          "supplierAbn": null,
+          "supplierState": "Outside Australia",
+          "value": 19326.07,
+          "start": "2026-03-07T13:00:00Z",
+          "end": "2027-03-06T13:00:00Z",
+          "unspsc": "43230000",
+          "method": "Limited tender",
+          "amendment": false
+        }
+      },
+      {
+        "dateType": "contractPublished",
+        "ocid": "prod-bb4be8433e0e4e21b3f79da64f197de5",
+        "releaseDate": "2026-10-29T03:04:41Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4284252",
+          "awardID": "CN4284252-0c66ce8bfd93475cb1edcf1fac77ac96",
+          "dateSigned": "2026-10-22T04:45:51Z",
+          "description": "Labour Hire Novated contract. Previous CN4198952",
+          "title": "4500165017",
+          "items": [
+            {
+              "id": "80111600-685e4190b1d14911900349a6c6fcf584",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "80111600"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2025-11-02T13:00:00Z",
+            "endDate": "2027-10-28T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "358645.29"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4284252-A1",
+              "releaseID": "prod-bb4be8433e0e4e21b3f79da64f197de5-9a98501a416c386e9bbaa684b7b9f2bc",
+              "amendsReleaseID": "prod-bb4be8433e0e4e21b3f79da64f197de5-2bd7b1fd385b32dba956fc2d6bd84aac"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4284252",
+          "notice": "CN4284252",
+          "released": "2026-10-22T04:45:51Z",
+          "description": "Labour Hire Novated contract. Previous CN4198952",
+          "agency": "Department of Health, Disability and Ageing",
+          "agencyAbn": "83605426759",
+          "division": "DEPARTMENT OF HEALTH",
+          "supplier": "HUDSON AUST PTY LIMITED",
+          "supplierAbn": "12701364623",
+          "supplierState": "NSW",
+          "value": 50278.14,
+          "start": "2025-11-02T13:00:00Z",
+          "end": "2027-10-28T13:00:00Z",
+          "unspsc": "80111600",
+          "method": "Open tender",
+          "amendment": false
+        }
+      }
+    ]
+  },
   "sample": [
     {
-      "id": "CN4289084",
-      "released": "2026-11-16T04:10:00Z",
-      "description": "Booklets",
+      "id": "CN4286111",
+      "notice": "CN4286111",
+      "released": "2026-11-02T03:59:54Z",
+      "description": "Protective Wear",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
       "division": "CASG",
-      "supplier": "CLARKE MURPHY PRINT LTD & THE TRUSTE FOR KUHAR FAMILY",
-      "supplierAbn": "33908547289",
-      "supplierState": "NSW",
-      "value": 129508.5,
-      "start": "2025-10-28T13:00:00Z",
-      "end": "2025-11-03T13:00:00Z",
-      "unspsc": "14110000",
+      "supplier": "TOLL REMOTE LOGISTICS PTY LTD",
+      "supplierAbn": "99004210093",
+      "supplierState": "VIC",
+      "value": 15504.72,
+      "start": "2026-10-28T13:00:00Z",
+      "end": "2026-11-18T13:00:00Z",
+      "unspsc": "80101706",
+      "method": "Open tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4289322",
+      "notice": "CN4289322",
+      "released": "2026-11-17T03:47:08Z",
+      "description": "Venue Hire and Catering Services",
+      "agency": "Department of Agriculture, Fisheries and Forestry",
+      "agencyAbn": "34190894983",
+      "division": null,
+      "supplier": "MANGROVE RESORT HOTEL TRUST NO 1",
+      "supplierAbn": "90376936235",
+      "supplierState": "WA",
+      "value": 12405,
+      "start": "2026-11-16T13:00:00Z",
+      "end": "2026-11-18T13:00:00Z",
+      "unspsc": "80141607",
       "method": "Limited tender",
       "amendment": false
     },
     {
-      "id": "CN4289385",
-      "released": "2026-11-17T23:09:49Z",
-      "description": "Training and Project Deep Dive Session",
-      "agency": "Geoscience Australia",
-      "agencyAbn": "80091799039",
-      "division": "Enabling Services",
-      "supplier": "International Centre of Insect Physiology and Ecology ICIPE",
-      "supplierAbn": null,
-      "supplierState": "Outside Australia",
-      "value": 39486,
-      "start": "2026-01-05T13:00:00Z",
-      "end": "2026-01-29T13:00:00Z",
-      "unspsc": "80101604",
-      "method": "Limited tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4288231",
-      "released": "2026-11-11T06:59:48Z",
-      "description": "Artists Performance",
-      "agency": "Department of Foreign Affairs and Trade",
-      "agencyAbn": "47065634525",
-      "division": "FINANCE DIVISION",
-      "supplier": "Didge Pty Ltd",
-      "supplierAbn": "77618340784",
-      "supplierState": "NSW",
-      "value": 17415.31,
-      "start": "2026-06-15T14:00:00Z",
-      "end": "2026-06-15T14:00:00Z",
-      "unspsc": "82150000",
+      "id": "CN4289076",
+      "notice": "CN4289076",
+      "released": "2026-11-16T04:09:55Z",
+      "description": "Detector Equipment",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "NSSG",
+      "supplier": "HASTINGS DEERING (AUST) PTY LTD",
+      "supplierAbn": "49054094647",
+      "supplierState": "QLD",
+      "value": 44019.17,
+      "start": "2026-10-29T13:00:00Z",
+      "end": "2026-11-18T13:00:00Z",
+      "unspsc": "25111900",
       "method": "Limited tender",
       "amendment": false
     }

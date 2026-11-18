@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T09:28:02.066Z",
+  "generatedAt": "2026-11-18T01:02:16.545Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 7,
@@ -9,26 +9,31 @@
   "perPull": {
     "contractPublished": {
       "windows": 2,
-      "releases": 1239
+      "releases": 971
     },
     "contractEnd": {
       "windows": 4,
-      "releases": 4683
+      "releases": 4675
     }
   },
-  "requests": 66,
-  "pages": 66,
-  "seconds": 202,
+  "requests": 65,
+  "pages": 65,
+  "seconds": 198,
   "largestWindow": 2578,
   "windowsWithMorePages": 5,
-  "contracts": 4121,
-  "suppliers": 1859,
+  "contracts": 3887,
+  "suppliers": 1801,
   "agencies": 118,
-  "categories": 337,
-  "totalValue": 7886998045,
-  "bytes": 1732087,
-  "errors": [],
-  "errorCount": 0,
+  "categories": 334,
+  "totalValue": 7824967672,
+  "bytes": 1635007,
+  "errors": [
+    {
+      "url": "https://api.tenders.gov.au/ocds/findByDates/contractPublished/2026-11-18T00:00:00Z/2026-11-19T00:00:00Z",
+      "status": 400
+    }
+  ],
+  "errorCount": 1,
   "sample": [
     {
       "id": "CN4289084",
@@ -48,6 +53,23 @@
       "amendment": false
     },
     {
+      "id": "CN4289385",
+      "released": "2026-11-17T23:09:49Z",
+      "description": "Training and Project Deep Dive Session",
+      "agency": "Geoscience Australia",
+      "agencyAbn": "80091799039",
+      "division": "Enabling Services",
+      "supplier": "International Centre of Insect Physiology and Ecology ICIPE",
+      "supplierAbn": null,
+      "supplierState": "Outside Australia",
+      "value": 39486,
+      "start": "2026-01-05T13:00:00Z",
+      "end": "2026-01-29T13:00:00Z",
+      "unspsc": "80101604",
+      "method": "Limited tender",
+      "amendment": false
+    },
+    {
       "id": "CN4288231",
       "released": "2026-11-11T06:59:48Z",
       "description": "Artists Performance",
@@ -61,23 +83,6 @@
       "start": "2026-06-15T14:00:00Z",
       "end": "2026-06-15T14:00:00Z",
       "unspsc": "82150000",
-      "method": "Limited tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4288126",
-      "released": "2026-11-11T02:45:46Z",
-      "description": "Traffic Management Services",
-      "agency": "Department of Defence",
-      "agencyAbn": "62950639680",
-      "division": "AIRF",
-      "supplier": "CORE TRAFFIC CONTROL",
-      "supplierAbn": "84155689508",
-      "supplierState": "NT",
-      "value": 28891.6,
-      "start": "2026-07-22T14:00:00Z",
-      "end": "2026-07-25T14:00:00Z",
-      "unspsc": "46160000",
       "method": "Limited tender",
       "amendment": false
     }

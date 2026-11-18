@@ -242,3 +242,17 @@ test("amendments are counted and sampled against the record held before", async 
   assert.equal(JSON.stringify(stats.amendmentSamples).includes("telephone"), false);
   assert.equal(stats.tags.contractAmendment, 1);
 });
+
+test("a window that outlasts the hard time limit is cut short and retried next run", async () => {
+  const cfg = settings({ PUBLISHED_DAYS: "1", ENDING_DAYS: "6", BUDGET_SECONDS: "50", HARD_SECONDS: "20" });
+  const start = Date.parse("2026-11-18T09:30:00Z");
+  const state = newState(start, cfg);
+  const byId = new Map();
+  // 60 releases per window = 30 pages at one second each: longer than the limit.
+  const stats = await sync(state, byId, cfg, fakeIo(fakeApi({ perWindow: 60 }), start));
+  assert.equal(stats.errors.length, 1);
+  assert.equal(stats.errors[0].error, "time limit");
+  assert.ok(byId.size > 0); // what was read is kept
+  assert.equal(state.cursors.contractPublished, "2026-11-17T00:00:00Z"); // but the cursor has not moved
+  assert.equal(stats.windowsOk, 0);
+});

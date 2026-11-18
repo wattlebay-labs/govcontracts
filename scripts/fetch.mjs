@@ -20,7 +20,11 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const API = "https://api.tenders.gov.au/ocds/findByDates";
 const UA = "govcontracts/0.2 (+https://github.com/wattlebay-labs/govcontracts)";
-const MAX_PAGES_PER_WINDOW = 200;
+// Contract end dates bunch up on a few days (31 December, 30 June), so one
+// window can run to hundreds of pages. The page cap only guards against a
+// runaway; HARD_SECONDS is what stops a run before the job's own time limit,
+// so that what was fetched is still saved.
+const MAX_PAGES_PER_WINDOW = 1500;
 const STATE_VERSION = 1;
 const DAY = 864e5;
 
@@ -39,6 +43,7 @@ export function settings(env = process.env) {
     OVERLAP_DAYS: num("OVERLAP_DAYS", 1),
     PAUSE_MS: num("PAUSE_MS", 800),
     BUDGET_SECONDS: num("BUDGET_SECONDS", 600),
+    HARD_SECONDS: num("HARD_SECONDS", 2400),
   };
 }
 
@@ -138,6 +143,10 @@ async function fetchWindow(dateType, from, to, stats, io, cfg) {
       stats.errors.push({ url, error: "pagination loop" });
       return { releases, ok: false };
     }
+    if (io.now() >= stats.hardDeadline) {
+      stats.errors.push({ url, error: "time limit", pagesRead: page });
+      return { releases, ok: false };
+    }
     seen.add(url);
     stats.pages++;
     let body = null;
@@ -180,6 +189,7 @@ export async function sync(state, byId, cfg, io) {
   const started = io.now();
   const deadline = started + cfg.BUDGET_SECONDS * 1000;
   const stats = {
+    hardDeadline: started + cfg.HARD_SECONDS * 1000,
     requests: 0,
     pages: 0,
     errors: [],
@@ -201,7 +211,7 @@ export async function sync(state, byId, cfg, io) {
     stats.perPull[dateType] = mine;
     let complete = true;
     for (const [from, to] of windows(pull.from, pull.to, cfg.WINDOW_DAYS)) {
-      if (io.now() >= deadline) {
+      if (io.now() >= Math.min(deadline, stats.hardDeadline)) {
         stats.budgetSpent = true;
         complete = false;
         break;

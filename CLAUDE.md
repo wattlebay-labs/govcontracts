@@ -18,6 +18,21 @@ or other work out of this repo, its commits and its site.
 - BLOCKED (403, CloudFront/Cloudflare): AusTender open-tender pages and RSS, NSW, VIC, SA, WA portals.
 - Unclear: QLD QTenders (redirects to a new site), TAS (error page). Not yet usable.
 
+## Data pipeline (`scripts/fetch.mjs`, workflow `fetch-data`)
+- The dataset is `data/contracts.json` (one compact record per contract, amendments filed under the
+  parent CN) plus `data/state.json` (cursors). Neither is committed: both travel between runs in the
+  workflow cache (`dataset-v1-*`, newest wins) and are also uploaded as the `contracts` artifact.
+  Only `data/summary.json` is committed; read it to see what the last run did.
+- Each run does three pulls in 7-day windows under a time budget (`BUDGET_SECONDS`): `contractPublished`
+  and `contractLastModified` from their cursors to now, then `contractEnd` from its cursor towards
+  today + 365 days. A cursor only moves past a window that came back complete, so a run that stops
+  early or hits an error is picked up by the next one. A new dataset takes several runs to fill
+  (`horizon.complete` in the summary says when it has).
+- Measured: about 3 seconds per page of 100 releases; about 170 contracts end per day of horizon.
+- If the cache is lost (unused for 7 days) the script starts a new dataset by itself.
+- A later job that needs the data (site build) should run in the same workflow after the fetch, or
+  restore the same cache.
+
 ## How to run things
 - The cloud shell has no internet. Push code; let GitHub Actions run it; pull the results.
 - Watch runs: `gh api repos/wattlebay-labs/govcontracts/actions/runs --jq '.workflow_runs[0] | .status+" "+(.conclusion//"")'`

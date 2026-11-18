@@ -1,7 +1,9 @@
 name: fetch-data
 # Daily pull of contract notices from the official AusTender OCDS API.
-# The full dataset is kept as a workflow artifact; only the small summary
-# is committed, so the repository does not grow by megabytes a day.
+# The dataset and its cursors travel from run to run in the workflow cache,
+# so a run only asks the API for what is new, and a new dataset is built up
+# over several runs instead of one long one. Only the small summary is
+# committed, so the repository does not grow by megabytes a day.
 on:
   workflow_dispatch:
   schedule:
@@ -21,24 +23,42 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - run: node --test scripts/fetch.test.mjs
+      - name: Restore dataset from the previous run
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/contracts.json
+            data/state.json
+          key: dataset-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            dataset-v1-
       - run: node scripts/fetch.mjs
         env:
-          # Small measurement window while the pipeline is being sized.
-          PUBLISHED_DAYS: "7"
-          ENDING_DAYS: "28"
+          # Seconds of fetching per run; the next run resumes where this stops.
+          BUDGET_SECONDS: "720"
+      - name: Save dataset for the next run
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/contracts.json
+            data/state.json
+          key: dataset-v1-${{ github.run_id }}-${{ github.run_attempt }}
       - uses: actions/upload-artifact@v4
         with:
           name: contracts
-          path: data/contracts.json
+          path: |
+            data/contracts.json
+            data/state.json
           retention-days: 14
       - name: Commit summary
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "govcontracts-bot"
           git config user.email "govcontracts-bot@users.noreply.github.com"

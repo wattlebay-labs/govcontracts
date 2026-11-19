@@ -97,9 +97,9 @@ export const fmtAbn = (abn) => `${abn.slice(0, 2)} ${abn.slice(2, 5)} ${abn.slic
 const tidy = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
 const clip = (s, n) => (s.length > n ? `${s.slice(0, n - 1).trimEnd()}…` : s);
 
-// The most frequent values, ignoring case and spacing, each shown in the
+// Distinct values, most frequent first, ignoring case and spacing, each in the
 // spelling it most often has. Ties go alphabetically so builds are stable.
-export function commonest(values, n = 1) {
+export function ranked(values) {
   const groups = new Map();
   for (const raw of values) {
     const text = tidy(raw);
@@ -112,8 +112,29 @@ export function commonest(values, n = 1) {
   }
   return [...groups.entries()]
     .sort((a, b) => b[1].count - a[1].count || (a[0] < b[0] ? -1 : 1))
+    .map(([, g]) => ({ text: [...g.forms.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0], count: g.count }));
+}
+export const commonest = (values, n = 1) =>
+  ranked(values)
     .slice(0, n)
-    .map(([, g]) => [...g.forms.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0][0]);
+    .map((x) => x.text);
+
+// What a UNSPSC code is used for, judged from the descriptions on its
+// contracts. A description only stands for the code when it recurs: in some
+// codes every contract is described differently, and one contract's wording
+// would mislead. `label` needs 3 contracts and either 5% of the code's
+// described contracts or 20 of them; `typical` lists descriptions seen twice
+// or more.
+export function describeCode(descriptions) {
+  const list = ranked(descriptions);
+  const described = list.reduce((s, x) => s + x.count, 0);
+  const top = list[0];
+  const label = top && top.count >= 3 && (top.count >= 20 || top.count / described >= 0.05) ? clip(top.text, 70) : null;
+  const typical = list
+    .filter((x) => x.count >= 2)
+    .slice(0, 3)
+    .map((x) => clip(x.text, 70));
+  return { label, typical };
 }
 
 // ---------- the model ----------
@@ -185,8 +206,7 @@ export function analyse(records, nowMs) {
 
   const categories = [...group((r) => r.code).entries()]
     .map(([code, list]) => {
-      const typical = commonest(list.map((r) => r.description), 3).map((d) => clip(d, 70));
-      return { code, rows: list, typical, label: typical[0] || null, ...tally(list) };
+      return { code, rows: list, ...describeCode(list.map((r) => r.description)), ...tally(list) };
     })
     .sort((a, b) => (a.code < b.code ? -1 : 1));
 
@@ -443,14 +463,14 @@ ${leaderTable(
     title: `Australian Government contracts by category (UNSPSC) | ${SITE_NAME}`,
     description: `Australian Government contracts in ${num(model.categories.length)} UNSPSC categories, with the number and value ending in the next 12 months.`,
     body: (a) => `<h1>Contracts by category</h1>
-<p class="note">AusTender files every contract under a UNSPSC code. The notices give the code but not its official title, so next to each code this page shows the description that agencies most often wrote on contracts filed under it. It is a guide to what the code is used for, not the official name.</p>
+<p class="note">AusTender files every contract under a UNSPSC code. The notices give the code but not its official title, so next to each code this page shows the description that agencies most often wrote on contracts filed under it, where one recurs. It is a guide to what the code is used for, not the official name.</p>
 <div class="scroll"><table>
 <thead><tr><th>UNSPSC code</th><th>Most common description</th><th class="r">Contracts</th><th class="r">Ending in 12 months</th><th class="r">Value ending (AUD)</th></tr></thead>
 <tbody>
 ${model.categories
   .map(
     (c) =>
-      `<tr><td>${a(`category/${c.code}/`, c.code)}</td><td>${esc(c.label || "No description")}</td><td class="r">${num(c.count)}</td><td class="r">${num(c.soonCount)}</td><td class="r nw">${money(c.soonValue)}</td></tr>`,
+      `<tr><td>${a(`category/${c.code}/`, c.code)}</td><td>${c.label ? esc(c.label) : "<small>varies by contract</small>"}</td><td class="r">${num(c.count)}</td><td class="r">${num(c.soonCount)}</td><td class="r nw">${money(c.soonValue)}</td></tr>`,
   )
   .join("\n")}
 </tbody></table></div>`,
@@ -467,7 +487,7 @@ ${model.categories
 <p class="lead">${
         c.typical.length
           ? `Most common contract descriptions under this code: ${c.typical.map((t) => `“${esc(t)}”`).join(", ")}.`
-          : "Contracts filed under this code carry no description."
+          : "Contracts under this code are each described differently; see the list below."
       }</p>
 ${stats(c)}
 ${expiring(a, c.rows, ["end", "supplier", "agency", "what", "value"])}
@@ -598,7 +618,7 @@ ${table(a, shown, ["end", "agency", "what", "category", "value", "start", "metho
 <ul>
 <li><b>Values</b> are in Australian dollars as published on the notice. When a contract has been amended, the value is the new total, not the change.</li>
 <li><b>End dates</b> are the dates on the notice. A contract ending does not mean it will be re-tendered: it may be extended, replaced through a panel or standing offer, or simply not renewed. A few notices carry end dates that cannot be right; those are left out of the “ending” counts.</li>
-<li><b>Categories</b> are the UNSPSC codes on the notices. The notices do not give the official title of a code, so the site shows the description that agencies most often wrote on contracts under that code.</li>
+<li><b>Categories</b> are the UNSPSC codes on the notices. The notices do not give the official title of a code, so the site shows the description that agencies most often wrote on contracts under that code, where one recurs. It is a guide, not the official title.</li>
 <li><b>Suppliers</b> are grouped by Australian Business Number, under the name most often used on their notices. Suppliers with no ABN on the notice have no page of their own.</li>
 </ul>
 <p>Data last updated ${fmtDate(updated)}.</p>`,
@@ -736,7 +756,8 @@ async function main() {
     brokenLinks: broken.length,
     brokenLinkSamples: broken.slice(0, 10),
     months: model.months,
-    topCategories: top(model.categories, 10).map((c) => ({ code: c.code, typical: c.typical, count: c.count, soonCount: c.soonCount, soonValue: Math.round(c.soonValue) })),
+    categoriesWithLabel: model.categories.filter((c) => c.label).length,
+    topCategories: top(model.categories, 10).map((c) => ({ code: c.code, label: c.label, typical: c.typical, count: c.count, soonCount: c.soonCount, soonValue: Math.round(c.soonValue) })),
     topAgencies: top(model.agencies, 5).map((g) => ({ name: g.name, slug: g.slug, count: g.count, soonCount: g.soonCount, soonValue: Math.round(g.soonValue) })),
   };
   await writeFile("data/build.json", JSON.stringify(build, null, 2) + "\n");

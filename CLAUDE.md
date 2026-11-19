@@ -55,8 +55,10 @@ or other work out of this repo, its commits and its site.
   `Australia/Sydney`. "Ending in the next 12 months" is today to today + 364 days in that zone.
   End dates outside 1990 to 2100 are treated as not stated.
 - Long tables are cut to the 150 largest contracts by value, shown in end-date order, and say so.
-- UNSPSC codes have no titles in the API. Pages show the code and the most common contract
-  description under it, and say that this is not the official title. Do not add titles from memory.
+- UNSPSC codes have no titles in the API. Pages show the code and, where one recurs, the most common
+  contract description under it (`describeCode`: 3 contracts and 5% of the code, or 20 contracts),
+  and say that this is not the official title. In some codes every contract is described differently
+  (seen live: research grants under 70140000), so those get no label. Do not add titles from memory.
 - Suppliers are grouped by ABN under their most common name; suppliers without an ABN are named in
   tables but get no page. Agency slugs come from the name (a number is added on a clash).
 - The build fails if any internal link points at a page it did not make. Tests use made-up records.

@@ -70,10 +70,12 @@ jobs:
           du -sh site
           for f in site/index.html "$(ls -S site/category/*/index.html | head -1)" "$(ls -S site/supplier/*/index.html | sed -n 200p)"; do
             echo "::group::$f"
-            sed -e 's/<[^>]*>/ /g' "$f" | tr -s ' \n' | head -c 2500
+            sed -e 's/<[^>]*>/ /g' "$f" | tr -s ' \n' > sample.txt
+            head -c 2500 sample.txt
             echo
             echo "::endgroup::"
           done
+          rm -f sample.txt
       - name: Commit summary
         if: ${{ !cancelled() }}
         run: |

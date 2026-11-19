@@ -9,6 +9,7 @@ import {
   cleanAbn,
   commonest,
   coverageOf,
+  describeCode,
   esc,
   fmtAbn,
   fmtDate,
@@ -115,6 +116,23 @@ test("commonest ignores case and spacing and is stable on ties", () => {
   assert.deepEqual(commonest(["ICT  Services", "ict services", "ICT Services", "Cleaning", null, ""], 2), ["ICT Services", "Cleaning"]);
   assert.deepEqual(commonest(["b", "a"], 1), ["a"]);
   assert.deepEqual(commonest([], 3), []);
+});
+
+test("a code is only labelled by a description that recurs", () => {
+  const many = (text, n) => Array.from({ length: n }, () => text);
+  assert.deepEqual(describeCode([...many("Labour Hire", 4), ...many("ICT Labour Hire", 2), "One-off study"]), {
+    label: "Labour Hire",
+    typical: ["Labour Hire", "ICT Labour Hire"],
+  });
+  // Every contract described differently: no label, nothing typical.
+  assert.deepEqual(describeCode(["Wheat genetics study", "Barley head-loss study", "Snail biocontrol"]), { label: null, typical: [] });
+  // Recurs, but too rarely to stand for the code.
+  const rare = describeCode([...many("Vehicle Spare Parts", 3), ...Array.from({ length: 97 }, (_, i) => `Item ${i}`)]);
+  assert.equal(rare.label, null);
+  assert.deepEqual(rare.typical, ["Vehicle Spare Parts"]);
+  // In a very large code, 20 identical descriptions are enough.
+  assert.equal(describeCode([...many("Software", 20), ...Array.from({ length: 980 }, (_, i) => `Item ${i}`)]).label, "Software");
+  assert.deepEqual(describeCode([null, ""]), { label: null, typical: [] });
 });
 
 test("analyse groups by category, agency and supplier ABN", () => {
@@ -258,6 +276,11 @@ test("a category page lists expiring contracts but not ended or far-off ones", (
   const { files } = build();
   const page = files.get("category/80101500/index.html");
   assert.match(page, /Most common contract descriptions under this code: “Example services”/);
+  assert.match(page, /<title>UNSPSC 80101500: Example services \|/);
+  // One contract's wording is not used as the name of a code.
+  assert.match(files.get("category/43230000/index.html"), /<title>UNSPSC 43230000 \|/);
+  assert.match(files.get("category/43230000/index.html"), /each described differently/);
+  assert.match(files.get("categories/index.html"), /varies by contract/);
   assert.match(page, /CN0000002/);
   const expiring = page.slice(page.indexOf("Contracts ending in the next 12 months"), page.indexOf("Largest suppliers"));
   assert.ok(!expiring.includes("CN0000003"), "ended contract listed as expiring");

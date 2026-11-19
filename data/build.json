@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-19T08:53:22Z",
-  "dataUpdated": "2026-11-19T08:53:18Z",
+  "generatedAt": "2026-11-19T08:56:48Z",
+  "dataUpdated": "2026-11-19T08:56:43Z",
   "siteUrl": "https://wattlebay-labs.github.io/govcontracts",
   "today": "2026-11-19",
   "pages": {
@@ -13,12 +13,12 @@
     "other": 2
   },
   "directories": 10520,
-  "bytes": 57149963,
+  "bytes": 56945595,
   "largestPage": {
     "path": "suppliers/a/index.html",
     "bytes": 165045
   },
-  "seconds": 2,
+  "seconds": 2.8,
   "records": 41093,
   "contracts": {
     "count": 41093,
@@ -105,9 +105,11 @@
       "value": 1809855583.7100003
     }
   ],
+  "categoriesWithLabel": 231,
   "topCategories": [
     {
       "code": "85100000",
+      "label": "Community Nursing Services Agreement",
       "typical": [
         "Community Nursing Services Agreement",
         "Community Nursing",
@@ -119,6 +121,7 @@
     },
     {
       "code": "93141805",
+      "label": "Transition to Work Deed 2022-2027",
       "typical": [
         "Transition to Work Deed 2022-2027",
         "Parent Pathways Service Provider",
@@ -130,6 +133,7 @@
     },
     {
       "code": "72100000",
+      "label": "Project Management",
       "typical": [
         "Project Management",
         "Building Works",
@@ -141,6 +145,7 @@
     },
     {
       "code": "25102000",
+      "label": "Vehicle Spare Parts",
       "typical": [
         "Vehicle Spare Parts",
         "LAND 400 Ph2 - Mounted Combat Reconnaissance Capability RFT",
@@ -152,6 +157,7 @@
     },
     {
       "code": "81110000",
+      "label": "Labour Hire",
       "typical": [
         "Labour Hire",
         "ICT Labour Hire",
@@ -163,6 +169,7 @@
     },
     {
       "code": "92110000",
+      "label": "Disposal Services",
       "typical": [
         "Disposal Services",
         "Port Services",
@@ -174,6 +181,7 @@
     },
     {
       "code": "25111900",
+      "label": "Watercraft Spare Parts",
       "typical": [
         "Watercraft Spare Parts",
         "Marine Components",
@@ -185,6 +193,7 @@
     },
     {
       "code": "25130000",
+      "label": "Aircraft",
       "typical": [
         "Aircraft",
         "Aircraft Spare Parts",
@@ -196,6 +205,7 @@
     },
     {
       "code": "80111600",
+      "label": "Labour Hire",
       "typical": [
         "Labour Hire",
         "Temporary Personnel",
@@ -207,6 +217,7 @@
     },
     {
       "code": "80161500",
+      "label": "Project Support Services",
       "typical": [
         "Project Support Services",
         "Management Support Services",

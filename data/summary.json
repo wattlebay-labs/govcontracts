@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T08:53:18Z",
+  "generatedAt": "2026-11-19T08:56:43Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,11 +11,11 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 4,
+  "runs": 5,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-19T08:52:13Z",
-    "contractLastModified": "2026-11-19T08:52:13Z",
+    "contractPublished": "2026-11-19T08:56:08Z",
+    "contractLastModified": "2026-11-19T08:56:08Z",
     "contractEnd": "2027-11-20T00:00:00Z"
   },
   "horizon": {
@@ -27,19 +27,19 @@
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 297,
-      "from": "2026-11-18T00:26:02Z",
-      "to": "2026-11-19T08:52:13Z",
+      "releases": 202,
+      "from": "2026-11-18T08:52:13Z",
+      "to": "2026-11-19T08:56:08Z",
       "caughtUp": true,
-      "cursor": "2026-11-19T08:52:13Z"
+      "cursor": "2026-11-19T08:56:08Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 1344,
-      "from": "2026-11-18T00:26:02Z",
-      "to": "2026-11-19T08:52:13Z",
+      "releases": 683,
+      "from": "2026-11-18T08:52:13Z",
+      "to": "2026-11-19T08:56:08Z",
       "caughtUp": true,
-      "cursor": "2026-11-19T08:52:13Z"
+      "cursor": "2026-11-19T08:56:08Z"
     },
     "contractEnd": {
       "windows": 0,
@@ -50,15 +50,15 @@
       "cursor": "2027-11-20T00:00:00Z"
     }
   },
-  "requests": 19,
-  "pages": 19,
-  "seconds": 65,
+  "requests": 12,
+  "pages": 12,
+  "seconds": 35,
   "budgetSpent": false,
   "windowsTried": 2,
   "windowsOk": 2,
-  "largestWindow": 1344,
+  "largestWindow": 683,
   "windowsWithMorePages": 2,
-  "contractsBefore": 40929,
+  "contractsBefore": 41093,
   "contracts": 41093,
   "contractsEndingWithinHorizon": 39104,
   "amendedContracts": 13667,
@@ -73,14 +73,14 @@
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 926,
-      "contractAmendment": 715
+      "contract": 564,
+      "contractAmendment": 321
     },
     "lastModified": {
-      "releases": 1344,
-      "amendments": 715,
-      "alsoInPublishedPull": 297,
-      "newToDataset": 54
+      "releases": 683,
+      "amendments": 321,
+      "alsoInPublishedPull": 202,
+      "newToDataset": 0
     },
     "amendmentSamples": [
       {
@@ -125,77 +125,19 @@
         "previous": {
           "id": "CN4281777",
           "notice": "CN4281777",
-          "released": "2026-11-11T09:13:33Z",
+          "released": "2026-11-19T02:05:18Z",
           "description": "Executive Search Services",
           "agency": "Bureau of Meteorology",
           "agencyAbn": "92637533532",
           "division": null,
-          "supplier": "Davidson Technology (Aust) Pty Ltd",
-          "supplierAbn": "51167752258",
+          "supplier": "Davidson Recruitment Pty Ltd",
+          "supplierAbn": "50167132523",
           "supplierState": "QLD",
           "value": 27500,
           "start": "2026-10-05T13:00:00Z",
           "end": "2026-12-30T13:00:00Z",
           "unspsc": "80111700",
           "method": "Open tender",
-          "amendment": false
-        }
-      },
-      {
-        "dateType": "contractLastModified",
-        "ocid": "prod-ec1a2226533141e0a8dc5c8e8dd0834b",
-        "releaseDate": "2026-11-18T08:35:54Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4287518",
-          "awardID": "CN4287518-2628ea94e9354ea69eebca26e57cdd93",
-          "dateSigned": "2026-11-11T09:07:34Z",
-          "description": "MORP Relocation and Coordination Services",
-          "title": "4600025830 | 6307-2026-27",
-          "items": [
-            {
-              "id": "78101804-6d9803b3c51444769aaf167dbeb470f3",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "78101804"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2026-10-05T13:00:00Z",
-            "endDate": "2028-04-27T14:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "80000.00"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4287518-A1",
-              "releaseID": "prod-ec1a2226533141e0a8dc5c8e8dd0834b-cbaf5a1fbd3f335ab7c5821c960ad78d",
-              "amendsReleaseID": "prod-ec1a2226533141e0a8dc5c8e8dd0834b-9748401dcc773874b879047dbe31e7ca"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4287518",
-          "notice": "CN4287518",
-          "released": "2026-11-18T08:35:54Z",
-          "description": "MORP Relocation and Coordination Services",
-          "agency": "Bureau of Meteorology",
-          "agencyAbn": "92637533532",
-          "division": null,
-          "supplier": "Orana Commercial Relocation Pty Ltd",
-          "supplierAbn": "49626304578",
-          "supplierState": "VIC",
-          "value": 80000,
-          "start": "2026-10-05T13:00:00Z",
-          "end": "2028-04-27T14:00:00Z",
-          "unspsc": "78101804",
-          "method": "Limited tender",
           "amendment": true
         }
       },
@@ -241,7 +183,7 @@
         "previous": {
           "id": "CN4287724",
           "notice": "CN4287724",
-          "released": "2026-11-10T00:07:23Z",
+          "released": "2026-11-19T03:30:44Z",
           "description": "Shallow Water Acoustic Mooring - Australian Antarctic Division",
           "agency": "Department of Climate Change, Energy, the Environment and Water",
           "agencyAbn": "63573932849",
@@ -249,12 +191,70 @@
           "supplier": "[OVS] Innovasea Marine Systems Canada Inc",
           "supplierAbn": null,
           "supplierState": "Outside Australia",
-          "value": 37283,
+          "value": 38226,
           "start": "2026-11-02T13:00:00Z",
           "end": "2027-06-29T14:00:00Z",
           "unspsc": "93131703",
           "method": "Limited tender",
-          "amendment": false
+          "amendment": true
+        }
+      },
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-1bc4582414424a7facc0cdaff817e66f",
+        "releaseDate": "2026-11-19T05:29:46Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4284019",
+          "awardID": "CN4284019-e34dc6812c984fccb7bdacface319b2b",
+          "dateSigned": "2026-10-21T04:58:30Z",
+          "description": "Provision of Legal Services",
+          "title": "2400011349",
+          "items": [
+            {
+              "id": "80120000-997b357101bd487ebdcfb4b8f4f7eaa0",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "80120000"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-06-30T14:00:00Z",
+            "endDate": "2027-06-29T14:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "42000.00"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4284019-A1",
+              "releaseID": "prod-1bc4582414424a7facc0cdaff817e66f-09337f6de10c31aa8d40b65287174ec8",
+              "amendsReleaseID": "prod-1bc4582414424a7facc0cdaff817e66f-35ee0c1704463c0bb7004de32039105a"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4284019",
+          "notice": "CN4284019",
+          "released": "2026-11-19T05:29:46Z",
+          "description": "Provision of Legal Services",
+          "agency": "Australian Taxation Office",
+          "agencyAbn": "51824753556",
+          "division": "ATO FINANCE",
+          "supplier": "William Russell Johnson",
+          "supplierAbn": "85316302302",
+          "supplierState": "NSW",
+          "value": 42000,
+          "start": "2026-06-30T14:00:00Z",
+          "end": "2027-06-29T14:00:00Z",
+          "unspsc": "80120000",
+          "method": "Limited tender",
+          "amendment": true
         }
       }
     ]

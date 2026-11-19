@@ -1,8 +1,9 @@
 name: fetch-data
-# Daily pull of contract notices from the official AusTender OCDS API.
+# Daily pull of contract notices from the official AusTender OCDS API, then a
+# build of the static site from the result.
 # The dataset and its cursors travel from run to run in the workflow cache,
 # so a run only asks the API for what is new, and a new dataset is built up
-# over several runs instead of one long one. Only the small summary is
+# over several runs instead of one long one. Only the small summaries are
 # committed, so the repository does not grow by megabytes a day.
 on:
   workflow_dispatch:
@@ -11,6 +12,8 @@ on:
   push:
     paths:
       - "scripts/fetch.mjs"
+      - "scripts/build.mjs"
+      - "scripts/style.css"
       - ".github/workflows/fetch.yml"
 
 permissions:
@@ -29,7 +32,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test scripts/fetch.test.mjs
+      - run: node --test scripts/fetch.test.mjs scripts/build.test.mjs
       - name: Restore dataset from the previous run
         uses: actions/cache/restore@v4
         with:
@@ -57,12 +60,27 @@ jobs:
             data/contracts.json
             data/state.json
           retention-days: 14
+      # The dataset is saved before the site is built, so a build error
+      # never costs a day of fetching.
+      - name: Build the site
+        run: node scripts/build.mjs
+      - name: Show a sample of the built pages
+        continue-on-error: true
+        run: |
+          du -sh site
+          for f in site/index.html "$(ls -S site/category/*/index.html | head -1)" "$(ls -S site/supplier/*/index.html | sed -n 200p)"; do
+            echo "::group::$f"
+            sed -e 's/<[^>]*>/ /g' "$f" | tr -s ' \n' | head -c 2500
+            echo
+            echo "::endgroup::"
+          done
       - name: Commit summary
         if: ${{ !cancelled() }}
         run: |
           git config user.name "govcontracts-bot"
           git config user.email "govcontracts-bot@users.noreply.github.com"
           git add data/summary.json
+          if [ -f data/build.json ]; then git add data/build.json; fi
           git commit -m "Data summary $(date -u +%F)" || echo "nothing to commit"
           git pull --rebase --autostash
           git push

@@ -43,6 +43,25 @@ or other work out of this repo, its commits and its site.
 - A later job that needs the data (site build) should run in the same workflow after the fetch, or
   restore the same cache.
 
+## Site build (`scripts/build.mjs`, a step of `fetch-data` after the dataset is saved)
+- Reads `data/contracts.json` (+ `data/summary.json` for the coverage dates), writes `site/` (ignored by
+  git) and `data/build.json` (committed: page counts, bytes, skipped records, broken links, top
+  categories). Read `data/build.json` to see what the last build made.
+- Pages: home, `categories/`, `category/<unspsc>/`, `agencies/`, `agency/<slug>/`, `suppliers/`,
+  `suppliers/<letter>/`, `supplier/<abn>/`, `about/`, `404.html`, `sitemap.xml`, `style.css`
+  (source: `scripts/style.css`). All links are relative; only canonical links, the sitemap and
+  `404.html` use `SITE_URL` (default: the GitHub Pages address).
+- Dates on notices are midnight in Canberra given as UTC, so the build shows the calendar date in
+  `Australia/Sydney`. "Ending in the next 12 months" is today to today + 364 days in that zone.
+  End dates outside 1990 to 2100 are treated as not stated.
+- Long tables are cut to the 150 largest contracts by value, shown in end-date order, and say so.
+- UNSPSC codes have no titles in the API. Pages show the code and the most common contract
+  description under it, and say that this is not the official title. Do not add titles from memory.
+- Suppliers are grouped by ABN under their most common name; suppliers without an ABN are named in
+  tables but get no page. Agency slugs come from the name (a number is added on a clash).
+- The build fails if any internal link points at a page it did not make. Tests use made-up records.
+- The site is not deployed yet; `site/` exists only inside the workflow run.
+
 ## How to run things
 - The cloud shell has no internet. Push code; let GitHub Actions run it; pull the results.
 - Watch runs: `gh api repos/wattlebay-labs/govcontracts/actions/runs --jq '.workflow_runs[0] | .status+" "+(.conclusion//"")'`

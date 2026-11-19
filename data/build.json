@@ -1,0 +1,257 @@
+{
+  "generatedAt": "2026-11-19T08:53:22Z",
+  "dataUpdated": "2026-11-19T08:53:18Z",
+  "siteUrl": "https://wattlebay-labs.github.io/govcontracts",
+  "today": "2026-11-19",
+  "pages": {
+    "total": 10521,
+    "home": 1,
+    "category": 498,
+    "agency": 137,
+    "supplier": 9853,
+    "index": 30,
+    "other": 2
+  },
+  "directories": 10520,
+  "bytes": 57149963,
+  "largestPage": {
+    "path": "suppliers/a/index.html",
+    "bytes": 165045
+  },
+  "seconds": 2,
+  "records": 41093,
+  "contracts": {
+    "count": 41093,
+    "value": 130864896934.1201,
+    "soonCount": 39149,
+    "soonValue": 121369934124.98035
+  },
+  "suppliers": 9853,
+  "agencies": 137,
+  "categories": 498,
+  "skipped": {
+    "noSupplierAbn": 3152,
+    "noCategory": 0,
+    "noAgency": 0,
+    "badEndDate": 7,
+    "noValue": 0
+  },
+  "brokenLinks": 0,
+  "brokenLinkSamples": [],
+  "months": [
+    {
+      "ym": "2026-11",
+      "count": 1784,
+      "value": 1735659400.3000016
+    },
+    {
+      "ym": "2026-12",
+      "count": 5882,
+      "value": 27044217402.88993
+    },
+    {
+      "ym": "2027-01",
+      "count": 2007,
+      "value": 2169175593.000001
+    },
+    {
+      "ym": "2027-02",
+      "count": 2001,
+      "value": 2527929619.59
+    },
+    {
+      "ym": "2027-03",
+      "count": 2440,
+      "value": 5816792164.339997
+    },
+    {
+      "ym": "2027-04",
+      "count": 1681,
+      "value": 1887070906.9599986
+    },
+    {
+      "ym": "2027-05",
+      "count": 1748,
+      "value": 4433179039.739999
+    },
+    {
+      "ym": "2027-06",
+      "count": 15038,
+      "value": 57545909373.89939
+    },
+    {
+      "ym": "2027-07",
+      "count": 1630,
+      "value": 2684356178.08
+    },
+    {
+      "ym": "2027-08",
+      "count": 1460,
+      "value": 3433968436.120002
+    },
+    {
+      "ym": "2027-09",
+      "count": 1725,
+      "value": 6471839938.439988
+    },
+    {
+      "ym": "2027-10",
+      "count": 1358,
+      "value": 3809980487.9099984
+    },
+    {
+      "ym": "2027-11",
+      "count": 395,
+      "value": 1809855583.7100003
+    }
+  ],
+  "topCategories": [
+    {
+      "code": "85100000",
+      "typical": [
+        "Community Nursing Services Agreement",
+        "Community Nursing",
+        "Health Technology Assessment"
+      ],
+      "count": 553,
+      "soonCount": 500,
+      "soonValue": 10785724317
+    },
+    {
+      "code": "93141805",
+      "typical": [
+        "Transition to Work Deed 2022-2027",
+        "Parent Pathways Service Provider",
+        "Workforce Australia Licence(s) to deliver Generalist services"
+      ],
+      "count": 226,
+      "soonCount": 225,
+      "soonValue": 8104260608
+    },
+    {
+      "code": "72100000",
+      "typical": [
+        "Project Management",
+        "Building Works",
+        "Refurbishment Works"
+      ],
+      "count": 935,
+      "soonCount": 857,
+      "soonValue": 7520049935
+    },
+    {
+      "code": "25102000",
+      "typical": [
+        "Vehicle Spare Parts",
+        "LAND 400 Ph2 - Mounted Combat Reconnaissance Capability RFT",
+        "War vehicles"
+      ],
+      "count": 108,
+      "soonCount": 107,
+      "soonValue": 6141970542
+    },
+    {
+      "code": "81110000",
+      "typical": [
+        "Labour Hire",
+        "ICT Labour Hire",
+        "ICT Contractor Services"
+      ],
+      "count": 2435,
+      "soonCount": 2374,
+      "soonValue": 5645479578
+    },
+    {
+      "code": "92110000",
+      "typical": [
+        "Disposal Services",
+        "Port Services",
+        "Support Services"
+      ],
+      "count": 135,
+      "soonCount": 123,
+      "soonValue": 5194775118
+    },
+    {
+      "code": "25111900",
+      "typical": [
+        "Watercraft Spare Parts",
+        "Marine Components",
+        "Ship Parts"
+      ],
+      "count": 183,
+      "soonCount": 168,
+      "soonValue": 4867318512
+    },
+    {
+      "code": "25130000",
+      "typical": [
+        "Aircraft",
+        "Aircraft Spare Parts",
+        "Project Support Services"
+      ],
+      "count": 32,
+      "soonCount": 29,
+      "soonValue": 4530305318
+    },
+    {
+      "code": "80111600",
+      "typical": [
+        "Labour Hire",
+        "Temporary Personnel",
+        "ICT Contractor Services"
+      ],
+      "count": 6852,
+      "soonCount": 6717,
+      "soonValue": 4197484797
+    },
+    {
+      "code": "80161500",
+      "typical": [
+        "Project Support Services",
+        "Management Support Services",
+        "Support Services"
+      ],
+      "count": 1165,
+      "soonCount": 1129,
+      "soonValue": 4105086395
+    }
+  ],
+  "topAgencies": [
+    {
+      "name": "Department of Defence",
+      "slug": "department-of-defence",
+      "count": 10350,
+      "soonCount": 9564,
+      "soonValue": 65888614589
+    },
+    {
+      "name": "Department of Employment and Workplace Relations",
+      "slug": "department-of-employment-and-workplace-relations",
+      "count": 1295,
+      "soonCount": 1281,
+      "soonValue": 9003495847
+    },
+    {
+      "name": "Department of Home Affairs",
+      "slug": "department-of-home-affairs",
+      "count": 1480,
+      "soonCount": 1424,
+      "soonValue": 7503800659
+    },
+    {
+      "name": "Services Australia",
+      "slug": "services-australia",
+      "count": 2341,
+      "soonCount": 2199,
+      "soonValue": 5279183020
+    },
+    {
+      "name": "Department of Health, Disability and Ageing",
+      "slug": "department-of-health-disability-and-ageing",
+      "count": 1949,
+      "soonCount": 1839,
+      "soonValue": 4227190929
+    }
+  ]
+}

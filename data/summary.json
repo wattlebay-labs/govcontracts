@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T00:34:21Z",
+  "generatedAt": "2026-11-19T08:53:18Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,11 +11,11 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 3,
+  "runs": 4,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-19T00:26:02Z",
-    "contractLastModified": "2026-11-19T00:26:02Z",
+    "contractPublished": "2026-11-19T08:52:13Z",
+    "contractLastModified": "2026-11-19T08:52:13Z",
     "contractEnd": "2027-11-20T00:00:00Z"
   },
   "horizon": {
@@ -27,62 +27,120 @@
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 213,
-      "from": "2026-11-17T09:04:19Z",
-      "to": "2026-11-19T00:26:02Z",
+      "releases": 297,
+      "from": "2026-11-18T00:26:02Z",
+      "to": "2026-11-19T08:52:13Z",
       "caughtUp": true,
-      "cursor": "2026-11-19T00:26:02Z"
+      "cursor": "2026-11-19T08:52:13Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 929,
-      "from": "2026-11-17T09:04:19Z",
-      "to": "2026-11-19T00:26:02Z",
+      "releases": 1344,
+      "from": "2026-11-18T00:26:02Z",
+      "to": "2026-11-19T08:52:13Z",
       "caughtUp": true,
-      "cursor": "2026-11-19T00:26:02Z"
+      "cursor": "2026-11-19T08:52:13Z"
     },
     "contractEnd": {
-      "windows": 21,
-      "releases": 11957,
-      "from": "2027-06-30T00:00:00Z",
+      "windows": 0,
+      "releases": 0,
+      "from": "2027-11-20T00:00:00Z",
       "to": "2027-11-20T00:00:00Z",
       "caughtUp": true,
       "cursor": "2027-11-20T00:00:00Z"
     }
   },
-  "requests": 165,
-  "pages": 165,
-  "seconds": 499,
+  "requests": 19,
+  "pages": 19,
+  "seconds": 65,
   "budgetSpent": false,
-  "windowsTried": 23,
-  "windowsOk": 23,
-  "largestWindow": 1673,
-  "windowsWithMorePages": 22,
-  "contractsBefore": 34947,
-  "contracts": 40929,
-  "contractsEndingWithinHorizon": 39040,
-  "amendedContracts": 13613,
-  "suppliers": 9824,
+  "windowsTried": 2,
+  "windowsOk": 2,
+  "largestWindow": 1344,
+  "windowsWithMorePages": 2,
+  "contractsBefore": 40929,
+  "contracts": 41093,
+  "contractsEndingWithinHorizon": 39104,
+  "amendedContracts": 13667,
+  "suppliers": 9853,
   "agencies": 137,
-  "categories": 495,
-  "totalValue": 129311853009,
+  "categories": 498,
+  "totalValue": 130864896934,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2046-10-27T13:00:00Z",
-  "bytes": 18193289,
+  "bytes": 18267496,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 7217,
-      "contractAmendment": 5882
+      "contract": 926,
+      "contractAmendment": 715
     },
     "lastModified": {
-      "releases": 929,
-      "amendments": 499,
-      "alsoInPublishedPull": 213,
-      "newToDataset": 29
+      "releases": 1344,
+      "amendments": 715,
+      "alsoInPublishedPull": 297,
+      "newToDataset": 54
     },
     "amendmentSamples": [
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-89c79f4d7b0e4d569903b2bf75ea4431",
+        "releaseDate": "2026-11-19T02:05:18Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4281777",
+          "awardID": "CN4281777-e0f06f7af79a4833801b9c82d2d4871f",
+          "dateSigned": "2026-11-11T09:13:33Z",
+          "description": "Executive Search Services",
+          "title": "4600025781",
+          "items": [
+            {
+              "id": "80111700-9f4894ed99eb4f4791b6e79fa896c14f",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "80111700"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-10-05T13:00:00Z",
+            "endDate": "2026-12-30T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "27500.00"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4281777-A1",
+              "releaseID": "prod-89c79f4d7b0e4d569903b2bf75ea4431-3b934e94324f35a9a8e904c42e484c31",
+              "amendsReleaseID": "prod-89c79f4d7b0e4d569903b2bf75ea4431-b908fc37e5bc3347b4aa7ac7bc02d07f"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4281777",
+          "notice": "CN4281777",
+          "released": "2026-11-11T09:13:33Z",
+          "description": "Executive Search Services",
+          "agency": "Bureau of Meteorology",
+          "agencyAbn": "92637533532",
+          "division": null,
+          "supplier": "Davidson Technology (Aust) Pty Ltd",
+          "supplierAbn": "51167752258",
+          "supplierState": "QLD",
+          "value": 27500,
+          "start": "2026-10-05T13:00:00Z",
+          "end": "2026-12-30T13:00:00Z",
+          "unspsc": "80111700",
+          "method": "Open tender",
+          "amendment": false
+        }
+      },
       {
         "dateType": "contractLastModified",
         "ocid": "prod-ec1a2226533141e0a8dc5c8e8dd0834b",
@@ -143,118 +201,60 @@
       },
       {
         "dateType": "contractLastModified",
-        "ocid": "prod-cffb0b1384f44a5083f0afe02179012b",
-        "releaseDate": "2026-11-18T08:36:08Z",
+        "ocid": "prod-357f8b192f9940d9a4795a4d9e61d2c9",
+        "releaseDate": "2026-11-19T03:30:44Z",
         "tag": [
           "contractAmendment"
         ],
         "contract": {
-          "id": "CN4284833",
-          "awardID": "CN4284833-920cc95f826447e5913e92265553bae1",
-          "dateSigned": "2026-10-27T05:10:47Z",
-          "description": "Tonga - Science Communication & Design Support",
-          "title": "4600025840",
+          "id": "CN4287724",
+          "awardID": "CN4287724-1c665bcb68d649c9a5b7fc3918986855",
+          "dateSigned": "2026-11-10T00:07:23Z",
+          "description": "Shallow Water Acoustic Mooring - Australian Antarctic Division",
+          "title": "REF12744",
           "items": [
             {
-              "id": "82140000-2104ba9a67dd4da282e0d702649e2cb8",
+              "id": "93131703-17094b4f641641f7863956cf61dcd5d1",
               "classification": {
                 "scheme": "UNSPSC",
-                "id": "82140000"
+                "id": "93131703"
               }
             }
           ],
           "period": {
-            "startDate": "2026-10-14T13:00:00Z",
+            "startDate": "2026-11-02T13:00:00Z",
             "endDate": "2027-06-29T14:00:00Z"
           },
           "value": {
             "currency": "AUD",
-            "amount": "124188.00"
+            "amount": "38226.00"
           },
           "status": "active",
           "amendments": [
             {
-              "id": "CN4284833-A1",
-              "releaseID": "prod-cffb0b1384f44a5083f0afe02179012b-1a6e2f6244ff3f728d69d21e28cef5c9",
-              "amendsReleaseID": "prod-cffb0b1384f44a5083f0afe02179012b-8bf8071d58293201ad56b4e25575a787"
+              "id": "CN4287724-A1",
+              "releaseID": "prod-357f8b192f9940d9a4795a4d9e61d2c9-e24ecda691e835d3a9bebb7cefbf501a",
+              "amendsReleaseID": "prod-357f8b192f9940d9a4795a4d9e61d2c9-123a356fb90e3e258a076a9f3dae8c26"
             }
           ]
         },
         "previous": {
-          "id": "CN4284833",
-          "notice": "CN4284833",
-          "released": "2026-11-18T08:36:08Z",
-          "description": "Tonga - Science Communication & Design Support",
-          "agency": "Bureau of Meteorology",
-          "agencyAbn": "92637533532",
+          "id": "CN4287724",
+          "notice": "CN4287724",
+          "released": "2026-11-10T00:07:23Z",
+          "description": "Shallow Water Acoustic Mooring - Australian Antarctic Division",
+          "agency": "Department of Climate Change, Energy, the Environment and Water",
+          "agencyAbn": "63573932849",
           "division": null,
-          "supplier": "Scientell Pty Ltd",
-          "supplierAbn": "62607420664",
-          "supplierState": "VIC",
-          "value": 124188,
-          "start": "2026-10-14T13:00:00Z",
+          "supplier": "[OVS] Innovasea Marine Systems Canada Inc",
+          "supplierAbn": null,
+          "supplierState": "Outside Australia",
+          "value": 37283,
+          "start": "2026-11-02T13:00:00Z",
           "end": "2027-06-29T14:00:00Z",
-          "unspsc": "82140000",
-          "method": "Open tender",
-          "amendment": true
-        }
-      },
-      {
-        "dateType": "contractLastModified",
-        "ocid": "prod-bbec64a3cc74489c9b7492270e182490",
-        "releaseDate": "2026-11-18T04:13:37Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4284145",
-          "awardID": "CN4284145-f4e748ce302546278192f7074cd0e362",
-          "dateSigned": "2026-10-21T21:48:04Z",
-          "description": "Cloud hosted licenses",
-          "title": "CON002375",
-          "items": [
-            {
-              "id": "43200000-7fa38c8b3ee44eb5bd26d24af3a57561",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "43200000"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2026-09-20T14:00:00Z",
-            "endDate": "2029-09-19T14:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "110789.47"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4284145-A1",
-              "releaseID": "prod-bbec64a3cc74489c9b7492270e182490-1ad157da06d43fcba47d67d5bef8ffdd",
-              "amendsReleaseID": "prod-bbec64a3cc74489c9b7492270e182490-08c79813ef683e4d85efb2a84204add1"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4284145",
-          "notice": "CN4284145",
-          "released": "2026-11-18T04:13:37Z",
-          "description": "Cloud hosted licenses",
-          "agency": "Australian Research Council",
-          "agencyAbn": "35201451156",
-          "division": null,
-          "supplier": "Airlock Digital Pty Ltd",
-          "supplierAbn": "87169643770",
-          "supplierState": "SA",
-          "value": 110789.47,
-          "start": "2026-09-20T14:00:00Z",
-          "end": "2029-09-19T14:00:00Z",
-          "unspsc": "43200000",
-          "method": "Open tender",
-          "amendment": true
+          "unspsc": "93131703",
+          "method": "Limited tender",
+          "amendment": false
         }
       }
     ]

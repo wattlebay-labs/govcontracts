@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T09:27:51Z",
+  "generatedAt": "2026-11-19T00:34:21Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,76 +11,76 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 2,
+  "runs": 3,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-18T09:04:19Z",
-    "contractLastModified": "2026-11-18T09:04:19Z",
-    "contractEnd": "2027-06-30T00:00:00Z"
+    "contractPublished": "2026-11-19T00:26:02Z",
+    "contractLastModified": "2026-11-19T00:26:02Z",
+    "contractEnd": "2027-11-20T00:00:00Z"
   },
   "horizon": {
     "from": "2026-11-18T00:00:00Z",
-    "fetchedTo": "2027-06-30T00:00:00Z",
-    "target": "2027-11-19T00:00:00Z",
-    "complete": false
+    "fetchedTo": "2027-11-20T00:00:00Z",
+    "target": "2027-11-20T00:00:00Z",
+    "complete": true
   },
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 121,
-      "from": "2026-11-17T08:49:35Z",
-      "to": "2026-11-18T09:04:19Z",
+      "releases": 213,
+      "from": "2026-11-17T09:04:19Z",
+      "to": "2026-11-19T00:26:02Z",
       "caughtUp": true,
-      "cursor": "2026-11-18T09:04:19Z"
+      "cursor": "2026-11-19T00:26:02Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 698,
-      "from": "2026-11-17T08:49:35Z",
-      "to": "2026-11-18T09:04:19Z",
+      "releases": 929,
+      "from": "2026-11-17T09:04:19Z",
+      "to": "2026-11-19T00:26:02Z",
       "caughtUp": true,
-      "cursor": "2026-11-18T09:04:19Z"
+      "cursor": "2026-11-19T00:26:02Z"
     },
     "contractEnd": {
       "windows": 21,
-      "releases": 39612,
-      "from": "2027-02-03T00:00:00Z",
-      "to": "2027-11-19T00:00:00Z",
-      "caughtUp": false,
-      "cursor": "2027-06-30T00:00:00Z"
+      "releases": 11957,
+      "from": "2027-06-30T00:00:00Z",
+      "to": "2027-11-20T00:00:00Z",
+      "caughtUp": true,
+      "cursor": "2027-11-20T00:00:00Z"
     }
   },
-  "requests": 441,
-  "pages": 441,
-  "seconds": 1411,
-  "budgetSpent": true,
+  "requests": 165,
+  "pages": 165,
+  "seconds": 499,
+  "budgetSpent": false,
   "windowsTried": 23,
   "windowsOk": 23,
-  "largestWindow": 25025,
-  "windowsWithMorePages": 23,
-  "contractsBefore": 13633,
-  "contracts": 34947,
-  "contractsEndingWithinHorizon": 33188,
-  "amendedContracts": 11335,
-  "suppliers": 9116,
-  "agencies": 135,
-  "categories": 486,
-  "totalValue": 110780958214,
+  "largestWindow": 1673,
+  "windowsWithMorePages": 22,
+  "contractsBefore": 34947,
+  "contracts": 40929,
+  "contractsEndingWithinHorizon": 39040,
+  "amendedContracts": 13613,
+  "suppliers": 9824,
+  "agencies": 137,
+  "categories": 495,
+  "totalValue": 129311853009,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2046-10-27T13:00:00Z",
-  "bytes": 15528792,
+  "bytes": 18193289,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 22996,
-      "contractAmendment": 17435
+      "contract": 7217,
+      "contractAmendment": 5882
     },
     "lastModified": {
-      "releases": 698,
-      "amendments": 399,
-      "alsoInPublishedPull": 121,
-      "newToDataset": 1
+      "releases": 929,
+      "amendments": 499,
+      "alsoInPublishedPull": 213,
+      "newToDataset": 29
     },
     "amendmentSamples": [
       {
@@ -125,7 +125,7 @@
         "previous": {
           "id": "CN4287518",
           "notice": "CN4287518",
-          "released": "2026-11-11T09:07:34Z",
+          "released": "2026-11-18T08:35:54Z",
           "description": "MORP Relocation and Coordination Services",
           "agency": "Bureau of Meteorology",
           "agencyAbn": "92637533532",
@@ -133,12 +133,12 @@
           "supplier": "Orana Commercial Relocation Pty Ltd",
           "supplierAbn": "49626304578",
           "supplierState": "VIC",
-          "value": 63265.88,
+          "value": 80000,
           "start": "2026-10-05T13:00:00Z",
           "end": "2028-04-27T14:00:00Z",
           "unspsc": "78101804",
           "method": "Limited tender",
-          "amendment": false
+          "amendment": true
         }
       },
       {
@@ -183,7 +183,7 @@
         "previous": {
           "id": "CN4284833",
           "notice": "CN4284833",
-          "released": "2026-10-27T05:10:47Z",
+          "released": "2026-11-18T08:36:08Z",
           "description": "Tonga - Science Communication & Design Support",
           "agency": "Bureau of Meteorology",
           "agencyAbn": "92637533532",
@@ -191,12 +191,12 @@
           "supplier": "Scientell Pty Ltd",
           "supplierAbn": "62607420664",
           "supplierState": "VIC",
-          "value": 122188,
+          "value": 124188,
           "start": "2026-10-14T13:00:00Z",
           "end": "2027-06-29T14:00:00Z",
           "unspsc": "82140000",
           "method": "Open tender",
-          "amendment": false
+          "amendment": true
         }
       },
       {
@@ -261,57 +261,57 @@
   },
   "sample": [
     {
-      "id": "CN4286111",
-      "notice": "CN4286111",
-      "released": "2026-11-02T03:59:54Z",
-      "description": "Protective Wear",
-      "agency": "Department of Defence",
-      "agencyAbn": "62950639680",
-      "division": "CASG",
-      "supplier": "TOLL REMOTE LOGISTICS PTY LTD",
-      "supplierAbn": "99004210093",
-      "supplierState": "VIC",
-      "value": 15504.72,
-      "start": "2026-10-28T13:00:00Z",
-      "end": "2026-11-18T13:00:00Z",
-      "unspsc": "80101706",
-      "method": "Open tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4289322",
-      "notice": "CN4289322",
-      "released": "2026-11-17T03:47:08Z",
-      "description": "Venue Hire and Catering Services",
-      "agency": "Department of Agriculture, Fisheries and Forestry",
-      "agencyAbn": "34190894983",
-      "division": null,
-      "supplier": "MANGROVE RESORT HOTEL TRUST NO 1",
-      "supplierAbn": "90376936235",
-      "supplierState": "WA",
-      "value": 12405,
-      "start": "2026-11-16T13:00:00Z",
-      "end": "2026-11-18T13:00:00Z",
-      "unspsc": "80141607",
-      "method": "Limited tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4289076",
-      "notice": "CN4289076",
-      "released": "2026-11-16T04:09:55Z",
-      "description": "Detector Equipment",
+      "id": "CN4283630",
+      "notice": "CN4283630",
+      "released": "2026-10-20T03:30:24Z",
+      "description": "Equipment Maintenance",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
       "division": "NSSG",
-      "supplier": "HASTINGS DEERING (AUST) PTY LTD",
-      "supplierAbn": "49054094647",
-      "supplierState": "QLD",
-      "value": 44019.17,
-      "start": "2026-10-29T13:00:00Z",
-      "end": "2026-11-18T13:00:00Z",
+      "supplier": "BELLINGER SYSTEMS PTY LTD",
+      "supplierAbn": "89633874656",
+      "supplierState": "NSW",
+      "value": 38780.28,
+      "start": "2026-10-13T13:00:00Z",
+      "end": "2026-11-19T13:00:00Z",
+      "unspsc": "26110000",
+      "method": "Limited tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4283546",
+      "notice": "CN4283546",
+      "released": "2026-10-20T03:29:32Z",
+      "description": "Watercraft Spare Parts",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "NSSG",
+      "supplier": "STAUFF CORPORATION PTY LTD",
+      "supplierAbn": "44001338487",
+      "supplierState": "NSW",
+      "value": 26631,
+      "start": "2026-10-15T13:00:00Z",
+      "end": "2026-11-19T13:00:00Z",
       "unspsc": "25111900",
       "method": "Limited tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4283541",
+      "notice": "CN4283541",
+      "released": "2026-10-20T03:29:30Z",
+      "description": "Lubricating Oils",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "JCG",
+      "supplier": "INTERCHEM PTY LTD",
+      "supplierAbn": "74057313630",
+      "supplierState": "VIC",
+      "value": 15499.8,
+      "start": "2026-10-18T13:00:00Z",
+      "end": "2026-11-19T13:00:00Z",
+      "unspsc": "15120000",
+      "method": "Open tender",
       "amendment": false
     }
   ]

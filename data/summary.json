@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T00:40:02Z",
+  "generatedAt": "2026-11-20T08:47:56Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,11 +11,11 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 6,
+  "runs": 7,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-20T00:39:26Z",
-    "contractLastModified": "2026-11-20T00:39:26Z",
+    "contractPublished": "2026-11-20T08:47:24Z",
+    "contractLastModified": "2026-11-20T08:47:24Z",
     "contractEnd": "2027-11-21T00:00:00Z"
   },
   "horizon": {
@@ -27,60 +27,60 @@
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 209,
-      "from": "2026-11-18T08:56:08Z",
-      "to": "2026-11-20T00:39:26Z",
+      "releases": 172,
+      "from": "2026-11-19T00:39:26Z",
+      "to": "2026-11-20T08:47:24Z",
       "caughtUp": true,
-      "cursor": "2026-11-20T00:39:26Z"
+      "cursor": "2026-11-20T08:47:24Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 712,
-      "from": "2026-11-18T08:56:08Z",
-      "to": "2026-11-20T00:39:26Z",
+      "releases": 735,
+      "from": "2026-11-19T00:39:26Z",
+      "to": "2026-11-20T08:47:24Z",
       "caughtUp": true,
-      "cursor": "2026-11-20T00:39:26Z"
+      "cursor": "2026-11-20T08:47:24Z"
     },
     "contractEnd": {
-      "windows": 1,
-      "releases": 21,
-      "from": "2027-11-20T00:00:00Z",
+      "windows": 0,
+      "releases": 0,
+      "from": "2027-11-21T00:00:00Z",
       "to": "2027-11-21T00:00:00Z",
       "caughtUp": true,
       "cursor": "2027-11-21T00:00:00Z"
     }
   },
-  "requests": 14,
-  "pages": 14,
-  "seconds": 35,
+  "requests": 12,
+  "pages": 12,
+  "seconds": 32,
   "budgetSpent": false,
-  "windowsTried": 3,
-  "windowsOk": 3,
-  "largestWindow": 712,
+  "windowsTried": 2,
+  "windowsOk": 2,
+  "largestWindow": 735,
   "windowsWithMorePages": 2,
-  "contractsBefore": 41093,
-  "contracts": 41111,
-  "contractsEndingWithinHorizon": 38974,
-  "amendedContracts": 13675,
-  "suppliers": 9856,
+  "contractsBefore": 41111,
+  "contracts": 41197,
+  "contractsEndingWithinHorizon": 39017,
+  "amendedContracts": 13720,
+  "suppliers": 9871,
   "agencies": 137,
   "categories": 498,
-  "totalValue": 130877355924,
+  "totalValue": 130932710764,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2046-10-27T13:00:00Z",
-  "bytes": 18275737,
+  "bytes": 18314692,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 594,
-      "contractAmendment": 348
+      "contract": 546,
+      "contractAmendment": 361
     },
     "lastModified": {
-      "releases": 712,
-      "amendments": 338,
-      "alsoInPublishedPull": 209,
-      "newToDataset": 3
+      "releases": 735,
+      "amendments": 360,
+      "alsoInPublishedPull": 172,
+      "newToDataset": 31
     },
     "amendmentSamples": [
       {
@@ -125,7 +125,7 @@
         "previous": {
           "id": "CN4289928",
           "notice": "CN4289928",
-          "released": "2026-11-19T22:04:18Z",
+          "released": "2026-11-19T22:07:06Z",
           "description": "Reform Cost Benefit Analysis",
           "agency": "Australian Transaction Reports and Analysis Centre",
           "agencyAbn": "32770513371",
@@ -133,12 +133,12 @@
           "supplier": "Deloitte Touche Tohmatsu",
           "supplierAbn": "74490121060",
           "supplierState": "VIC",
-          "value": 195316,
+          "value": 140316,
           "start": "2026-11-05T13:00:00Z",
           "end": "2027-03-04T13:00:00Z",
           "unspsc": "80100000",
           "method": "Open tender",
-          "amendment": false
+          "amendment": true
         }
       },
       {

@@ -62,7 +62,33 @@ or other work out of this repo, its commits and its site.
 - Suppliers are grouped by ABN under their most common name; suppliers without an ABN are named in
   tables but get no page. Agency slugs come from the name (a number is added on a clash).
 - The build fails if any internal link points at a page it did not make. Tests use made-up records.
-- The site is not deployed yet; `site/` exists only inside the workflow run.
+- The build also writes `site/build.json` (`generatedAt`, `dataUpdated`, page counts): the stamp the
+  deploy check reads from the live address.
+
+## Deploy (`deploy` job of `fetch-data`, live since 20 Nov 2026)
+- Live address: https://wattlebay-labs.github.io/govcontracts/ . Every run of `fetch-data` on `main`
+  (daily schedule, a push to the scripts or the workflow, or a manual run) fetches, builds, deploys
+  and checks. `site/` is still not in git: it goes from the `fetch` job to the `deploy` job as the
+  `github-pages` artifact (`actions/upload-pages-artifact@v5`, then `actions/deploy-pages@v5`).
+- Only the `deploy` job has `pages: write` and `id-token: write`; it runs in the `github-pages`
+  environment and only on `main`.
+- After the deploy, `scripts/check-live.mjs` asks the live address for `build.json` (waiting up to
+  `WAIT_SECONDS` until it is the build just made), the home page, `sitemap.xml`, `style.css`, the
+  first category, agency and supplier page in the sitemap, and an address that does not exist (must
+  be the site's own 404 page). Each page must return the right status and carry the source credit,
+  the derived-data statement and the not-affiliated statement, or the run fails. Requests carry
+  `?v=<run id>` so a cached copy of an earlier deploy cannot answer. The result is in the job log
+  and the run summary. Tests (`scripts/check-live.test.mjs`) run the check against the build's own
+  output for made-up records.
+- First deploy (run 11): 10,539 pages, deploy step 14 seconds, the new build was served on the first
+  request, whole run 80 seconds.
+- A failed deploy or check never loses data: the dataset is saved and the summaries are committed in
+  the `fetch` job before `deploy` starts. The previous deploy stays live until a new one succeeds.
+- The site shows no contact details and does not link to this repository. Keep it that way until
+  told otherwise.
+- The log warns that `actions/checkout@v4` and `actions/setup-node@v4` target Node 20 and are forced
+  onto Node 24 (they run). Moving the `@v4` actions to current majors is a small later job; check
+  the cache action's notes first, because the dataset lives in that cache.
 
 ## How to run things
 - The cloud shell has no internet. Push code; let GitHub Actions run it; pull the results.

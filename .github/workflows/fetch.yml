@@ -1,6 +1,7 @@
 name: fetch-data
 # Daily pull of contract notices from the official AusTender OCDS API, then a
-# build of the static site from the result.
+# build of the static site from the result, then a deploy of that site to
+# GitHub Pages and a check that the live address serves it.
 # The dataset and its cursors travel from run to run in the workflow cache,
 # so a run only asks the API for what is new, and a new dataset is built up
 # over several runs instead of one long one. Only the small summaries are
@@ -14,6 +15,7 @@ on:
       - "scripts/fetch.mjs"
       - "scripts/build.mjs"
       - "scripts/style.css"
+      - "scripts/check-live.mjs"
       - ".github/workflows/fetch.yml"
 
 permissions:
@@ -27,12 +29,16 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     timeout-minutes: 55
+    outputs:
+      generated: ${{ steps.built.outputs.generated }}
+      pages: ${{ steps.built.outputs.pages }}
+      site_url: ${{ steps.built.outputs.site_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test scripts/fetch.test.mjs scripts/build.test.mjs
+      - run: node --test scripts/fetch.test.mjs scripts/build.test.mjs scripts/check-live.test.mjs
       - name: Restore dataset from the previous run
         uses: actions/cache/restore@v4
         with:
@@ -76,6 +82,20 @@ jobs:
             echo "::endgroup::"
           done
           rm -f sample.txt
+      # What was built, for the deploy job's check of the live address.
+      - name: Note which build this is
+        id: built
+        run: |
+          node -e '
+            const b = JSON.parse(require("fs").readFileSync("data/build.json", "utf8"));
+            console.log(`generated=${b.generatedAt}\npages=${b.pages.total}\nsite_url=${b.siteUrl}`);
+          ' >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"
+      - name: Package the site for GitHub Pages
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
       - name: Commit summary
         if: ${{ !cancelled() }}
         run: |
@@ -86,3 +106,34 @@ jobs:
           git commit -m "Data summary $(date -u +%F)" || echo "nothing to commit"
           git pull --rebase --autostash
           git push
+
+  # Publish the site that the fetch job built, then ask the live address for
+  # it. Only this job may write to Pages.
+  deploy:
+    needs: fetch
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the live site
+        run: node scripts/check-live.mjs
+        env:
+          SITE_URL: ${{ needs.fetch.outputs.site_url }}
+          EXPECT_GENERATED: ${{ needs.fetch.outputs.generated }}
+          EXPECT_PAGES: ${{ needs.fetch.outputs.pages }}
+          CHECK_TAG: ${{ github.run_id }}-${{ github.run_attempt }}
+          WAIT_SECONDS: "300"

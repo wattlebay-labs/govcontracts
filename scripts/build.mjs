@@ -9,6 +9,7 @@
 //   suppliers/, suppliers/<letter>/, supplier/<abn>/   one page per supplier ABN
 //   about/                     source, licence, coverage, caveats
 //   404.html, sitemap.xml, style.css
+//   build.json                 when this build was made and how many pages it has
 // plus data/build.json: page counts and sizes, small enough to commit.
 //
 // Every page credits the source and says the figures are derived. Links are
@@ -761,6 +762,9 @@ async function main() {
     topAgencies: top(model.agencies, 5).map((g) => ({ name: g.name, slug: g.slug, count: g.count, soonCount: g.soonCount, soonValue: Math.round(g.soonValue) })),
   };
   await writeFile("data/build.json", JSON.stringify(build, null, 2) + "\n");
+  // A stamp inside the site, so a check after a deploy can tell which build
+  // the live address is serving.
+  await writeFile(join(out, "build.json"), JSON.stringify({ generatedAt: build.generatedAt, dataUpdated: build.dataUpdated, pages: counts }) + "\n");
   console.log(JSON.stringify(build, null, 2));
 
   if (broken.length) {

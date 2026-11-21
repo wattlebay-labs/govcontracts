@@ -1,36 +1,36 @@
 {
-  "generatedAt": "2026-11-20T08:48:02Z",
-  "dataUpdated": "2026-11-20T08:47:56Z",
+  "generatedAt": "2026-11-21T00:00:22Z",
+  "dataUpdated": "2026-11-21T00:00:17Z",
   "siteUrl": "https://wattlebay-labs.github.io/govcontracts",
-  "today": "2026-11-20",
+  "today": "2026-11-21",
   "pages": {
-    "total": 10539,
+    "total": 10543,
     "home": 1,
     "category": 498,
     "agency": 137,
-    "supplier": 9871,
+    "supplier": 9875,
     "index": 30,
     "other": 2
   },
-  "directories": 10538,
-  "bytes": 57032950,
+  "directories": 10542,
+  "bytes": 57047490,
   "largestPage": {
     "path": "suppliers/a/index.html",
     "bytes": 165348
   },
-  "seconds": 2.8,
-  "records": 41197,
+  "seconds": 2.9,
+  "records": 41268,
   "contracts": {
-    "count": 41197,
-    "value": 130932710764.40013,
-    "soonCount": 39149,
-    "soonValue": 121445786703.34033
+    "count": 41268,
+    "value": 130980843126.05013,
+    "soonCount": 39063,
+    "soonValue": 121446323739.92036
   },
-  "suppliers": 9871,
+  "suppliers": 9875,
   "agencies": 137,
   "categories": 498,
   "skipped": {
-    "noSupplierAbn": 3159,
+    "noSupplierAbn": 3191,
     "noCategory": 0,
     "noAgency": 0,
     "badEndDate": 8,
@@ -41,43 +41,43 @@
   "months": [
     {
       "ym": "2026-11",
-      "count": 1713,
-      "value": 1720902729.6700017
+      "count": 1567,
+      "value": 1683765862.5300024
     },
     {
       "ym": "2026-12",
-      "count": 5872,
-      "value": 27040005735.50993
+      "count": 5876,
+      "value": 27039274334.71993
     },
     {
       "ym": "2027-01",
-      "count": 2008,
-      "value": 2163724502.88
+      "count": 2010,
+      "value": 2162398973.7399993
     },
     {
       "ym": "2027-02",
-      "count": 2000,
-      "value": 2513896205.56
+      "count": 1997,
+      "value": 2512171014.49
     },
     {
       "ym": "2027-03",
-      "count": 2448,
-      "value": 5821596316.699998
+      "count": 2451,
+      "value": 5821719095.409998
     },
     {
       "ym": "2027-04",
-      "count": 1683,
-      "value": 1883340898.9599986
+      "count": 1687,
+      "value": 1884632910.6899986
     },
     {
       "ym": "2027-05",
-      "count": 1754,
-      "value": 4433934953.749999
+      "count": 1757,
+      "value": 4434374035.539999
     },
     {
       "ym": "2027-06",
-      "count": 15054,
-      "value": 57548317968.979385
+      "count": 15067,
+      "value": 57548617976.27938
     },
     {
       "ym": "2027-07",
@@ -86,23 +86,23 @@
     },
     {
       "ym": "2027-08",
-      "count": 1464,
-      "value": 3435822618.120002
+      "count": 1463,
+      "value": 3435814366.8400016
     },
     {
       "ym": "2027-09",
-      "count": 1730,
-      "value": 6474032638.399988
+      "count": 1732,
+      "value": 6474344819.189987
     },
     {
       "ym": "2027-10",
-      "count": 1365,
-      "value": 3815452202.8299985
+      "count": 1372,
+      "value": 3816467861.919998
     },
     {
       "ym": "2027-11",
-      "count": 427,
-      "value": 1909080796.06
+      "count": 453,
+      "value": 1947063352.65
     }
   ],
   "categoriesWithLabel": 231,
@@ -116,8 +116,8 @@
         "Health Technology Assessment"
       ],
       "count": 553,
-      "soonCount": 500,
-      "soonValue": 10785724317
+      "soonCount": 498,
+      "soonValue": 10785444427
     },
     {
       "code": "93141805",
@@ -128,8 +128,8 @@
         "Workforce Australia Licence(s) to deliver Generalist services"
       ],
       "count": 226,
-      "soonCount": 225,
-      "soonValue": 8104260608
+      "soonCount": 224,
+      "soonValue": 8104250608
     },
     {
       "code": "72100000",
@@ -139,9 +139,9 @@
         "Building Works",
         "Refurbishment Works"
       ],
-      "count": 939,
+      "count": 940,
       "soonCount": 857,
-      "soonValue": 7608929107
+      "soonValue": 7608938593
     },
     {
       "code": "25102000",
@@ -165,7 +165,7 @@
       ],
       "count": 2436,
       "soonCount": 2371,
-      "soonValue": 5640870774
+      "soonValue": 5640990747
     },
     {
       "code": "92110000",
@@ -188,8 +188,8 @@
         "Ship Parts"
       ],
       "count": 183,
-      "soonCount": 165,
-      "soonValue": 4867077401
+      "soonCount": 158,
+      "soonValue": 4866542083
     },
     {
       "code": "25130000",
@@ -211,9 +211,9 @@
         "Temporary Personnel",
         "ICT Contractor Services"
       ],
-      "count": 6881,
-      "soonCount": 6737,
-      "soonValue": 4205315062
+      "count": 6896,
+      "soonCount": 6726,
+      "soonValue": 4202959625
     },
     {
       "code": "80161500",
@@ -223,9 +223,9 @@
         "Management Support Services",
         "Support Services"
       ],
-      "count": 1165,
-      "soonCount": 1129,
-      "soonValue": 4104862986
+      "count": 1166,
+      "soonCount": 1130,
+      "soonValue": 4126216780
     }
   ],
   "topAgencies": [
@@ -233,36 +233,36 @@
       "name": "Department of Defence",
       "slug": "department-of-defence",
       "count": 10352,
-      "soonCount": 9541,
-      "soonValue": 65975380998
+      "soonCount": 9468,
+      "soonValue": 65992640617
     },
     {
       "name": "Department of Employment and Workplace Relations",
       "slug": "department-of-employment-and-workplace-relations",
       "count": 1304,
-      "soonCount": 1289,
-      "soonValue": 9005101586
+      "soonCount": 1287,
+      "soonValue": 9005042810
     },
     {
       "name": "Department of Home Affairs",
       "slug": "department-of-home-affairs",
       "count": 1480,
-      "soonCount": 1421,
-      "soonValue": 7502173581
+      "soonCount": 1418,
+      "soonValue": 7504280068
     },
     {
       "name": "Services Australia",
       "slug": "services-australia",
       "count": 2341,
-      "soonCount": 2199,
-      "soonValue": 5279183020
+      "soonCount": 2198,
+      "soonValue": 5279062020
     },
     {
       "name": "Department of Health, Disability and Ageing",
       "slug": "department-of-health-disability-and-ageing",
       "count": 1949,
-      "soonCount": 1837,
-      "soonValue": 4226959473
+      "soonCount": 1832,
+      "soonValue": 4226126794
     }
   ]
 }

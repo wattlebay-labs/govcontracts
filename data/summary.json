@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T08:47:56Z",
+  "generatedAt": "2026-11-21T00:00:17Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,11 +11,11 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 7,
+  "runs": 8,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-20T08:47:24Z",
-    "contractLastModified": "2026-11-20T08:47:24Z",
+    "contractPublished": "2026-11-20T23:59:52Z",
+    "contractLastModified": "2026-11-20T23:59:52Z",
     "contractEnd": "2027-11-21T00:00:00Z"
   },
   "horizon": {
@@ -27,19 +27,19 @@
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 172,
-      "from": "2026-11-19T00:39:26Z",
-      "to": "2026-11-20T08:47:24Z",
+      "releases": 120,
+      "from": "2026-11-19T08:47:24Z",
+      "to": "2026-11-20T23:59:52Z",
       "caughtUp": true,
-      "cursor": "2026-11-20T08:47:24Z"
+      "cursor": "2026-11-20T23:59:52Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 735,
-      "from": "2026-11-19T00:39:26Z",
-      "to": "2026-11-20T08:47:24Z",
+      "releases": 429,
+      "from": "2026-11-19T08:47:24Z",
+      "to": "2026-11-20T23:59:52Z",
       "caughtUp": true,
-      "cursor": "2026-11-20T08:47:24Z"
+      "cursor": "2026-11-20T23:59:52Z"
     },
     "contractEnd": {
       "windows": 0,
@@ -50,37 +50,37 @@
       "cursor": "2027-11-21T00:00:00Z"
     }
   },
-  "requests": 12,
-  "pages": 12,
-  "seconds": 32,
+  "requests": 9,
+  "pages": 9,
+  "seconds": 25,
   "budgetSpent": false,
   "windowsTried": 2,
   "windowsOk": 2,
-  "largestWindow": 735,
+  "largestWindow": 429,
   "windowsWithMorePages": 2,
-  "contractsBefore": 41111,
-  "contracts": 41197,
-  "contractsEndingWithinHorizon": 39017,
-  "amendedContracts": 13720,
-  "suppliers": 9871,
+  "contractsBefore": 41197,
+  "contracts": 41268,
+  "contractsEndingWithinHorizon": 39054,
+  "amendedContracts": 13745,
+  "suppliers": 9875,
   "agencies": 137,
   "categories": 498,
-  "totalValue": 130932710764,
+  "totalValue": 130980843126,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2046-10-27T13:00:00Z",
-  "bytes": 18314692,
+  "bytes": 18346917,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 546,
-      "contractAmendment": 361
+      "contract": 355,
+      "contractAmendment": 194
     },
     "lastModified": {
-      "releases": 735,
-      "amendments": 360,
-      "alsoInPublishedPull": 172,
-      "newToDataset": 31
+      "releases": 429,
+      "amendments": 193,
+      "alsoInPublishedPull": 120,
+      "newToDataset": 13
     },
     "amendmentSamples": [
       {
@@ -201,59 +201,59 @@
       },
       {
         "dateType": "contractLastModified",
-        "ocid": "prod-89c79f4d7b0e4d569903b2bf75ea4431",
-        "releaseDate": "2026-11-19T02:05:18Z",
+        "ocid": "prod-d24d1e232c464853b600c25232f36371",
+        "releaseDate": "2026-11-20T00:04:59Z",
         "tag": [
           "contractAmendment"
         ],
         "contract": {
-          "id": "CN4281777",
-          "awardID": "CN4281777-e0f06f7af79a4833801b9c82d2d4871f",
-          "dateSigned": "2026-11-11T09:13:33Z",
-          "description": "Executive Search Services",
-          "title": "4600025781",
+          "id": "CN4287797",
+          "awardID": "CN4287797-80fab33dc2144928950b9e8f1549e6f2",
+          "dateSigned": "2026-11-10T01:55:21Z",
+          "description": "CRN01/2026",
+          "title": "4610006355",
           "items": [
             {
-              "id": "80111700-9f4894ed99eb4f4791b6e79fa896c14f",
+              "id": "86000000-8f2a8d9e02ed4d4c85291759b02af232",
               "classification": {
                 "scheme": "UNSPSC",
-                "id": "80111700"
+                "id": "86000000"
               }
             }
           ],
           "period": {
-            "startDate": "2026-10-05T13:00:00Z",
-            "endDate": "2026-12-30T13:00:00Z"
+            "startDate": "1900-01-01T00:00:00Z",
+            "endDate": "1900-01-01T00:00:00Z"
           },
           "value": {
             "currency": "AUD",
-            "amount": "27500.00"
+            "amount": "0.11"
           },
-          "status": "active",
+          "status": "cancelled",
           "amendments": [
             {
-              "id": "CN4281777-A1",
-              "releaseID": "prod-89c79f4d7b0e4d569903b2bf75ea4431-3b934e94324f35a9a8e904c42e484c31",
-              "amendsReleaseID": "prod-89c79f4d7b0e4d569903b2bf75ea4431-b908fc37e5bc3347b4aa7ac7bc02d07f"
+              "id": "CN4287797-A1",
+              "releaseID": "prod-d24d1e232c464853b600c25232f36371-ebc4df7d4aae34f4809ceafed8034def",
+              "amendsReleaseID": "prod-d24d1e232c464853b600c25232f36371-ad52a967aac63ac59b7f39bb5872fc8b"
             }
           ]
         },
         "previous": {
-          "id": "CN4281777",
-          "notice": "CN4281777",
-          "released": "2026-11-19T02:05:18Z",
-          "description": "Executive Search Services",
-          "agency": "Bureau of Meteorology",
-          "agencyAbn": "92637533532",
-          "division": null,
-          "supplier": "Davidson Recruitment Pty Ltd",
-          "supplierAbn": "50167132523",
-          "supplierState": "QLD",
-          "value": 27500,
-          "start": "2026-10-05T13:00:00Z",
-          "end": "2026-12-30T13:00:00Z",
-          "unspsc": "80111700",
-          "method": "Open tender",
+          "id": "CN4287797",
+          "notice": "CN4287797",
+          "released": "2026-11-20T00:04:59Z",
+          "description": "CRN01/2026",
+          "agency": "Department of Defence",
+          "agencyAbn": "62950639680",
+          "division": "DPG",
+          "supplier": "CANADIAN FORCES COLLEGE",
+          "supplierAbn": null,
+          "supplierState": "Outside Australia",
+          "value": 0.11,
+          "start": "1900-01-01T00:00:00Z",
+          "end": "1900-01-01T00:00:00Z",
+          "unspsc": "86000000",
+          "method": "Limited tender",
           "amendment": true
         }
       }
@@ -261,56 +261,56 @@
   },
   "sample": [
     {
-      "id": "CN4283805",
-      "notice": "CN4283805",
-      "released": "2026-10-20T22:48:48Z",
-      "description": "Accommodation for Conference Delegation",
-      "agency": "Department of Agriculture, Fisheries and Forestry",
-      "agencyAbn": "34190894983",
-      "division": null,
-      "supplier": "CORAL SEYAHAT A. S.",
-      "supplierAbn": null,
-      "supplierState": "Outside Australia",
-      "value": 17349.08,
-      "start": "2026-10-06T13:00:00Z",
-      "end": "2026-11-20T13:00:00Z",
-      "unspsc": "90120000",
-      "method": "Limited tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4286354",
-      "notice": "CN4286354",
-      "released": "2026-11-03T02:42:43Z",
-      "description": "Aircraft Spare Parts",
-      "agency": "Department of Defence",
-      "agencyAbn": "62950639680",
-      "division": "CASG",
-      "supplier": "PPG INDUSTRIES AUSTRALIA PTY LTD",
-      "supplierAbn": "82055500939",
-      "supplierState": "VIC",
-      "value": 19604.64,
-      "start": "2026-10-27T13:00:00Z",
-      "end": "2026-11-20T13:00:00Z",
-      "unspsc": "31210000",
-      "method": "Limited tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4287586",
-      "notice": "CN4287586",
-      "released": "2026-11-09T22:12:12Z",
-      "description": "Audio Visual Equipment",
-      "agency": "Department of Defence",
-      "agencyAbn": "62950639680",
-      "division": "ASSEC",
-      "supplier": "THE PIER ONE DEVELOPMENTS UNIT TRUST",
-      "supplierAbn": "36855093178",
+      "id": "CN4284024",
+      "notice": "CN4284024",
+      "released": "2026-10-21T04:58:31Z",
+      "description": "Provision of Campaign Advertising Services - Ready for Business",
+      "agency": "Australian Taxation Office",
+      "agencyAbn": "51824753556",
+      "division": "ATO FINANCE",
+      "supplier": "UNIVERSAL MCCANN MEDIABRANDS AUSTRALIA P/L T/AS",
+      "supplierAbn": "19002966001",
       "supplierState": "NSW",
-      "value": 20715.23,
-      "start": "2026-10-18T13:00:00Z",
-      "end": "2026-11-20T13:00:00Z",
-      "unspsc": "80161507",
+      "value": 22000,
+      "start": "2026-10-25T13:00:00Z",
+      "end": "2026-11-21T13:00:00Z",
+      "unspsc": "82100000",
+      "method": "Open tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4284846",
+      "notice": "CN4284846",
+      "released": "2026-10-27T06:54:35Z",
+      "description": "Transport",
+      "agency": "Department of Foreign Affairs and Trade",
+      "agencyAbn": "47065634525",
+      "division": "FINANCE DIVISION",
+      "supplier": "Crowne Chauffeurs PTY LTD",
+      "supplierAbn": "99642258179",
+      "supplierState": "ACT",
+      "value": 24200,
+      "start": "2026-11-12T13:00:00Z",
+      "end": "2026-11-21T13:00:00Z",
+      "unspsc": "78110000",
+      "method": "Limited tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4286169",
+      "notice": "CN4286169",
+      "released": "2026-11-02T04:00:25Z",
+      "description": "Training Services",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "AIRF",
+      "supplier": "SEARCH & RESCUE (SAR) TRAINING AUST",
+      "supplierAbn": "24941126858",
+      "supplierState": "NSW",
+      "value": 57560,
+      "start": "2026-10-19T13:00:00Z",
+      "end": "2026-11-21T13:00:00Z",
+      "unspsc": "86000000",
       "method": "Limited tender",
       "amendment": false
     }

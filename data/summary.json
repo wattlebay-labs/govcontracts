@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T00:00:17Z",
+  "generatedAt": "2026-11-21T23:21:55Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,194 +11,78 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 8,
+  "runs": 9,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-20T23:59:52Z",
-    "contractLastModified": "2026-11-20T23:59:52Z",
-    "contractEnd": "2027-11-21T00:00:00Z"
+    "contractPublished": "2026-11-21T23:21:34Z",
+    "contractLastModified": "2026-11-21T23:21:34Z",
+    "contractEnd": "2027-11-22T00:00:00Z"
   },
   "horizon": {
     "from": "2026-11-18T00:00:00Z",
-    "fetchedTo": "2027-11-21T00:00:00Z",
-    "target": "2027-11-21T00:00:00Z",
+    "fetchedTo": "2027-11-22T00:00:00Z",
+    "target": "2027-11-22T00:00:00Z",
     "complete": true
   },
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 120,
-      "from": "2026-11-19T08:47:24Z",
-      "to": "2026-11-20T23:59:52Z",
+      "releases": 113,
+      "from": "2026-11-19T23:59:52Z",
+      "to": "2026-11-21T23:21:34Z",
       "caughtUp": true,
-      "cursor": "2026-11-20T23:59:52Z"
+      "cursor": "2026-11-21T23:21:34Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 429,
-      "from": "2026-11-19T08:47:24Z",
-      "to": "2026-11-20T23:59:52Z",
+      "releases": 400,
+      "from": "2026-11-19T23:59:52Z",
+      "to": "2026-11-21T23:21:34Z",
       "caughtUp": true,
-      "cursor": "2026-11-20T23:59:52Z"
+      "cursor": "2026-11-21T23:21:34Z"
     },
     "contractEnd": {
-      "windows": 0,
-      "releases": 0,
+      "windows": 1,
+      "releases": 40,
       "from": "2027-11-21T00:00:00Z",
-      "to": "2027-11-21T00:00:00Z",
+      "to": "2027-11-22T00:00:00Z",
       "caughtUp": true,
-      "cursor": "2027-11-21T00:00:00Z"
+      "cursor": "2027-11-22T00:00:00Z"
     }
   },
   "requests": 9,
   "pages": 9,
-  "seconds": 25,
+  "seconds": 21,
   "budgetSpent": false,
-  "windowsTried": 2,
-  "windowsOk": 2,
-  "largestWindow": 429,
+  "windowsTried": 3,
+  "windowsOk": 3,
+  "largestWindow": 400,
   "windowsWithMorePages": 2,
-  "contractsBefore": 41197,
-  "contracts": 41268,
-  "contractsEndingWithinHorizon": 39054,
-  "amendedContracts": 13745,
+  "contractsBefore": 41268,
+  "contracts": 41284,
+  "contractsEndingWithinHorizon": 39057,
+  "amendedContracts": 13751,
   "suppliers": 9875,
   "agencies": 137,
   "categories": 498,
-  "totalValue": 130980843126,
+  "totalValue": 130999810296,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2046-10-27T13:00:00Z",
-  "bytes": 18346917,
+  "bytes": 18354034,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 355,
-      "contractAmendment": 194
+      "contract": 360,
+      "contractAmendment": 193
     },
     "lastModified": {
-      "releases": 429,
-      "amendments": 193,
-      "alsoInPublishedPull": 120,
-      "newToDataset": 13
+      "releases": 400,
+      "amendments": 176,
+      "alsoInPublishedPull": 113,
+      "newToDataset": 0
     },
     "amendmentSamples": [
-      {
-        "dateType": "contractPublished",
-        "ocid": "prod-8996c0bb3d2c4a8b9bd51cde89a5801e",
-        "releaseDate": "2026-11-19T22:07:06Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4289928",
-          "awardID": "CN4289928-462cfca828fd4db6ba857b99bca0a238",
-          "dateSigned": "2026-11-19T22:04:18Z",
-          "description": "Reform Cost Benefit Analysis",
-          "title": "AC3165",
-          "items": [
-            {
-              "id": "80100000-c245462503d34a39a3a2401402feeb6f",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "80100000"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2026-11-05T13:00:00Z",
-            "endDate": "2027-03-04T13:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "140316.00"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4289928-A1",
-              "releaseID": "prod-8996c0bb3d2c4a8b9bd51cde89a5801e-11e7731febdd315c8be93b1fbce3a48d",
-              "amendsReleaseID": "prod-8996c0bb3d2c4a8b9bd51cde89a5801e-db6d053156c2313d908adbd42bdac72f"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4289928",
-          "notice": "CN4289928",
-          "released": "2026-11-19T22:07:06Z",
-          "description": "Reform Cost Benefit Analysis",
-          "agency": "Australian Transaction Reports and Analysis Centre",
-          "agencyAbn": "32770513371",
-          "division": null,
-          "supplier": "Deloitte Touche Tohmatsu",
-          "supplierAbn": "74490121060",
-          "supplierState": "VIC",
-          "value": 140316,
-          "start": "2026-11-05T13:00:00Z",
-          "end": "2027-03-04T13:00:00Z",
-          "unspsc": "80100000",
-          "method": "Open tender",
-          "amendment": true
-        }
-      },
-      {
-        "dateType": "contractLastModified",
-        "ocid": "prod-8996c0bb3d2c4a8b9bd51cde89a5801e",
-        "releaseDate": "2026-11-19T22:07:06Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4289928",
-          "awardID": "CN4289928-462cfca828fd4db6ba857b99bca0a238",
-          "dateSigned": "2026-11-19T22:04:18Z",
-          "description": "Reform Cost Benefit Analysis",
-          "title": "AC3165",
-          "items": [
-            {
-              "id": "80100000-c245462503d34a39a3a2401402feeb6f",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "80100000"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2026-11-05T13:00:00Z",
-            "endDate": "2027-03-04T13:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "140316.00"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4289928-A1",
-              "releaseID": "prod-8996c0bb3d2c4a8b9bd51cde89a5801e-11e7731febdd315c8be93b1fbce3a48d",
-              "amendsReleaseID": "prod-8996c0bb3d2c4a8b9bd51cde89a5801e-db6d053156c2313d908adbd42bdac72f"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4289928",
-          "notice": "CN4289928",
-          "released": "2026-11-19T22:07:06Z",
-          "description": "Reform Cost Benefit Analysis",
-          "agency": "Australian Transaction Reports and Analysis Centre",
-          "agencyAbn": "32770513371",
-          "division": null,
-          "supplier": "Deloitte Touche Tohmatsu",
-          "supplierAbn": "74490121060",
-          "supplierState": "VIC",
-          "value": 140316,
-          "start": "2026-11-05T13:00:00Z",
-          "end": "2027-03-04T13:00:00Z",
-          "unspsc": "80100000",
-          "method": "Open tender",
-          "amendment": true
-        }
-      },
       {
         "dateType": "contractLastModified",
         "ocid": "prod-d24d1e232c464853b600c25232f36371",
@@ -256,61 +140,177 @@
           "method": "Limited tender",
           "amendment": true
         }
+      },
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-be4dd1e0f12b439e9f9608fed82989e4",
+        "releaseDate": "2026-11-20T05:58:08Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4284382",
+          "awardID": "CN4284382-c4e884e7357c4615927a9e85b0d3a26d",
+          "dateSigned": "2026-10-23T03:28:49Z",
+          "description": "Provision of escrow services",
+          "title": "5700027694",
+          "items": [
+            {
+              "id": "81111000-300f33098219438e9daa7d45657df980",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "81111000"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-09-21T14:00:00Z",
+            "endDate": "2028-09-20T14:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "155911.80"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4284382-A1",
+              "releaseID": "prod-be4dd1e0f12b439e9f9608fed82989e4-968778752c343faa906b2f0a30d5f37e",
+              "amendsReleaseID": "prod-be4dd1e0f12b439e9f9608fed82989e4-95d6b9da92ec3f23b9b220fb409d2b9d"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4284382",
+          "notice": "CN4284382",
+          "released": "2026-11-20T05:58:08Z",
+          "description": "Provision of escrow services",
+          "agency": "Australian Federal Police",
+          "agencyAbn": "17864931143",
+          "division": "CORPORATE CO-ORDINATION AND DE",
+          "supplier": "ESCROW LONDON AUSTRALIA PTY LTD",
+          "supplierAbn": "15678858538",
+          "supplierState": "NSW",
+          "value": 155911.8,
+          "start": "2026-09-21T14:00:00Z",
+          "end": "2028-09-20T14:00:00Z",
+          "unspsc": "81111000",
+          "method": "Limited tender",
+          "amendment": true
+        }
+      },
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-f994758fe2b445ab9eb5e7843fde01cd",
+        "releaseDate": "2026-11-20T08:13:57Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4284091",
+          "awardID": "CN4284091-8d8b1ca0bb4d41309ee1e2e68df11280",
+          "dateSigned": "2026-10-21T05:27:30Z",
+          "description": "Computer Equipment and Accessories",
+          "title": "4600031123",
+          "items": [
+            {
+              "id": "43210000-60e4c61a731b4431888f6a04a483fc5c",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "43210000"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-10-15T13:00:00Z",
+            "endDate": "2029-10-15T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "2634481.59"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4284091-A1",
+              "releaseID": "prod-f994758fe2b445ab9eb5e7843fde01cd-0f57ef64319f3ea696eba1f3fd0b7859",
+              "amendsReleaseID": "prod-f994758fe2b445ab9eb5e7843fde01cd-4a8a418d0039367783d5f1957bc1d97f"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4284091",
+          "notice": "CN4284091",
+          "released": "2026-11-20T08:13:57Z",
+          "description": "Computer Equipment and Accessories",
+          "agency": "Department of Foreign Affairs and Trade",
+          "agencyAbn": "47065634525",
+          "division": "FINANCE DIVISION",
+          "supplier": "Brennan IT Pty Ltd",
+          "supplierAbn": "29082699367",
+          "supplierState": "NSW",
+          "value": 2634481.59,
+          "start": "2026-10-15T13:00:00Z",
+          "end": "2029-10-15T13:00:00Z",
+          "unspsc": "43210000",
+          "method": "Open tender",
+          "amendment": true
+        }
       }
     ]
   },
   "sample": [
     {
-      "id": "CN4284024",
-      "notice": "CN4284024",
-      "released": "2026-10-21T04:58:31Z",
-      "description": "Provision of Campaign Advertising Services - Ready for Business",
-      "agency": "Australian Taxation Office",
-      "agencyAbn": "51824753556",
-      "division": "ATO FINANCE",
-      "supplier": "UNIVERSAL MCCANN MEDIABRANDS AUSTRALIA P/L T/AS",
-      "supplierAbn": "19002966001",
-      "supplierState": "NSW",
-      "value": 22000,
-      "start": "2026-10-25T13:00:00Z",
-      "end": "2026-11-21T13:00:00Z",
-      "unspsc": "82100000",
-      "method": "Open tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4284846",
-      "notice": "CN4284846",
-      "released": "2026-10-27T06:54:35Z",
-      "description": "Transport",
-      "agency": "Department of Foreign Affairs and Trade",
-      "agencyAbn": "47065634525",
-      "division": "FINANCE DIVISION",
-      "supplier": "Crowne Chauffeurs PTY LTD",
-      "supplierAbn": "99642258179",
-      "supplierState": "ACT",
-      "value": 24200,
-      "start": "2026-11-12T13:00:00Z",
-      "end": "2026-11-21T13:00:00Z",
-      "unspsc": "78110000",
+      "id": "CN4284698",
+      "notice": "CN4284698",
+      "released": "2026-10-27T01:42:29Z",
+      "description": "Equipment Hire",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "DSTG",
+      "supplier": "PINNACLE HIRE PTY LTD",
+      "supplierAbn": "35646593428",
+      "supplierState": "VIC",
+      "value": 202708.72,
+      "start": "2026-10-04T13:00:00Z",
+      "end": "2026-11-22T13:00:00Z",
+      "unspsc": "41100000",
       "method": "Limited tender",
       "amendment": false
     },
     {
-      "id": "CN4286169",
-      "notice": "CN4286169",
-      "released": "2026-11-02T04:00:25Z",
-      "description": "Training Services",
+      "id": "CN4287034",
+      "notice": "CN4287034",
+      "released": "2026-11-05T04:54:31Z",
+      "description": "Relocation Services",
+      "agency": "Department of Agriculture, Fisheries and Forestry",
+      "agencyAbn": "34190894983",
+      "division": null,
+      "supplier": "GRACE REMOVALS AUSTRALIA PTY LTD",
+      "supplierAbn": "35083330223",
+      "supplierState": "NSW",
+      "value": 20833,
+      "start": "2026-10-28T13:00:00Z",
+      "end": "2026-11-22T13:00:00Z",
+      "unspsc": "78101804",
+      "method": "Open tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4286279",
+      "notice": "CN4286279",
+      "released": "2026-11-02T22:08:58Z",
+      "description": "Test Set",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
-      "division": "AIRF",
-      "supplier": "SEARCH & RESCUE (SAR) TRAINING AUST",
-      "supplierAbn": "24941126858",
+      "division": "NSSG",
+      "supplier": "BELLINGER SYSTEMS PTY LTD",
+      "supplierAbn": "89633874656",
       "supplierState": "NSW",
-      "value": 57560,
-      "start": "2026-10-19T13:00:00Z",
-      "end": "2026-11-21T13:00:00Z",
-      "unspsc": "86000000",
+      "value": 35660.24,
+      "start": "2026-10-20T13:00:00Z",
+      "end": "2026-11-22T13:00:00Z",
+      "unspsc": "41110000",
       "method": "Limited tender",
       "amendment": false
     }

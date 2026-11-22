@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T09:06:49Z",
+  "generatedAt": "2026-11-22T23:38:09Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,11 +11,11 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 11,
+  "runs": 12,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-22T09:06:48Z",
-    "contractLastModified": "2026-11-22T09:06:48Z",
+    "contractPublished": "2026-11-22T23:38:05Z",
+    "contractLastModified": "2026-11-22T23:38:05Z",
     "contractEnd": "2027-11-23T00:00:00Z"
   },
   "horizon": {
@@ -27,19 +27,19 @@
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 0,
-      "from": "2026-11-20T23:21:34Z",
-      "to": "2026-11-22T09:06:48Z",
+      "releases": 5,
+      "from": "2026-11-21T09:06:48Z",
+      "to": "2026-11-22T23:38:05Z",
       "caughtUp": true,
-      "cursor": "2026-11-22T09:06:48Z"
+      "cursor": "2026-11-22T23:38:05Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 0,
-      "from": "2026-11-20T23:21:34Z",
-      "to": "2026-11-22T09:06:48Z",
+      "releases": 20,
+      "from": "2026-11-21T09:06:48Z",
+      "to": "2026-11-22T23:38:05Z",
       "caughtUp": true,
-      "cursor": "2026-11-22T09:06:48Z"
+      "cursor": "2026-11-22T23:38:05Z"
     },
     "contractEnd": {
       "windows": 0,
@@ -52,88 +52,266 @@
   },
   "requests": 2,
   "pages": 2,
-  "seconds": 2,
+  "seconds": 3,
   "budgetSpent": false,
   "windowsTried": 2,
   "windowsOk": 2,
-  "emptyWindows": 2,
-  "largestWindow": 0,
+  "emptyWindows": 0,
+  "largestWindow": 20,
   "windowsWithMorePages": 0,
   "contractsBefore": 41299,
-  "contracts": 41299,
-  "contractsEndingWithinHorizon": 39057,
-  "amendedContracts": 13763,
-  "suppliers": 9877,
+  "contracts": 41308,
+  "contractsEndingWithinHorizon": 39031,
+  "amendedContracts": 13766,
+  "suppliers": 9882,
   "agencies": 137,
-  "categories": 498,
-  "totalValue": 131042899778,
+  "categories": 499,
+  "totalValue": 131060017241,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2046-10-27T13:00:00Z",
-  "bytes": 18360732,
+  "bytes": 18364800,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
-    "tags": {},
-    "lastModified": {
-      "releases": 0,
-      "amendments": 0,
-      "alsoInPublishedPull": 0,
-      "newToDataset": 0
+    "tags": {
+      "contract": 16,
+      "contractAmendment": 9
     },
-    "amendmentSamples": []
+    "lastModified": {
+      "releases": 20,
+      "amendments": 9,
+      "alsoInPublishedPull": 5,
+      "newToDataset": 4
+    },
+    "amendmentSamples": [
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-ea66c29a1cf342fb90631a6106c033f7",
+        "releaseDate": "2026-11-22T22:25:26Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4261708",
+          "awardID": "CN4261708-461569fd28db49cc8f4834a8a8e11788",
+          "dateSigned": "2026-07-17T00:16:58Z",
+          "description": "Service Now Licences",
+          "title": "CON001207",
+          "items": [
+            {
+              "id": "81112200-e40bd88af2424cc6851e7b59c64ac85a",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "81112200"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-06-30T14:00:00Z",
+            "endDate": "2027-06-29T14:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "154867.42"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4261708-A1",
+              "releaseID": "prod-ea66c29a1cf342fb90631a6106c033f7-8a23fa817db932ff9d1f453e42867c9d",
+              "amendsReleaseID": "prod-ea66c29a1cf342fb90631a6106c033f7-c45c1a8aaa293f919ac02b54fea9722d"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4261708",
+          "notice": "CN4261708",
+          "released": "2026-07-17T00:16:58Z",
+          "description": "Service Now Licences",
+          "agency": "National Archives of Australia",
+          "agencyAbn": "36889228992",
+          "division": null,
+          "supplier": "ServiceNow Australia Pty Ltd",
+          "supplierAbn": "88149683312",
+          "supplierState": "NSW",
+          "value": 140788.56,
+          "start": "2026-06-30T14:00:00Z",
+          "end": "2027-06-29T14:00:00Z",
+          "unspsc": "81112200",
+          "method": "Open tender",
+          "amendment": false
+        }
+      },
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-d5745683da0d4c7e84fe3bb842d4b222",
+        "releaseDate": "2026-11-22T21:45:36Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4110866",
+          "awardID": "CN4110866-9af5db85de494c3b9525a939aecd4ac0",
+          "dateSigned": "2024-11-27T02:56:55Z",
+          "description": "Training and Development Services",
+          "title": "NCD11289",
+          "items": [
+            {
+              "id": "86000000-1287f0cc39b34595b8251aefaba8075b",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "86000000"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2024-10-17T13:00:00Z",
+            "endDate": "2028-01-30T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "1220000.00"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4110866-A1",
+              "releaseID": "prod-d5745683da0d4c7e84fe3bb842d4b222-6364da7833fd378e9d741388bcfa6b9a",
+              "amendsReleaseID": "prod-d5745683da0d4c7e84fe3bb842d4b222-caaf459ec2203042ad0c54dc06c1951e"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4110866",
+          "notice": "CN4110866",
+          "released": "2025-11-20T03:35:25Z",
+          "description": "Training and Development Services",
+          "agency": "National Indigenous Australians Agency",
+          "agencyAbn": "30429895164",
+          "division": null,
+          "supplier": "Australian National University",
+          "supplierAbn": "52234063906",
+          "supplierState": "ACT",
+          "value": 1220000,
+          "start": "2024-10-17T13:00:00Z",
+          "end": "2027-10-30T13:00:00Z",
+          "unspsc": "86000000",
+          "method": "Open tender",
+          "amendment": true
+        }
+      },
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-d5745683da0d4c7e84fe3bb842d4b222",
+        "releaseDate": "2026-11-22T21:45:36Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4110866",
+          "awardID": "CN4110866-9af5db85de494c3b9525a939aecd4ac0",
+          "dateSigned": "2024-11-27T02:56:55Z",
+          "description": "Training and Development Services",
+          "title": "NCD11289",
+          "items": [
+            {
+              "id": "86000000-2f1d29ddf70a45c3b70876f69b3fed18",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "86000000"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2024-10-17T13:00:00Z",
+            "endDate": "2028-01-30T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "1830000.00"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4110866-A2",
+              "releaseID": "prod-d5745683da0d4c7e84fe3bb842d4b222-deef67be570f324688faf7ad930fafb7",
+              "amendsReleaseID": "prod-d5745683da0d4c7e84fe3bb842d4b222-caaf459ec2203042ad0c54dc06c1951e"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4110866",
+          "notice": "CN4110866",
+          "released": "2026-11-22T21:45:36Z",
+          "description": "Training and Development Services",
+          "agency": "National Indigenous Australians Agency",
+          "agencyAbn": "30429895164",
+          "division": null,
+          "supplier": "Australian National University",
+          "supplierAbn": "52234063906",
+          "supplierState": "ACT",
+          "value": 1220000,
+          "start": "2024-10-17T13:00:00Z",
+          "end": "2028-01-30T13:00:00Z",
+          "unspsc": "86000000",
+          "method": "Open tender",
+          "amendment": true
+        }
+      }
+    ]
   },
   "sample": [
     {
-      "id": "CN4284698",
-      "notice": "CN4284698",
-      "released": "2026-10-27T01:42:29Z",
-      "description": "Equipment Hire",
+      "id": "CN4285726",
+      "notice": "CN4285726",
+      "released": "2026-10-30T02:50:32Z",
+      "description": "Vehicle Spare Parts",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
-      "division": "DSTG",
-      "supplier": "PINNACLE HIRE PTY LTD",
-      "supplierAbn": "35646593428",
-      "supplierState": "VIC",
-      "value": 202708.72,
-      "start": "2026-10-04T13:00:00Z",
-      "end": "2026-11-22T13:00:00Z",
-      "unspsc": "41100000",
+      "division": "CASG",
+      "supplier": "HARDY SPICER - TOWNSVILLE",
+      "supplierAbn": "52099707856",
+      "supplierState": "QLD",
+      "value": 97354.4,
+      "start": "2026-10-11T13:00:00Z",
+      "end": "2026-11-23T13:00:00Z",
+      "unspsc": "25170000",
       "method": "Limited tender",
       "amendment": false
     },
     {
-      "id": "CN4287034",
-      "notice": "CN4287034",
-      "released": "2026-11-05T04:54:31Z",
-      "description": "Relocation Services",
-      "agency": "Department of Agriculture, Fisheries and Forestry",
-      "agencyAbn": "34190894983",
+      "id": "CN4286547",
+      "notice": "CN4286547",
+      "released": "2026-11-03T22:46:26Z",
+      "description": "Graphic Design of Annual Report",
+      "agency": "Royal Australian Mint",
+      "agencyAbn": "45852104259",
       "division": null,
-      "supplier": "GRACE REMOVALS AUSTRALIA PTY LTD",
-      "supplierAbn": "35083330223",
-      "supplierState": "NSW",
-      "value": 20833,
-      "start": "2026-10-28T13:00:00Z",
-      "end": "2026-11-22T13:00:00Z",
-      "unspsc": "78101804",
+      "supplier": "The Trustee for Giraffe Visual Communication Management Unit Trust",
+      "supplierAbn": "35588248491",
+      "supplierState": "ACT",
+      "value": 21714.13,
+      "start": "2026-09-28T14:00:00Z",
+      "end": "2026-11-23T13:00:00Z",
+      "unspsc": "82140000",
       "method": "Open tender",
       "amendment": false
     },
     {
-      "id": "CN4286279",
-      "notice": "CN4286279",
-      "released": "2026-11-02T22:08:58Z",
-      "description": "Test Set",
+      "id": "CN4286132",
+      "notice": "CN4286132",
+      "released": "2026-11-02T04:00:03Z",
+      "description": "Vehicle Maintenance",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
-      "division": "NSSG",
-      "supplier": "BELLINGER SYSTEMS PTY LTD",
-      "supplierAbn": "89633874656",
-      "supplierState": "NSW",
-      "value": 35660.24,
-      "start": "2026-10-20T13:00:00Z",
-      "end": "2026-11-22T13:00:00Z",
-      "unspsc": "41110000",
+      "division": "JCG",
+      "supplier": "HAULMARK TRAILERS (AUSTRALIA) PTY  LTD",
+      "supplierAbn": "85010131567",
+      "supplierState": "QLD",
+      "value": 14285.29,
+      "start": "2026-10-26T13:00:00Z",
+      "end": "2026-11-23T13:00:00Z",
+      "unspsc": "25100000",
       "method": "Limited tender",
       "amendment": false
     }

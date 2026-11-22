@@ -1,36 +1,36 @@
 {
-  "generatedAt": "2026-11-21T23:22:03Z",
-  "dataUpdated": "2026-11-21T23:21:55Z",
+  "generatedAt": "2026-11-22T08:59:00Z",
+  "dataUpdated": "2026-11-22T08:58:55Z",
   "siteUrl": "https://wattlebay-labs.github.io/govcontracts",
   "today": "2026-11-22",
   "pages": {
-    "total": 10543,
+    "total": 10546,
     "home": 1,
     "category": 498,
     "agency": 137,
-    "supplier": 9875,
+    "supplier": 9877,
     "index": 30,
-    "other": 2
+    "other": 3
   },
-  "directories": 10542,
-  "bytes": 57048278,
+  "directories": 10545,
+  "bytes": 57705176,
   "largestPage": {
     "path": "suppliers/a/index.html",
-    "bytes": 165348
+    "bytes": 165569
   },
-  "seconds": 3.6,
-  "records": 41284,
+  "seconds": 2.4,
+  "records": 41299,
   "contracts": {
-    "count": 41284,
-    "value": 130999810295.79012,
+    "count": 41299,
+    "value": 131042899777.6101,
     "soonCount": 39054,
     "soonValue": 121436404946.53036
   },
-  "suppliers": 9875,
+  "suppliers": 9877,
   "agencies": 137,
   "categories": 498,
   "skipped": {
-    "noSupplierAbn": 3192,
+    "noSupplierAbn": 3193,
     "noCategory": 0,
     "noAgency": 0,
     "badEndDate": 8,
@@ -211,7 +211,7 @@
         "Temporary Personnel",
         "ICT Contractor Services"
       ],
-      "count": 6897,
+      "count": 6901,
       "soonCount": 6724,
       "soonValue": 4200713868
     },
@@ -223,7 +223,7 @@
         "Management Support Services",
         "Support Services"
       ],
-      "count": 1166,
+      "count": 1168,
       "soonCount": 1130,
       "soonValue": 4126216780
     }
@@ -232,7 +232,7 @@
     {
       "name": "Department of Defence",
       "slug": "department-of-defence",
-      "count": 10360,
+      "count": 10363,
       "soonCount": 9465,
       "soonValue": 65992528297
     },

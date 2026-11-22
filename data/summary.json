@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T08:58:55Z",
+  "generatedAt": "2026-11-22T09:06:49Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,11 +11,11 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 10,
+  "runs": 11,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-21T23:21:34Z",
-    "contractLastModified": "2026-11-21T23:21:34Z",
+    "contractPublished": "2026-11-22T09:06:48Z",
+    "contractLastModified": "2026-11-22T09:06:48Z",
     "contractEnd": "2027-11-23T00:00:00Z"
   },
   "horizon": {
@@ -29,36 +29,37 @@
       "windows": 1,
       "releases": 0,
       "from": "2026-11-20T23:21:34Z",
-      "to": "2026-11-22T08:58:51Z",
-      "caughtUp": false,
-      "cursor": "2026-11-21T23:21:34Z"
+      "to": "2026-11-22T09:06:48Z",
+      "caughtUp": true,
+      "cursor": "2026-11-22T09:06:48Z"
     },
     "contractLastModified": {
       "windows": 1,
       "releases": 0,
       "from": "2026-11-20T23:21:34Z",
-      "to": "2026-11-22T08:58:51Z",
-      "caughtUp": false,
-      "cursor": "2026-11-21T23:21:34Z"
+      "to": "2026-11-22T09:06:48Z",
+      "caughtUp": true,
+      "cursor": "2026-11-22T09:06:48Z"
     },
     "contractEnd": {
-      "windows": 1,
-      "releases": 39,
-      "from": "2027-11-22T00:00:00Z",
+      "windows": 0,
+      "releases": 0,
+      "from": "2027-11-23T00:00:00Z",
       "to": "2027-11-23T00:00:00Z",
       "caughtUp": true,
       "cursor": "2027-11-23T00:00:00Z"
     }
   },
-  "requests": 3,
-  "pages": 3,
-  "seconds": 4,
+  "requests": 2,
+  "pages": 2,
+  "seconds": 2,
   "budgetSpent": false,
-  "windowsTried": 3,
-  "windowsOk": 1,
-  "largestWindow": 39,
+  "windowsTried": 2,
+  "windowsOk": 2,
+  "emptyWindows": 2,
+  "largestWindow": 0,
   "windowsWithMorePages": 0,
-  "contractsBefore": 41284,
+  "contractsBefore": 41299,
   "contracts": 41299,
   "contractsEndingWithinHorizon": 39057,
   "amendedContracts": 13763,
@@ -69,206 +70,17 @@
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2046-10-27T13:00:00Z",
   "bytes": 18360732,
-  "errors": [
-    {
-      "url": "https://api.tenders.gov.au/ocds/findByDates/contractPublished/2026-11-20T23:21:34Z/2026-11-22T08:58:51Z",
-      "status": 400,
-      "body": "{\"errorCode\": 100, \"message\": \"No Records found for Date Range ['2026-11-20T23:21:34Z'-'2026-11-22T08:58:51Z']\"}"
-    },
-    {
-      "url": "https://api.tenders.gov.au/ocds/findByDates/contractLastModified/2026-11-20T23:21:34Z/2026-11-22T08:58:51Z",
-      "status": 400,
-      "body": "{\"errorCode\": 100, \"message\": \"No Records found for Date Range ['2026-11-20T23:21:34Z'-'2026-11-22T08:58:51Z']\"}"
-    }
-  ],
-  "errorCount": 2,
+  "errors": [],
+  "errorCount": 0,
   "diagnostics": {
-    "tags": {
-      "contract": 17,
-      "contractAmendment": 22
-    },
+    "tags": {},
     "lastModified": {
       "releases": 0,
       "amendments": 0,
       "alsoInPublishedPull": 0,
       "newToDataset": 0
     },
-    "amendmentSamples": [
-      {
-        "dateType": "contractEnd",
-        "ocid": "prod-b2079e5374d8481e9c1d8dfa3447ad93",
-        "releaseDate": "2026-11-18T22:52:12Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4228596",
-          "awardID": "CN4228596-f573930bd5724f7882f12b616d325fe0",
-          "dateSigned": "2026-03-27T00:12:24Z",
-          "description": "ICT Software",
-          "title": "C00875",
-          "items": [
-            {
-              "id": "43210000-ee54789246e34c7890d4d793815f38be",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "43210000"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2025-11-18T13:00:00Z",
-            "endDate": "2027-11-22T13:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "240178.34"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4228596-A1",
-              "releaseID": "prod-b2079e5374d8481e9c1d8dfa3447ad93-620996780bd034249611eaa0e62b130e",
-              "amendsReleaseID": "prod-b2079e5374d8481e9c1d8dfa3447ad93-6f08e6e4f9d73f6eb6a3bb2728afa5c8"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4228596",
-          "notice": "CN4228596",
-          "released": "2026-11-18T22:52:12Z",
-          "description": "ICT Software",
-          "agency": "Department of the Prime Minister and Cabinet",
-          "agencyAbn": "18108001191",
-          "division": null,
-          "supplier": "Data#3 Limited",
-          "supplierAbn": "31010545267",
-          "supplierState": "QLD",
-          "value": 240178.34,
-          "start": "2025-11-18T13:00:00Z",
-          "end": "2027-11-22T13:00:00Z",
-          "unspsc": "43210000",
-          "method": "Open tender",
-          "amendment": true
-        }
-      },
-      {
-        "dateType": "contractEnd",
-        "ocid": "prod-4fd967e729a34b5ba9b8ac06e2412082",
-        "releaseDate": "2026-06-26T06:33:23Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4210327",
-          "awardID": "CN4210327-f674a7ec94ea48dc999f0aa573b49ce1",
-          "dateSigned": "2025-12-19T01:14:31Z",
-          "description": "Provision of building support services",
-          "title": "5700025997",
-          "items": [
-            {
-              "id": "72101500-1040f9e91fef484fb1e2defce1788e90",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "72101500"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2025-11-23T13:00:00Z",
-            "endDate": "2027-11-22T13:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "5197838.80"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4210327-A1",
-              "releaseID": "prod-4fd967e729a34b5ba9b8ac06e2412082-8697a0c6a5853717b41fb65548e7e882",
-              "amendsReleaseID": "prod-4fd967e729a34b5ba9b8ac06e2412082-a0531244845539338f2a9234882732c6"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4210327",
-          "notice": "CN4210327",
-          "released": "2025-12-19T01:14:31Z",
-          "description": "Provision of building support services",
-          "agency": "Australian Federal Police",
-          "agencyAbn": "17864931143",
-          "division": "CORPORATE CO-ORDINATION AND DE",
-          "supplier": "HUMANIHUT PTY LTD",
-          "supplierAbn": "71163752994",
-          "supplierState": "SA",
-          "value": 3289969.1,
-          "start": "2025-11-23T13:00:00Z",
-          "end": "2027-11-22T13:00:00Z",
-          "unspsc": "72101500",
-          "method": "Limited tender",
-          "amendment": false
-        }
-      },
-      {
-        "dateType": "contractEnd",
-        "ocid": "prod-4fd967e729a34b5ba9b8ac06e2412082",
-        "releaseDate": "2026-06-26T06:33:23Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4210327",
-          "awardID": "CN4210327-f674a7ec94ea48dc999f0aa573b49ce1",
-          "dateSigned": "2025-12-19T01:14:31Z",
-          "description": "Provision of building support services",
-          "title": "5700025997",
-          "items": [
-            {
-              "id": "72101500-e6ce681d8ab742038ca50815a776fc0f",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "72101500"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2025-11-23T13:00:00Z",
-            "endDate": "2027-11-22T13:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "5787903.98"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4210327-A2",
-              "releaseID": "prod-4fd967e729a34b5ba9b8ac06e2412082-a05d78079cc73bdc8f26701387b4ea9a",
-              "amendsReleaseID": "prod-4fd967e729a34b5ba9b8ac06e2412082-a0531244845539338f2a9234882732c6"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4210327",
-          "notice": "CN4210327",
-          "released": "2026-06-26T06:33:23Z",
-          "description": "Provision of building support services",
-          "agency": "Australian Federal Police",
-          "agencyAbn": "17864931143",
-          "division": "CORPORATE CO-ORDINATION AND DE",
-          "supplier": "HUMANIHUT PTY LTD",
-          "supplierAbn": "71163752994",
-          "supplierState": "SA",
-          "value": 5197838.8,
-          "start": "2025-11-23T13:00:00Z",
-          "end": "2027-11-22T13:00:00Z",
-          "unspsc": "72101500",
-          "method": "Limited tender",
-          "amendment": true
-        }
-      }
-    ]
+    "amendmentSamples": []
   },
   "sample": [
     {

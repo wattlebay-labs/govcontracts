@@ -38,6 +38,10 @@ or other work out of this repo, its commits and its site.
   `contracts[0].id` stays the parent CN, `contracts[0].amendments[].id` is `CN…-A1`, and
   `value.amount` is the new total contract value, not the change. So the newest release per CN is the
   current state of the contract. `contractLastModified` returns both new notices and amendments.
+- A date range with no notices in it (first seen on a weekend, 22 Nov 2026) is answered with HTTP 400 and
+  `{"errorCode": 100, "message": "No Records found for Date Range […]"}`. The script counts that as an
+  empty window (`emptyWindows` in the summary) and moves the cursor on; any other 400 is still an error.
+  This is also what the unexplained 400 of 18 Nov was (a window less than an hour long).
 - End dates are not all sane (one is 1900-01-01): anything that sorts or filters by date must cope.
 - If the cache is lost (unused for 7 days) the script starts a new dataset by itself.
 - A later job that needs the data (site build) should run in the same workflow after the fetch, or

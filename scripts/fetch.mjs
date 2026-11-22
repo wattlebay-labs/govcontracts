@@ -130,6 +130,19 @@ export function plan(state, nowMs, cfg) {
   ];
 }
 
+// The API answers a date range that holds no notices (a weekend, say) with
+// HTTP 400 and {"errorCode": 100, "message": "No Records found for Date
+// Range […]"}. That is an empty window, not a refusal.
+export function saysNoRecords(status, text) {
+  if (status !== 400) return false;
+  try {
+    const body = JSON.parse(text);
+    return body?.errorCode === 100 && /^No Records found\b/i.test(String(body.message || ""));
+  } catch {
+    return false;
+  }
+}
+
 async function fetchWindow(dateType, from, to, stats, io, cfg) {
   let url = `${API}/${dateType}/${from}/${to}`;
   const releases = [];
@@ -164,6 +177,10 @@ async function fetchWindow(dateType, from, to, stats, io, cfg) {
         }
         if (!res.ok) {
           const text = await res.text().catch(() => "");
+          if (page === 0 && saysNoRecords(res.status, text)) {
+            stats.emptyWindows++;
+            return { releases, ok: true };
+          }
           stats.errors.push({ url, status: res.status, body: text.slice(0, 200) });
           return { releases, ok: false };
         }
@@ -196,6 +213,7 @@ export async function sync(state, byId, cfg, io) {
     pagedWindows: new Set(),
     windowsTried: 0,
     windowsOk: 0,
+    emptyWindows: 0,
     largestWindow: 0,
     budgetSpent: false,
     perPull: {},
@@ -331,6 +349,7 @@ async function main() {
     budgetSpent: stats.budgetSpent,
     windowsTried: stats.windowsTried,
     windowsOk: stats.windowsOk,
+    emptyWindows: stats.emptyWindows,
     largestWindow: stats.largestWindow,
     windowsWithMorePages: stats.pagedWindows.size,
     contractsBefore: before,

@@ -1,7 +1,7 @@
 // Run with: node --test scripts/fetch.test.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
-import { baseId, compact, merge, newState, plan, settings, sync, windows } from "./fetch.mjs";
+import { baseId, compact, merge, newState, plan, saysNoRecords, settings, sync, windows } from "./fetch.mjs";
 
 const DAY = 864e5;
 
@@ -188,6 +188,32 @@ test("sync follows pages, stops at the budget and resumes from the cursor", asyn
   assert.equal(second.perPull.contractPublished.from, "2026-11-17T09:30:00Z");
   assert.equal(second.perPull.contractLastModified.windows, 1);
   assert.equal(state.runs, 2);
+});
+
+test("a window with no notices in it is an empty window, not an error", async () => {
+  const cfg = settings({ PUBLISHED_DAYS: "6", ENDING_DAYS: "13" });
+  const start = Date.parse("2026-11-22T09:00:00Z");
+  const state = newState(start, cfg);
+  const none = { errorCode: 100, message: "No Records found for Date Range ['2026-11-20T23:21:34Z'-'2026-11-22T08:58:51Z']" };
+  const api = fakeApi({ override: (url) => (url.includes("/contractLastModified/") ? { status: 400, body: none } : null) });
+  const stats = await sync(state, new Map(), cfg, fakeIo(api, start));
+  assert.deepEqual(stats.errors, []);
+  assert.equal(stats.emptyWindows, 1);
+  assert.equal(stats.perPull.contractLastModified.releases, 0);
+  assert.equal(stats.perPull.contractLastModified.caughtUp, true);
+  assert.equal(stats.windowsOk, stats.windowsTried);
+  // The cursor moves on, as after any window that came back complete.
+  assert.ok(state.cursors.contractLastModified > "2026-11-22T00:00:00Z");
+});
+
+test("only the API's own 'no records' answer counts as an empty window", () => {
+  const body = JSON.stringify({ errorCode: 100, message: "No Records found for Date Range ['a'-'b']" });
+  assert.equal(saysNoRecords(400, body), true);
+  assert.equal(saysNoRecords(404, body), false);
+  assert.equal(saysNoRecords(400, JSON.stringify({ errorCode: 101, message: "No Records found" })), false);
+  assert.equal(saysNoRecords(400, JSON.stringify({ errorCode: 100, message: "Invalid date" })), false);
+  assert.equal(saysNoRecords(400, "<html>Bad Request</html>"), false);
+  assert.equal(saysNoRecords(400, ""), false);
 });
 
 test("a refused window is recorded and its cursor stays put", async () => {

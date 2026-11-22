@@ -67,7 +67,7 @@ test("a freshly built site passes every check", async () => {
   assert.equal(out.sitemapCount, html - 1);
   assert.deepEqual(
     out.results.map((r) => r.name),
-    ["build stamp", "home page", "sitemap", "category page", "agency page", "supplier page", "stylesheet", "not-found page"],
+    ["build stamp", "home page", "sitemap", "category page", "agency page", "supplier page", "sample pack page", "stylesheet", "not-found page"],
   );
   assert.ok(calls.every((u) => u.includes("v=t1")), "every request carries the tag");
 });
@@ -128,6 +128,28 @@ test("a missing page and a wrong page count are both reported", async () => {
   assert.equal(out.ok, false);
   const failed = out.results.filter((r) => !r.ok).map((r) => r.name);
   assert.deepEqual(failed, ["sitemap", "supplier page"]);
+});
+
+test("a sample pack that stops saying what it is fails", async () => {
+  const { files } = builtSite();
+  const page = files.get("sample-pack/index.html");
+  files.set("sample-pack/index.html", page.replace("This is a sample, not a real bid", "This is a bid").replace(/prepared with AI software/g, "prepared"));
+  const out = await run(files);
+  assert.equal(out.ok, false);
+  const sample = out.results.find((r) => r.name === "sample pack page");
+  assert.match(sample.detail, /no statement that it is a sample, no statement of how it was made/);
+});
+
+test("a sample pack without credit for its source document, or missing altogether, fails", async () => {
+  const { files } = builtSite();
+  const page = files.get("sample-pack/index.html");
+  files.set("sample-pack/index.html", page.replaceAll("Exposure Draft of the 2025 National Panel of Assessors program RFT", "a tender"));
+  let out = await run(files);
+  assert.match(out.results.find((r) => r.name === "sample pack page").detail, /no credit for the tender document/);
+  files.delete("sample-pack/index.html");
+  files.set("sitemap.xml", files.get("sitemap.xml").replace(/<url><loc>[^<]*sample-pack\/<\/loc>.*<\/url>\n/, ""));
+  out = await run(files);
+  assert.deepEqual(out.results.filter((r) => !r.ok).map((r) => r.name), ["sample pack in sitemap", "sample pack page"]);
 });
 
 test("a host without the site's own not-found page fails", async () => {

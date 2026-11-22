@@ -39,6 +39,8 @@ nav a:hover { text-decoration: underline; }
 main.wrap { padding-top: 24px; padding-bottom: 40px; }
 h1 { font-size: 1.75rem; line-height: 1.2; margin: 8px 0 12px; letter-spacing: -0.015em; text-wrap: balance; }
 h2 { font-size: 1.2rem; line-height: 1.3; margin: 36px 0 8px; }
+h3 { font-size: 1.02rem; line-height: 1.35; margin: 24px 0 6px; }
+h3 small { font-weight: 400; margin-left: 4px; }
 p { margin: 0 0 12px; max-width: 72ch; }
 ul { max-width: 72ch; padding-left: 20px; }
 li { margin-bottom: 8px; }
@@ -65,3 +67,12 @@ td small { display: block; }
 .letters b { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 footer.wrap { border-top: 1px solid var(--line); padding-top: 18px; padding-bottom: 32px; color: var(--muted); font-size: 0.86rem; }
 footer p { max-width: 90ch; }
+.box { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 14px 16px 2px; margin: 16px 0; max-width: 78ch; }
+th[scope="row"] { white-space: normal; min-width: 9rem; width: 22%; font-size: 0.86rem; color: var(--ink); }
+.tag { display: inline-block; padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+.tag.ready { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.tag.todo, .tag.check { border-color: var(--accent); color: var(--accent); }
+.tag.check { border-style: dashed; }
+.tag.na { color: var(--muted); }
+.draft { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 2px; margin: 8px 0 14px; max-width: 78ch; }
+mark.chk { background: transparent; color: inherit; border-bottom: 2px dashed var(--accent); font-size: 0.92em; }

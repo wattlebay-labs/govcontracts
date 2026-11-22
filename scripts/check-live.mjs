@@ -5,9 +5,11 @@
 //   build.json                 the stamp of the build (waits until it is the expected one)
 //   the home page, sitemap.xml, style.css
 //   the first category, agency and supplier page named in the sitemap
+//   the sample Bid Draft Pack page
 //   an address that does not exist (must give the not-found page with a 404)
 // Every HTML page must return 200, credit the source, say the figures are
-// derived and say the site is not a government one.
+// derived and say the site is not a government one. The sample pack must also
+// credit the document it was made from and say what it is and is not.
 //
 // Settings (environment):
 //   SITE_URL          address of the site (required)
@@ -26,6 +28,16 @@ export const MUST_SAY = [
   ["licence", /CC BY 3\.0 AU/],
   ["derived-data statement", /derived from that data/],
   ["not-affiliated statement", /not affiliated with/],
+];
+
+// What the sample Bid Draft Pack page must also say.
+export const SAMPLE_MUST_SAY = [
+  ["credit for the tender document", /Exposure Draft of the 2025 National Panel of Assessors program RFT/],
+  ["licence of the tender document", /creativecommons\.org\/licenses\/by\/4\.0\//],
+  ["statement that it is a sample", /This is a sample, not a real bid/],
+  ["statement that the bidder is invented", /is invented/],
+  ["statement that nothing is promised", /Nothing here is a promise/],
+  ["statement of how it was made", /prepared with AI software/],
 ];
 
 const realSleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -94,11 +106,11 @@ export async function checkSite({
   }
   note("build stamp", true, `build ${stamp.generatedAt} is live (try ${tries})`);
 
-  const page = async (name, url, wantStatus = 200) => {
+  const page = async (name, url, wantStatus = 200, alsoSay = []) => {
     const r = await get(url);
     const problems = [];
     if (r.status !== wantStatus) problems.push(`expected HTTP ${wantStatus}`);
-    for (const [what, pattern] of MUST_SAY) if (!pattern.test(r.text)) problems.push(`no ${what}`);
+    for (const [what, pattern] of [...MUST_SAY, ...alsoSay]) if (!pattern.test(r.text)) problems.push(`no ${what}`);
     note(name, problems.length === 0, `${url} gave ${describe(r)}${problems.length ? `: ${problems.join(", ")}` : ""}`);
     return r;
   };
@@ -133,11 +145,16 @@ export async function checkSite({
     }
   }
 
-  // 5. Stylesheet.
+  // 5. The sample Bid Draft Pack: listed in the sitemap, and says what it is.
+  const sampleUrl = `${site}/sample-pack/`;
+  if (locs.length && !locs.includes(sampleUrl)) note("sample pack in sitemap", false, `the sitemap does not name ${sampleUrl}`);
+  await page("sample pack page", sampleUrl, 200, SAMPLE_MUST_SAY);
+
+  // 6. Stylesheet.
   const css = await get(`${site}/style.css`);
   note("stylesheet", css.status === 200 && css.text.length > 0 && /css/.test(css.type), `${site}/style.css gave ${describe(css)}, type "${css.type}"`);
 
-  // 6. An address that does not exist gives the site's own not-found page.
+  // 7. An address that does not exist gives the site's own not-found page.
   const missing = await page("not-found page", `${site}/no-such-page-${tag || "check"}/`, 404);
   if (missing.status === 404 && !/Page not found/.test(missing.text)) note("not-found page text", false, "the 404 answer is not the site's own page");
 

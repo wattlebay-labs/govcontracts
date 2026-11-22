@@ -3,6 +3,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { posix } from "node:path";
+import { BIDDER, CHECKLIST, DRAFTS, OUTLINE, SOURCE, STATUSES } from "./sample-pack.mjs";
 import {
   addDays,
   analyse,
@@ -204,6 +205,7 @@ test("the site has a page for every category, agency and supplier", () => {
     "supplier/11111111111/index.html",
     "supplier/33333333333/index.html",
     "about/index.html",
+    "sample-pack/index.html",
     "404.html",
     "sitemap.xml",
     "style.css",
@@ -320,4 +322,65 @@ test("coverage wording follows what the fetch has read", () => {
   const about = build(sample, { coverage: cov }).files.get("about/index.html");
   assert.match(about, /end date falls between 19 Nov 2026 and 20 Nov 2027, and notices published since 19 Oct 2026/);
   assert.match(build().files.get("about/index.html"), /roughly the next 12 months/);
+});
+
+test("the sample pack says what it is, what it was made from and what it does not promise", () => {
+  const { files } = build();
+  const page = files.get("sample-pack/index.html");
+  assert.match(page, /This is a sample, not a real bid/);
+  assert.match(page, /Nothing here is a promise/);
+  assert.match(page, /No pack can promise that a bid will succeed, be shortlisted or be found compliant/);
+  assert.match(page, /prepared with AI software/);
+  assert.match(page, /does not endorse/);
+  assert.match(page, /Packs are not on sale/);
+  assert.ok(page.includes(`${BIDDER}, is invented`));
+  // The source asks to be attributed in these words, and CC BY asks for the
+  // licence, a link to the source and a note that it was changed.
+  assert.equal(SOURCE.attribution, "Exposure Draft of the 2025 National Panel of Assessors program RFT");
+  assert.ok(page.includes(`<a href="${SOURCE.url}" rel="noopener">${SOURCE.attribution}</a>`));
+  assert.ok(page.includes(`href="${SOURCE.licenceUrl}"`));
+  assert.match(page, /Creative Commons Attribution 4\.0 International/);
+  assert.match(page, /summarised and restated from that document in other words/);
+  assert.match(page, /Department of Social Services/);
+  // No prices, no way to order, no placeholders left in, nothing typed by a visitor.
+  assert.ok(!/A\$\d|\$490|\$99\b|\$29\b/.test(page), "the sample quotes a price for a pack");
+  assert.ok(!/<form|<input|<script|mailto:/.test(page));
+  assert.ok(!/\[[A-Z]{3,}[^\]]*\]/.test(page), "a square-bracket placeholder is showing");
+});
+
+test("every line of the sample checklist points at a section and has a status", () => {
+  let rows = 0;
+  for (const group of CHECKLIST) {
+    assert.ok(group.heading && group.note);
+    for (const [ref, need, how, status] of group.rows) {
+      assert.match(ref, /^\d+(\.\d+)*([,;] | to | and |$)/, `section reference "${ref}"`);
+      assert.ok(need.length > 20 && how.length > 5, ref);
+      assert.ok(status in STATUSES, `status "${status}"`);
+      rows++;
+    }
+  }
+  assert.ok(rows >= 25);
+  const page = build().files.get("sample-pack/index.html");
+  assert.equal([...page.matchAll(/<span class="tag (\w+)">/g)].length, rows);
+});
+
+test("the sample drafts answer each criterion in the outline and flag what must be checked", () => {
+  assert.deepEqual(DRAFTS.map((d) => d.name), OUTLINE.map((c) => c.name));
+  const page = build().files.get("sample-pack/index.html");
+  const flags = [...page.matchAll(/<mark class="chk">Check: [^<]+<\/mark>/g)].length;
+  const written = DRAFTS.flatMap((d) => d.paragraphs).join(" ").match(/\[CHECK: /g).length;
+  assert.equal(flags, written);
+  assert.ok(flags >= 8);
+  // The drafts must not promise an outcome.
+  assert.ok(!/guarantee|will win|ensure success/i.test(DRAFTS.flatMap((d) => d.paragraphs).join(" ")));
+});
+
+test("the sample pack is linked from the home page, the about page and every footer, and is in the sitemap", () => {
+  const { files } = build();
+  assert.match(files.get("index.html"), /href="sample-pack\/">a sample Bid Draft Pack<\/a>/);
+  assert.match(files.get("about/index.html"), /href="\.\.\/sample-pack\/">sample Bid Draft Pack<\/a>/);
+  for (const [path, body] of files) {
+    if (path.endsWith(".html")) assert.match(body, /sample-pack\/">Sample Bid Draft Pack<\/a><\/p>\n<\/footer>/, path);
+  }
+  assert.ok(files.get("sitemap.xml").includes("<loc>https://example.org/site/sample-pack/</loc>"));
 });

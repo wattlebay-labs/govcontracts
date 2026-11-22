@@ -8,6 +8,7 @@
 //   agencies/, agency/<slug>/  one page per buying agency
 //   suppliers/, suppliers/<letter>/, supplier/<abn>/   one page per supplier ABN
 //   about/                     source, licence, coverage, caveats
+//   sample-pack/               a worked sample of a Bid Draft Pack (sample-pack.mjs)
 //   404.html, sitemap.xml, style.css
 //   build.json                 when this build was made and how many pages it has
 // plus data/build.json: page counts and sizes, small enough to commit.
@@ -16,6 +17,7 @@
 // relative, so the site works under any address.
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
+import { SAMPLE_PACK_LINK, samplePack } from "./sample-pack.mjs";
 
 export const SITE_NAME = "govcontracts";
 const SOURCE_URL = "https://www.tenders.gov.au/";
@@ -350,7 +352,7 @@ ${body(a)}
 </main>
 <footer class="wrap">
 <p>Data: <a href="${SOURCE_URL}" rel="noopener">AusTender</a> contract notices, Department of Finance, licensed under <a href="${LICENCE_URL}" rel="noopener license">CC BY 3.0 AU</a>. Figures on this site are derived from that data and may differ from the source: check the original notice on AusTender before relying on them.</p>
-<p>This site is independent. It is not affiliated with, or endorsed by, the Australian Government. Data last updated ${fmtDate(updated)}. ${a("about/", "About this site")}</p>
+<p>This site is independent. It is not affiliated with, or endorsed by, the Australian Government. Data last updated ${fmtDate(updated)}. ${a("about/", "About this site")} · ${a(SAMPLE_PACK_LINK, "Sample Bid Draft Pack")}</p>
 </footer>
 </body>
 </html>
@@ -455,7 +457,9 @@ ${leaderTable(
   agencyLeader(a),
   "Value ending (AUD)",
 )}
-<p>${a("agencies/", `All ${num(model.agencies.length)} agencies`)} · ${a("suppliers/", `All ${num(model.suppliers.length)} suppliers`)}</p>`,
+<p>${a("agencies/", `All ${num(model.agencies.length)} agencies`)} · ${a("suppliers/", `All ${num(model.suppliers.length)} suppliers`)}</p>
+<h2>Bidding for government work?</h2>
+<p>See what a tender asks for, worked through: ${a(SAMPLE_PACK_LINK, "a sample Bid Draft Pack")}, with a compliance checklist, a response outline and first-draft answers, made from a public Australian Government tender document. It is a sample with an invented bidder, not a real bid.</p>`,
   });
 
   // Categories
@@ -606,7 +610,7 @@ ${table(a, shown, ["end", "agency", "what", "category", "value", "start", "metho
     path: "about/index.html",
     title: `About this site and its data | ${SITE_NAME}`,
     description: `Where the contract data comes from, its licence, what the site covers and what to check before relying on it.`,
-    body: () => `<h1>About this site</h1>
+    body: (a) => `<h1>About this site</h1>
 <p>This site lists Australian Government contracts by category, agency and supplier, with a view of the contracts due to end in the next 12 months. It is for businesses that sell to government, or want to, and need to see who holds what and when it runs out.</p>
 <h2>Source and licence</h2>
 <p>All contract data comes from contract notices published on <a href="${SOURCE_URL}" rel="noopener">AusTender</a>, the Australian Government's procurement information system, through its public contract-notice data service. The data is © Commonwealth of Australia (Department of Finance) and is used under the <a href="${LICENCE_URL}" rel="noopener license">Creative Commons Attribution 3.0 Australia</a> licence.</p>
@@ -622,8 +626,13 @@ ${table(a, shown, ["end", "agency", "what", "category", "value", "start", "metho
 <li><b>Categories</b> are the UNSPSC codes on the notices. The notices do not give the official title of a code, so the site shows the description that agencies most often wrote on contracts under that code, where one recurs. It is a guide, not the official title.</li>
 <li><b>Suppliers</b> are grouped by Australian Business Number, under the name most often used on their notices. Suppliers with no ABN on the notice have no page of their own.</li>
 </ul>
+<h2>The sample Bid Draft Pack</h2>
+<p>The ${a(SAMPLE_PACK_LINK, "sample Bid Draft Pack")} is separate from the contract data. It was made from one public tender document released by the Department of Social Services under a Creative Commons Attribution 4.0 International licence, and it names that document and what was changed. The bidder in it is invented.</p>
 <p>Data last updated ${fmtDate(updated)}.</p>`,
   });
+
+  // A worked sample of a Bid Draft Pack, from one openly licensed tender document.
+  yield html(samplePack(SITE_NAME));
 
   yield html({
     path: "404.html",

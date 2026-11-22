@@ -14,6 +14,7 @@ on:
     paths:
       - "scripts/fetch.mjs"
       - "scripts/build.mjs"
+      - "scripts/sample-pack.mjs"
       - "scripts/style.css"
       - "scripts/check-live.mjs"
       - ".github/workflows/fetch.yml"

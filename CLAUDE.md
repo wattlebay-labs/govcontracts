@@ -48,7 +48,7 @@ or other work out of this repo, its commits and its site.
   git) and `data/build.json` (committed: page counts, bytes, skipped records, broken links, top
   categories). Read `data/build.json` to see what the last build made.
 - Pages: home, `categories/`, `category/<unspsc>/`, `agencies/`, `agency/<slug>/`, `suppliers/`,
-  `suppliers/<letter>/`, `supplier/<abn>/`, `about/`, `404.html`, `sitemap.xml`, `style.css`
+  `suppliers/<letter>/`, `supplier/<abn>/`, `about/`, `sample-pack/`, `404.html`, `sitemap.xml`, `style.css`
   (source: `scripts/style.css`). All links are relative; only canonical links, the sitemap and
   `404.html` use `SITE_URL` (default: the GitHub Pages address).
 - Dates on notices are midnight in Canberra given as UTC, so the build shows the calendar date in
@@ -65,6 +65,28 @@ or other work out of this repo, its commits and its site.
 - The build also writes `site/build.json` (`generatedAt`, `dataUpdated`, page counts): the stamp the
   deploy check reads from the live address.
 
+## Sample Bid Draft Pack (`scripts/sample-pack.mjs`, page `sample-pack/`, live since 22 Nov 2026)
+- One worked sample: the tender at a glance, a compliance checklist (28 lines, each with its section), a
+  response outline, first-draft answers for an invented bidder with "Check" flags, and what is left to
+  settle. The content is data at the top of the file; `build.mjs` only places the page. It is linked from
+  the home page, the about page and every footer, and is in the sitemap.
+- Source: the Exposure Draft of the 2025 National Panel of Assessors program RFT, Department of Social
+  Services, August 2024, a PDF on engage.dss.gov.au (address in `SOURCE.url`). Its licence page gives
+  CC BY 4.0 and the attribution wording, which must stay exactly as it is in `SOURCE.attribution`.
+- How it was read: the cloud shell has no internet, so the PDF was read through the session's web fetch,
+  which returned sections 1 to 8.14.14 word for word and only a summary of the rest. Every factual line on
+  the page was then checked against the word-for-word part. The end of 8.14, Appendices A to F, the Draft
+  Deed and the tender form were not read, and the page says so. Do not add claims about those parts.
+- Some headings in the draft have no printed number (minimum content, ESAs, coverage, modern slavery,
+  insurance, tax residency): cite them as "3, Coverage" and so on, not with an invented number.
+- The page must keep saying: it is a sample and not a real bid; the bidder is invented; nothing is
+  promised; it was prepared with AI software; the department does not endorse it; packs are not on
+  sale. No price, no contact details, no form. The tests and `check-live.mjs` (`SAMPLE_MUST_SAY`) fail
+  if these statements or the source credit go missing.
+- Looked at and not used, because their terms do not allow it: the Department of Finance sample approach
+  to market (an empty template, CC BY-NC-ND) and a tender published on the National Film and Sound
+  Archive site (all rights reserved, personal or educational use only).
+
 ## Deploy (`deploy` job of `fetch-data`, live since 20 Nov 2026)
 - Live address: https://wattlebay-labs.github.io/govcontracts/ . Every run of `fetch-data` on `main`
   (daily schedule, a push to the scripts or the workflow, or a manual run) fetches, builds, deploys
@@ -74,8 +96,8 @@ or other work out of this repo, its commits and its site.
   environment and only on `main`.
 - After the deploy, `scripts/check-live.mjs` asks the live address for `build.json` (waiting up to
   `WAIT_SECONDS` until it is the build just made), the home page, `sitemap.xml`, `style.css`, the
-  first category, agency and supplier page in the sitemap, and an address that does not exist (must
-  be the site's own 404 page). Each page must return the right status and carry the source credit,
+  first category, agency and supplier page in the sitemap, the sample pack page, and an address that
+  does not exist (must be the site's own 404 page). Each page must return the right status and carry the source credit,
   the derived-data statement and the not-affiliated statement, or the run fails. Requests carry
   `?v=<run id>` so a cached copy of an earlier deploy cannot answer. The result is in the job log
   and the run summary. Tests (`scripts/check-live.test.mjs`) run the check against the build's own

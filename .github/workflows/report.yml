@@ -1,0 +1,50 @@
+name: make-report
+# Makes the category report for one or more UNSPSC codes from the dataset the
+# fetch-data workflow keeps, and attaches the files to the run as an artifact
+# that is kept for one day. Started by hand: Actions, make-report, Run
+# workflow. Nothing here touches the site.
+on:
+  workflow_dispatch:
+    inputs:
+      codes:
+        description: "UNSPSC codes, 8 digits each, separated by spaces"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # The newest dataset saved by fetch-data. Read only: this workflow
+      # never saves a cache.
+      - name: Restore the dataset
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/contracts.json
+            data/state.json
+          key: dataset-v1-none
+          restore-keys: |
+            dataset-v1-
+          fail-on-cache-miss: true
+      # The codes reach the script as data, never as part of a command; it
+      # accepts 8-digit codes only, and writes nothing unless every report
+      # adds up against the dataset.
+      - name: Make the reports
+        run: node scripts/report.mjs
+        env:
+          REPORT_CODES: ${{ inputs.codes }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: category-reports-${{ github.run_number }}
+          path: reports/
+          if-no-files-found: error
+          retention-days: 1

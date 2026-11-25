@@ -17,6 +17,7 @@ on:
       - "scripts/sample-pack.mjs"
       - "scripts/style.css"
       - "scripts/check-live.mjs"
+      - "scripts/report.mjs"
       - ".github/workflows/fetch.yml"
 
 permissions:
@@ -39,7 +40,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test scripts/fetch.test.mjs scripts/build.test.mjs scripts/check-live.test.mjs
+      - run: node --test scripts/fetch.test.mjs scripts/build.test.mjs scripts/check-live.test.mjs scripts/report.test.mjs
       - name: Restore dataset from the previous run
         uses: actions/cache/restore@v4
         with:
@@ -97,6 +98,16 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: site
+      # Make the category report for every code from the day's data and read
+      # each one back against the dataset. The reports are written outside the
+      # checkout and are not kept or published: only the small summary
+      # (data/report.json) is committed. A fault here is flagged on the run
+      # and in that summary ("ok": false) but does not hold back the site.
+      - name: Check the category reports
+        continue-on-error: true
+        run: node scripts/report.mjs --all
+        env:
+          REPORT_DIR: ${{ runner.temp }}/reports
       - name: Commit summary
         if: ${{ !cancelled() }}
         run: |
@@ -104,6 +115,7 @@ jobs:
           git config user.email "govcontracts-bot@users.noreply.github.com"
           git add data/summary.json
           if [ -f data/build.json ]; then git add data/build.json; fi
+          if [ -f data/report.json ]; then git add data/report.json; fi
           git commit -m "Data summary $(date -u +%F)" || echo "nothing to commit"
           git pull --rebase --autostash
           git push

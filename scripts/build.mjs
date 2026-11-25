@@ -20,8 +20,8 @@ import { dirname, join } from "node:path";
 import { SAMPLE_PACK_LINK, samplePack } from "./sample-pack.mjs";
 
 export const SITE_NAME = "govcontracts";
-const SOURCE_URL = "https://www.tenders.gov.au/";
-const LICENCE_URL = "https://creativecommons.org/licenses/by/3.0/au/";
+export const SOURCE_URL = "https://www.tenders.gov.au/";
+export const LICENCE_URL = "https://creativecommons.org/licenses/by/3.0/au/";
 const DAY = 864e5;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -292,6 +292,20 @@ const letterOf = (name) => {
   return c >= "A" && c <= "Z" ? c.toLowerCase() : "0-9";
 };
 
+// What the dataset holds, in a sentence, from the dates the fetch has read in
+// full (`coverageOf`). Used on the site and in the category reports.
+export function coverageText(cov = {}) {
+  const endFrom = plausible(cov?.endFrom || null);
+  const endTo = plausible(cov?.endTo || null);
+  const publishedFrom = plausible(cov?.publishedFrom || null);
+  return endFrom && endTo
+    ? `It holds notices for contracts whose end date falls between ${fmtDate(endFrom)} and ${fmtDate(endTo)}` +
+        (publishedFrom ? `, and notices published since ${fmtDate(publishedFrom)}` : "") +
+        `, and is refreshed daily with new notices and amendments.`
+    : `It holds notices for contracts ending in roughly the next 12 months, and recently published notices, and is refreshed daily with new notices and amendments.`;
+}
+export const PARTIAL = `This is not a full history: earlier contracts that have already ended are not included.`;
+
 // ---------- pages ----------
 
 // Yields { path, body } for every file of the site. `opts`:
@@ -307,17 +321,8 @@ export function* pages(model, opts = {}) {
   const linked = new Set();
   const made = new Set();
 
-  const cov = opts.coverage || {};
-  const endFrom = plausible(cov.endFrom || null);
-  const endTo = plausible(cov.endTo || null);
-  const publishedFrom = plausible(cov.publishedFrom || null);
-  const coverage =
-    endFrom && endTo
-      ? `It holds notices for contracts whose end date falls between ${fmtDate(endFrom)} and ${fmtDate(endTo)}` +
-        (publishedFrom ? `, and notices published since ${fmtDate(publishedFrom)}` : "") +
-        `, and is refreshed daily with new notices and amendments.`
-      : `It holds notices for contracts ending in roughly the next 12 months, and recently published notices, and is refreshed daily with new notices and amendments.`;
-  const partial = `This is not a full history: earlier contracts that have already ended are not included.`;
+  const coverage = coverageText(opts.coverage);
+  const partial = PARTIAL;
 
   const html = ({ path, title, description, body, noindex = false, absolute = false }) => {
     const depth = path.split("/").length - 1;

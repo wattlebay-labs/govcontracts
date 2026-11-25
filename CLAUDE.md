@@ -91,6 +91,42 @@ or other work out of this repo, its commits and its site.
   to market (an empty template, CC BY-NC-ND) and a tender published on the National Film and Sound
   Archive site (all rights reserved, personal or educational use only).
 
+## Category reports (`scripts/report.mjs`, since 25 Nov 2026)
+- A report covers one UNSPSC code and is a folder `unspsc-<code>/` of four files: `-contracts.csv` (every
+  contract held under the code, end-date order), `-suppliers.csv` and `-agencies.csv` (largest total value
+  first) and `-read-me.txt` (what is covered, how to read it, source and licence, not a government
+  document, no promise). It reuses `analyse` from the build, so dates, ABNs, amendments and impossible end
+  dates are handled the same way as on the site.
+- CSV, not `.xlsx`: no dependencies. Each file starts with a byte-order mark and uses CRLF, so Excel reads
+  the accents. Dates are `YYYY-MM-DD`, values are bare numbers. Text from a notice that begins with `=`,
+  `+`, `-` or `@` gets an apostrophe in front, so it cannot run as a formula. In the source the mark is
+  written as the escape `\uFEFF`; keep it that way (an editor can turn it into an invisible character).
+- Every row ends with a "Source and licence" cell, so the credit stays with a file that is passed on alone.
+- One supplier has one name in all three files: the site's name for the ABN, or, with no ABN, the most
+  common spelling among that code's contracts (grouped ignoring case). The name on each notice is kept in
+  its own column.
+- `checkReport` reads a finished report back from its own text and compares it with the dataset (row
+  counts, totals to the cent, order, dates, credit on every row, the read-me's statements). A report that
+  does not add up is not written and the command exits 1.
+- Where reports may go: outside the checkout in the daily run (`REPORT_DIR` under the runner's temp
+  folder, thrown away), or the one-day artifact of `make-report`. Never `site/` (the script refuses),
+  never git (`reports/` is ignored). Reports are not linked from or mentioned on the site.
+- Daily: the `fetch` job runs `node scripts/report.mjs --all` after the site is packaged and commits
+  `data/report.json` (`ok`, `problems`, counts, categories by size, the ten largest). The step may fail
+  without stopping the deploy, so **read `ok` in `data/report.json`**, and check that its `dataUpdated`
+  matches `data/summary.json`'s `generatedAt` to within a minute; a stale file means the step did not run.
+- By hand: workflow `make-report` (`.github/workflows/report.yml`, Actions tab, "Run workflow", input
+  `codes`: 8-digit codes separated by spaces). It restores the newest dataset cache read-only, makes the
+  reports and uploads them as the artifact `category-reports-<run number>`, kept for one day. The codes
+  reach the script through the environment and anything that is not 8 digits is refused. A code with no
+  contracts fails the run and uploads nothing. The run's log shows which codes were asked for.
+- Measured 25 Nov 2026 on live data: all 499 reports made and checked in 2.1 seconds, 22.7 MB, 0
+  problems. `make-report` run 1 (codes 43230000 and 95122403): 13 seconds from start to artifact, 8 files,
+  122 KB zipped. Sizes: 208 codes hold 1 to 9 contracts, 183 hold 10 to 49, 77 hold 50 to 199, 23 hold 200
+  to 999, 8 hold 1,000 or more (largest 80111600: 6,977 contracts, 2.7 MB); the median is 13.
+- Not checked: the files have not been opened in Excel itself. One made-up report was converted by
+  LibreOffice (dates became dates, values numbers, no formula cells).
+
 ## Deploy (`deploy` job of `fetch-data`, live since 20 Nov 2026)
 - Live address: https://wattlebay-labs.github.io/govcontracts/ . Every run of `fetch-data` on `main`
   (daily schedule, a push to the scripts or the workflow, or a manual run) fetches, builds, deploys

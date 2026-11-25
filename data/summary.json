@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T03:59:29Z",
+  "generatedAt": "2026-11-25T02:33:13Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,77 +11,77 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 13,
+  "runs": 14,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-24T03:58:26Z",
-    "contractLastModified": "2026-11-24T03:58:26Z",
-    "contractEnd": "2027-11-25T00:00:00Z"
+    "contractPublished": "2026-11-25T02:32:26Z",
+    "contractLastModified": "2026-11-25T02:32:26Z",
+    "contractEnd": "2027-11-26T00:00:00Z"
   },
   "horizon": {
     "from": "2026-11-18T00:00:00Z",
-    "fetchedTo": "2027-11-25T00:00:00Z",
-    "target": "2027-11-25T00:00:00Z",
+    "fetchedTo": "2027-11-26T00:00:00Z",
+    "target": "2027-11-26T00:00:00Z",
     "complete": true
   },
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 288,
-      "from": "2026-11-21T23:38:05Z",
-      "to": "2026-11-24T03:58:26Z",
+      "releases": 328,
+      "from": "2026-11-23T03:58:26Z",
+      "to": "2026-11-25T02:32:26Z",
       "caughtUp": true,
-      "cursor": "2026-11-24T03:58:26Z"
+      "cursor": "2026-11-25T02:32:26Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 1231,
-      "from": "2026-11-21T23:38:05Z",
-      "to": "2026-11-24T03:58:26Z",
+      "releases": 923,
+      "from": "2026-11-23T03:58:26Z",
+      "to": "2026-11-25T02:32:26Z",
       "caughtUp": true,
-      "cursor": "2026-11-24T03:58:26Z"
+      "cursor": "2026-11-25T02:32:26Z"
     },
     "contractEnd": {
       "windows": 1,
-      "releases": 76,
-      "from": "2027-11-23T00:00:00Z",
-      "to": "2027-11-25T00:00:00Z",
+      "releases": 47,
+      "from": "2027-11-25T00:00:00Z",
+      "to": "2027-11-26T00:00:00Z",
       "caughtUp": true,
-      "cursor": "2027-11-25T00:00:00Z"
+      "cursor": "2027-11-26T00:00:00Z"
     }
   },
-  "requests": 19,
-  "pages": 19,
-  "seconds": 63,
+  "requests": 17,
+  "pages": 17,
+  "seconds": 46,
   "budgetSpent": false,
   "windowsTried": 3,
   "windowsOk": 3,
   "emptyWindows": 0,
-  "largestWindow": 1231,
+  "largestWindow": 923,
   "windowsWithMorePages": 2,
-  "contractsBefore": 41308,
-  "contracts": 41790,
-  "contractsEndingWithinHorizon": 39134,
-  "amendedContracts": 13915,
-  "suppliers": 9984,
+  "contractsBefore": 41790,
+  "contracts": 41984,
+  "contractsEndingWithinHorizon": 39170,
+  "amendedContracts": 13987,
+  "suppliers": 10016,
   "agencies": 137,
   "categories": 499,
-  "totalValue": 133269482714,
+  "totalValue": 133591286208,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2051-02-27T13:00:00Z",
-  "bytes": 18573473,
+  "bytes": 18663521,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 889,
-      "contractAmendment": 706
+      "contract": 899,
+      "contractAmendment": 399
     },
     "lastModified": {
-      "releases": 1231,
-      "amendments": 661,
-      "alsoInPublishedPull": 288,
-      "newToDataset": 171
+      "releases": 923,
+      "amendments": 382,
+      "alsoInPublishedPull": 328,
+      "newToDataset": 48
     },
     "amendmentSamples": [
       {
@@ -126,20 +126,20 @@
         "previous": {
           "id": "CN4289351",
           "notice": "CN4289351",
-          "released": "2026-11-17T07:16:59Z",
+          "released": "2026-11-23T23:49:20Z",
           "description": "Electronic Reference Resource - Europa World Plus",
           "agency": "Department of Parliamentary Services",
           "agencyAbn": "52997141147",
           "division": null,
           "supplier": "Taylor and Francis Group",
-          "supplierAbn": null,
+          "supplierAbn": "15160482271",
           "supplierState": "Outside Australia",
-          "value": 34774.1,
+          "value": 36864,
           "start": "2026-11-02T13:00:00Z",
           "end": "2029-11-01T13:00:00Z",
           "unspsc": "55110000",
           "method": "Limited tender",
-          "amendment": false
+          "amendment": true
         }
       },
       {
@@ -202,58 +202,58 @@
       },
       {
         "dateType": "contractLastModified",
-        "ocid": "prod-b9367920d0f64830a68300629eb7c2b0",
-        "releaseDate": "2026-11-24T02:11:20Z",
+        "ocid": "prod-8829bfaf74044af4920c04d1b9d3fe9f",
+        "releaseDate": "2026-11-24T04:51:13Z",
         "tag": [
           "contractAmendment"
         ],
         "contract": {
-          "id": "CN4283357",
-          "awardID": "CN4283357-ce1ab22af9bd48ebb42b8e91fdb975dc",
-          "dateSigned": "2026-10-20T00:04:39Z",
-          "description": "Finance Advsior",
-          "title": "C006053",
+          "id": "CN4286534",
+          "awardID": "CN4286534-f2729db090564679a8a45760d1c816af",
+          "dateSigned": "2026-11-03T05:45:01Z",
+          "description": "Independent review of Soil Organic Carbon Method 2021 Supplement change",
+          "title": "REF12617",
           "items": [
             {
-              "id": "80111600-fe546d74837d443eaaab7cb179fcdc7d",
+              "id": "80100000-586268b04f5d4c7e8d030a8c5f150653",
               "classification": {
                 "scheme": "UNSPSC",
-                "id": "80111600"
+                "id": "80100000"
               }
             }
           ],
           "period": {
-            "startDate": "2026-10-18T13:00:00Z",
-            "endDate": "2027-01-21T13:00:00Z"
+            "startDate": "2026-09-03T14:00:00Z",
+            "endDate": "2026-12-17T13:00:00Z"
           },
           "value": {
             "currency": "AUD",
-            "amount": "77000.00"
+            "amount": "45450.00"
           },
           "status": "active",
           "amendments": [
             {
-              "id": "CN4283357-A1",
-              "releaseID": "prod-b9367920d0f64830a68300629eb7c2b0-128ae26c4020375589d129bc47e55b49",
-              "amendsReleaseID": "prod-b9367920d0f64830a68300629eb7c2b0-93e9215df2503eafac38668c4eab5707"
+              "id": "CN4286534-A1",
+              "releaseID": "prod-8829bfaf74044af4920c04d1b9d3fe9f-cc9433b0e62c390db949379a63718706",
+              "amendsReleaseID": "prod-8829bfaf74044af4920c04d1b9d3fe9f-9282e18780f1382785d671f1f70a6329"
             }
           ]
         },
         "previous": {
-          "id": "CN4283357",
-          "notice": "CN4283357",
-          "released": "2026-10-20T00:04:39Z",
-          "description": "Finance Advsior",
-          "agency": "Australian Centre for International Agricultural Research",
-          "agencyAbn": "34864955427",
+          "id": "CN4286534",
+          "notice": "CN4286534",
+          "released": "2026-11-03T05:45:01Z",
+          "description": "Independent review of Soil Organic Carbon Method 2021 Supplement change",
+          "agency": "Department of Climate Change, Energy, the Environment and Water",
+          "agencyAbn": "63573932849",
           "division": null,
-          "supplier": "Callida Pty Ltd",
-          "supplierAbn": "40154007664",
-          "supplierState": "ACT",
-          "value": 66000,
-          "start": "2026-10-18T13:00:00Z",
-          "end": "2027-01-21T13:00:00Z",
-          "unspsc": "80111600",
+          "supplier": "BALDOCK, JEFFREY ALEXANDER",
+          "supplierAbn": "58708115035",
+          "supplierState": "SA",
+          "value": 36450,
+          "start": "2026-09-03T14:00:00Z",
+          "end": "2026-12-17T13:00:00Z",
+          "unspsc": "80100000",
           "method": "Limited tender",
           "amendment": false
         }
@@ -262,56 +262,56 @@
   },
   "sample": [
     {
-      "id": "CN4283216",
-      "notice": "CN4283216",
-      "released": "2026-10-19T02:57:51Z",
-      "description": "Vehicle Maintenance",
+      "id": "CN4283183",
+      "notice": "CN4283183",
+      "released": "2026-10-19T02:57:39Z",
+      "description": "Vehicle Spare Parts",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
       "division": "JCG",
-      "supplier": "SARTORI'S PANEL WORKS",
-      "supplierAbn": "44151416929",
+      "supplier": "RFD (AUSTRALIA) PTY. LTD. BEAUFORT GROUP AUSTRALIA",
+      "supplierAbn": "55050242601",
       "supplierState": "VIC",
-      "value": 26672.4,
-      "start": "2026-10-13T13:00:00Z",
-      "end": "2026-11-24T13:00:00Z",
-      "unspsc": "25100000",
+      "value": 23655.94,
+      "start": "2026-10-14T13:00:00Z",
+      "end": "2026-11-25T13:00:00Z",
+      "unspsc": "25170000",
       "method": "Limited tender",
       "amendment": false
     },
     {
-      "id": "CN4285710",
-      "notice": "CN4285710",
-      "released": "2026-10-30T02:50:22Z",
-      "description": "ICT Hardware",
+      "id": "CN4286615",
+      "notice": "CN4286615",
+      "released": "2026-11-04T01:03:55Z",
+      "description": "Electronic Equipment",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
-      "division": "DSTG",
-      "supplier": "HEWLETT PACKARD AUSTRALIA LTD",
-      "supplierAbn": "74004394763",
-      "supplierState": "NSW",
-      "value": 228846.73,
-      "start": "2026-10-20T13:00:00Z",
-      "end": "2026-11-24T13:00:00Z",
-      "unspsc": "43210000",
-      "method": "Open tender",
+      "division": "CASG",
+      "supplier": "MILSPEC SERVICES PTY LIMITED",
+      "supplierAbn": "12071999132",
+      "supplierState": "QLD",
+      "value": 24431,
+      "start": "2026-10-25T13:00:00Z",
+      "end": "2026-11-25T13:00:00Z",
+      "unspsc": "40100000",
+      "method": "Limited tender",
       "amendment": false
     },
     {
-      "id": "CN4284973",
-      "notice": "CN4284973",
-      "released": "2026-10-28T01:53:58Z",
-      "description": "REQ000239 -Engagement for a consultant to upgrade Tidal software",
-      "agency": "Australian Prudential Regulation Authority",
-      "agencyAbn": "79635582658",
-      "division": "CORPORATE SERVICES",
-      "supplier": "Spectrum Software Pty Ltd",
-      "supplierAbn": "94002971299",
-      "supplierState": "NSW",
-      "value": 22000,
-      "start": "2026-10-24T13:00:00Z",
-      "end": "2026-11-24T13:00:00Z",
-      "unspsc": "80111600",
+      "id": "CN4286112",
+      "notice": "CN4286112",
+      "released": "2026-11-02T03:59:54Z",
+      "description": "Equipment Maintenance",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "JCG",
+      "supplier": "TECHNI WATERJET PTY LTD",
+      "supplierAbn": "53053413817",
+      "supplierState": "VIC",
+      "value": 14751.83,
+      "start": "2026-10-28T13:00:00Z",
+      "end": "2026-11-25T13:00:00Z",
+      "unspsc": "31160000",
       "method": "Limited tender",
       "amendment": false
     }

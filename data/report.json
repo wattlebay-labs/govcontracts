@@ -1,0 +1,149 @@
+{
+  "generatedAt": "2026-11-25T08:53:12Z",
+  "dataUpdated": "2026-11-25T08:53:02Z",
+  "today": "2026-11-25",
+  "ok": true,
+  "problems": [],
+  "problemCount": 0,
+  "categories": 499,
+  "reports": 499,
+  "files": 1996,
+  "bytes": 22736749,
+  "seconds": 2.1,
+  "contractsInReports": 42120,
+  "medianContracts": 13,
+  "categoriesBySize": [
+    {
+      "contracts": "1 to 9",
+      "categories": 208
+    },
+    {
+      "contracts": "10 to 49",
+      "categories": 183
+    },
+    {
+      "contracts": "50 to 199",
+      "categories": 77
+    },
+    {
+      "contracts": "200 to 999",
+      "categories": 23
+    },
+    {
+      "contracts": "1,000 or more",
+      "categories": 8
+    }
+  ],
+  "largest": [
+    {
+      "code": "80111600",
+      "label": "Labour Hire",
+      "contracts": 6977,
+      "suppliers": 920,
+      "agencies": 100,
+      "value": 4556306133,
+      "soonCount": 6749,
+      "bytes": 2744958
+    },
+    {
+      "code": "80120000",
+      "label": "Legal Services",
+      "contracts": 3330,
+      "suppliers": 543,
+      "agencies": 89,
+      "value": 1102571897,
+      "soonCount": 3138,
+      "bytes": 1296109
+    },
+    {
+      "code": "81110000",
+      "label": "Labour Hire",
+      "contracts": 2447,
+      "suppliers": 552,
+      "agencies": 65,
+      "value": 6259876804,
+      "soonCount": 2368,
+      "bytes": 1001654
+    },
+    {
+      "code": "43230000",
+      "label": "Software Licence",
+      "contracts": 1693,
+      "suppliers": 754,
+      "agencies": 87,
+      "value": 1591201196,
+      "soonCount": 1603,
+      "bytes": 796940
+    },
+    {
+      "code": "86000000",
+      "label": "Training Services",
+      "contracts": 1572,
+      "suppliers": 766,
+      "agencies": 86,
+      "value": 2090759986,
+      "soonCount": 1436,
+      "bytes": 787039
+    },
+    {
+      "code": "80100000",
+      "label": "Management advisory services",
+      "contracts": 1248,
+      "suppliers": 561,
+      "agencies": 98,
+      "value": 1543067179,
+      "soonCount": 1201,
+      "bytes": 643899
+    },
+    {
+      "code": "80161500",
+      "label": "Project Support Services",
+      "contracts": 1187,
+      "suppliers": 392,
+      "agencies": 45,
+      "value": 4540591449,
+      "soonCount": 1142,
+      "bytes": 507844
+    },
+    {
+      "code": "93140000",
+      "label": "Delivery of Counselling Services",
+      "contracts": 1081,
+      "suppliers": 1076,
+      "agencies": 11,
+      "value": 141328412,
+      "soonCount": 1077,
+      "bytes": 632718
+    },
+    {
+      "code": "72100000",
+      "label": "Project Management",
+      "contracts": 981,
+      "suppliers": 322,
+      "agencies": 43,
+      "value": 9915760042,
+      "soonCount": 858,
+      "bytes": 436685
+    },
+    {
+      "code": "81112200",
+      "label": "Maintenance and support",
+      "contracts": 912,
+      "suppliers": 498,
+      "agencies": 90,
+      "value": 1038813782,
+      "soonCount": 867,
+      "bytes": 476217
+    }
+  ],
+  "smallest": {
+    "code": "95122403",
+    "label": null,
+    "contracts": 1,
+    "suppliers": 1,
+    "agencies": 1,
+    "value": 91879,
+    "soonCount": 1,
+    "bytes": 4785
+  }
+}

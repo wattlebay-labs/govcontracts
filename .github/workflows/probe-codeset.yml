@@ -1,0 +1,47 @@
+name: probe-codeset
+# One-off look at a possible source of category titles: the "AusTender
+# Customised UNSPSC Codeset" workbook the Department of Finance publishes on
+# data.gov.au. Asks the catalogue for the dataset's licence and the workbook's
+# address, fetches the workbook once, compares its codes with the contract
+# dataset, and commits what it found as probe/codeset.json. Nothing here
+# touches the site.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/probe-codeset.yml"
+      - "scripts/probe-codeset.mjs"
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test scripts/xlsx.test.mjs
+      # The newest dataset saved by fetch-data, to count how many of its
+      # codes get a title. Read only: this workflow never saves a cache.
+      - name: Restore the dataset
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/contracts.json
+            data/state.json
+          key: dataset-v1-none
+          restore-keys: |
+            dataset-v1-
+      - run: node scripts/probe-codeset.mjs
+      - name: Commit what was found
+        run: |
+          git config user.name "govcontracts-bot"
+          git config user.email "govcontracts-bot@users.noreply.github.com"
+          git add probe/codeset.json
+          git commit -m "Probe: category titles source" || echo "nothing to commit"
+          git pull --rebase --autostash
+          git push

@@ -1,0 +1,214 @@
+{
+  "probedAt": "2026-11-26T08:50:48Z",
+  "what": "AusTender Customised UNSPSC Codeset, Department of Finance, on data.gov.au",
+  "ok": true,
+  "reason": "workbook read and compared with the contract dataset",
+  "requests": [
+    {
+      "url": "https://data.gov.au/data/api/3/action/package_show?id=5c7fa69b-b0e9-4553-b8df-2a022dd2e982",
+      "status": 200,
+      "finalUrl": "https://data.gov.au/data/api/3/action/package_show?id=5c7fa69b-b0e9-4553-b8df-2a022dd2e982",
+      "contentType": "application/json;charset=utf-8",
+      "bytes": 30235
+    },
+    {
+      "url": "https://data.gov.au/data/dataset/5c7fa69b-b0e9-4553-b8df-2a022dd2e982/resource/bae9cb73-1500-4d45-a862-eac2706cfbd4/download/austender-customised-unspsc-codeset-1-july-2023-1.xlsx",
+      "status": 200,
+      "finalUrl": "https://data.gov.au/data/dataset/5c7fa69b-b0e9-4553-b8df-2a022dd2e982/resource/bae9cb73-1500-4d45-a862-eac2706cfbd4/download/austender-customised-unspsc-codeset-1-july-2023-1.xlsx",
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "bytes": 80887
+    }
+  ],
+  "dataset": {
+    "title": "Historical Australian Government Contract Notice Data",
+    "organisation": "Department of Finance",
+    "licenceId": "cc-by",
+    "licenceTitle": "Creative Commons Attribution 3.0 Australia",
+    "licenceUrl": "http://creativecommons.org/licenses/by/3.0/au/",
+    "modified": "2024-01-10T04:40:16.800937",
+    "resources": 19,
+    "notesMentioningRights": "This is the historical contract notice (CN) data reported by Australian Government\r\nagencies for the years 1999 to 2020. The CN data has been sourced from\r\nthe Gazette Publishing System (GaPS) for the years 1999 to 2006-07, inclusive,\r\nand from the AusTender from 1 July 2007 onwards.\r\n\r\nEffective 1 July 2007, mandatory contract reporting was transferred to\r\nAusTender [www.tenders.gov.au](http://www.tenders.gov.au/) . Notices of\r\ncontracts that were active at 1 July 2007 were migrated to AusTender and will\r\ntherefore appear in both databases. These records are identifiable on\r\nAusTender by the GaPS ID reference. The reporting requirements for GaPS differed from those for AusTender reporting in terms of value thresholds, industry sector codes and contract confidentiality. For further information please contact the AusTender Help Desk at [tenders@finance.gov.au](mailto:tenders@finance.gov.au).\r\n\r\nThe CN data reflects contractual information reported by entities in accordance with entities' procurement publishing obligations. Please note that the data contained within each file was correct at the time of extraction. Data may change over time as agencies undertake data quality assurance processes or as contract information is varied. The contract values on AusTender represent the total maximum value of each contract over its life, including where contracts span multiple years. AusTender data does not reflect annual expenditure. \r\nThere is a Data Dictionary available for AusTender …"
+  },
+  "resource": {
+    "id": "bae9cb73-1500-4d45-a862-eac2706cfbd4",
+    "name": "AusTender Customised UNSPSC Codeset 1 July 2023.xlsx",
+    "format": "XLSX",
+    "size": 80887,
+    "created": "2021-05-11T05:47:09.625723",
+    "lastModified": "2024-01-10T00:00:00",
+    "url": "https://data.gov.au/data/dataset/5c7fa69b-b0e9-4553-b8df-2a022dd2e982/resource/bae9cb73-1500-4d45-a862-eac2706cfbd4/download/austender-customised-unspsc-codeset-1-july-2023-1.xlsx",
+    "description": "AusTender, the Commonwealth Government’s procurement information system www.tenders.gov.au, uses a subset of the United Nations Standard Products and Services Code (UNSPSC) to categorise Commonwealth Government procurements. Agencies apply the goods and services category codes to their Planned Procurements (PPs), open Approaches to Market (ATMs), Standing Offer Notices (SONs), and Contract Notices (CNs), as they are published on AusTender. The information supports analysis and policy development in relation to the Government procurement market."
+  },
+  "file": {
+    "bytes": 80887,
+    "sha256": "90d9b46aa02992835f9114912459f6c7e6ae01c0d161ec78827361a22b9e5a32"
+  },
+  "workbook": {
+    "sheets": [
+      {
+        "name": "AT UNSPSC 1 July 2023",
+        "rows": 637,
+        "columns": 16374,
+        "firstRows": [
+          [
+            "AusTender Customised UNSPSC Codeset",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Code",
+            "Title",
+            "Definition",
+            "Goods/Services"
+          ],
+          [
+            "",
+            "Live Plant and Animal Material and Accessories and Supplies",
+            "This segment includes live, wild and domesticated, seeds and plants and animals. This segment also includes materials an…",
+            "Goods"
+          ],
+          [
+            "10100000",
+            "Live animals",
+            "",
+            "Goods"
+          ],
+          [
+            "10110000",
+            "Domestic pet products",
+            "",
+            "Goods"
+          ],
+          [
+            "10120000",
+            "Animal feed   ",
+            "",
+            "Goods"
+          ]
+        ]
+      }
+    ]
+  },
+  "notices": [],
+  "table": {
+    "sheet": "AT UNSPSC 1 July 2023",
+    "codeColumn": 0,
+    "titleColumn": 1,
+    "codeHeader": "",
+    "titleHeader": "Live Plant and Animal Material and Accessories and Supplies",
+    "textColumns": [
+      {
+        "column": 1,
+        "filled": 586,
+        "different": 586
+      },
+      {
+        "column": 2,
+        "filled": 9,
+        "different": 9
+      },
+      {
+        "column": 3,
+        "filled": 586,
+        "different": 2
+      }
+    ],
+    "firstCodeRow": 4,
+    "rowsWithCode": 586,
+    "codes": 586,
+    "levels": {
+      "segment": 8,
+      "family": 310,
+      "class": 157,
+      "commodity": 111
+    },
+    "duplicates": 0,
+    "conflicts": [],
+    "emptyTitles": 0,
+    "longestTitle": "Management and provision of all facilities engineering modification and maintenance services for a site or platform",
+    "allCapsTitles": 0
+  },
+  "coverage": {
+    "datasetCodes": 499,
+    "withTitle": 495,
+    "withoutTitle": 4,
+    "contracts": 42198,
+    "contractsUnderTitledCodes": 42182,
+    "codesWithoutTitle": [
+      {
+        "code": "81111812",
+        "contracts": 9
+      },
+      {
+        "code": "81112500",
+        "contracts": 5
+      },
+      {
+        "code": "72130000",
+        "contracts": 1
+      },
+      {
+        "code": "80141602",
+        "contracts": 1
+      }
+    ],
+    "guideLabels": {
+      "codesWithGuide": 233,
+      "codesWithNeither": 4,
+      "codesWithTitleOnly": 262,
+      "guideSameAsTitle": 38,
+      "guideDiffersFromTitle": 195
+    },
+    "largest": [
+      {
+        "code": "80111600",
+        "contracts": 6981,
+        "title": "Temporary personnel services",
+        "guide": "Labour Hire"
+      },
+      {
+        "code": "80120000",
+        "contracts": 3345,
+        "title": "Legal services",
+        "guide": "Legal Services"
+      },
+      {
+        "code": "81110000",
+        "contracts": 2447,
+        "title": "Computer services",
+        "guide": "Labour Hire"
+      },
+      {
+        "code": "43230000",
+        "contracts": 1697,
+        "title": "Software",
+        "guide": "Software"
+      },
+      {
+        "code": "86000000",
+        "contracts": 1573,
+        "title": "Education and Training Services",
+        "guide": "Training Services"
+      },
+      {
+        "code": "80100000",
+        "contracts": 1255,
+        "title": "Management advisory services",
+        "guide": "Management advisory services"
+      },
+      {
+        "code": "80161500",
+        "contracts": 1188,
+        "title": "Management support services",
+        "guide": "Project Support Services"
+      },
+      {
+        "code": "93140000",
+        "contracts": 1081,
+        "title": "Community and social services",
+        "guide": "Delivery of Counselling Services"
+      }
+    ]
+  }
+}

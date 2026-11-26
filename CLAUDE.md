@@ -15,6 +15,8 @@ or other work out of this repo, its commits and its site.
   `https://api.tenders.gov.au/ocds/findByDates/{contractPublished|contractStart|contractEnd|contractLastModified}/{fromISO}/{toISO}`
   Response: `{ releases: [ { parties[], awards[], contracts[ {id: "CN…", description, period{startDate,endDate}, value{amount}, items[].classification(UNSPSC)} ], tender{procurementMethod} } ] }`
   Supplier ABN is in `parties[].additionalIdentifiers` (scheme `AU-ABN`), role `supplier`; buyer has role `procuringEntity`.
+- OK (probed 26 Nov 2026, see `probe/codeset.json`): data.gov.au's catalogue API
+  (`https://data.gov.au/data/api/3/action/package_show?id=<dataset id>`, JSON) and its file downloads.
 - BLOCKED (403, CloudFront/Cloudflare): AusTender open-tender pages and RSS, NSW, VIC, SA, WA portals.
 - Unclear: QLD QTenders (redirects to a new site), TAS (error page). Not yet usable.
 
@@ -68,6 +70,39 @@ or other work out of this repo, its commits and its site.
 - The build fails if any internal link points at a page it did not make. Tests use made-up records.
 - The build also writes `site/build.json` (`generatedAt`, `dataUpdated`, page counts): the stamp the
   deploy check reads from the live address.
+
+## Category titles: a source was found and probed, and is not used yet (26 Nov 2026)
+- The source: "AusTender Customised UNSPSC Codeset 1 July 2023.xlsx", a resource of the dataset
+  "Historical Australian Government Contract Notice Data" (Department of Finance) on data.gov.au, dataset id
+  `5c7fa69b-b0e9-4553-b8df-2a022dd2e982`, resource id `bae9cb73-1500-4d45-a862-eac2706cfbd4`. The catalogue
+  gives the licence as Creative Commons Attribution 3.0 Australia (`cc-by`) for the dataset and the resource.
+  It is the list of codes AusTender itself uses, a subset of UNSPSC, so it fits the contract data.
+- What the licence check did not settle: UNSPSC belongs to the United Nations Development Programme (its own
+  site says "All rights reserved", and also that the code may be browsed and downloaded at no cost and that
+  "The use of UNSPSC codes is free"). No data.gov.au page and no line in the workbook says whether the CC BY
+  label covers the UN's titles. Whoever puts the titles on the site credits the Department of Finance file
+  and says that UNSPSC is the UNDP's; the UNDP's own files are not used.
+- The probe: `scripts/probe-codeset.mjs`, workflow `probe-codeset` (by hand, or a push to that script or
+  workflow). It asks the catalogue for the licence and the workbook's address, fetches the workbook once
+  (80,887 bytes), and commits `probe/codeset.json`. Run 1: both requests answered 200 in 4 seconds.
+- What the workbook holds: one sheet, "AT UNSPSC 1 July 2023"; row 1 a heading, row 2 the column names
+  `Code`, `Title`, `Definition`, `Goods/Services`; 586 rows with an 8-digit code, each with a title, no code
+  twice (8 end in 000000, 310 in 0000, 157 in 00, 111 are full commodity codes); 49 more rows have a title
+  and no code (the first is a segment heading with its definition); only 9 code rows have a definition.
+  Titles carry stray spaces ("Animal feed   "): collapse them. One row reaches column 16,374, so do not
+  assume four columns. No cell mentions copyright, a licence, the UN, UNDP or GS1.
+- Against the dataset of 26 Nov: **495 of the 499 codes get a title** (42,182 of 42,198 contracts). Without
+  one: 81111812 (9 contracts), 81112500 (5), 72130000 (1), 80141602 (1). Of the 233 codes that have a guide
+  label from `describeCode`, the label matches the title in 38 and differs in 195, sometimes badly:
+  81110000 is "Computer services" and its commonest description is "Labour Hire". So a title should head
+  the page and the common description stay beside it as what it is.
+- `scripts/xlsx.mjs` reads the cell text of a workbook with Node's own `zlib` (no library): `readWorkbook(buffer)`
+  gives `[{ name, rows }]`, every cell a string. Tests build made-up workbooks; it was also checked against
+  3,000-row workbooks written by two other programs (0 differences). It reads text only.
+- Not done: nothing on the site or in the reports uses the titles. To use them, do not fetch the workbook in
+  every daily run: make a small committed file of code and title from it in a hand-started workflow (with the
+  source, the file's SHA-256 `90d9b46a…` and the date), let the build read that, and credit it on the about
+  page and wherever a title shows. The cloud shell cannot see the workbook, only what a workflow commits.
 
 ## Sample Bid Draft Pack (`scripts/sample-pack.mjs`, page `sample-pack/`, live since 22 Nov 2026)
 - One worked sample: the tender at a glance, a compliance checklist (28 lines, each with its section), a

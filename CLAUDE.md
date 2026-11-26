@@ -87,8 +87,9 @@ or other work out of this repo, its commits and its site.
   (80,887 bytes), and commits `probe/codeset.json`. Run 1: both requests answered 200 in 4 seconds.
 - What the workbook holds: one sheet, "AT UNSPSC 1 July 2023"; row 1 a heading, row 2 the column names
   `Code`, `Title`, `Definition`, `Goods/Services`; 586 rows with an 8-digit code, each with a title, no code
-  twice (8 end in 000000, 310 in 0000, 157 in 00, 111 are full commodity codes); 49 more rows have a title
-  and no code (the first is a segment heading with its definition); only 9 code rows have a definition.
+  twice (8 end in 000000, 310 in 0000, 157 in 00, 111 are full commodity codes); the other 49 rows have no
+  code (the first is a segment heading with its definition; the rest were not looked at); only 9 code rows
+  have a definition.
   Titles carry stray spaces ("Animal feed   "): collapse them. One row reaches column 16,374, so do not
   assume four columns. No cell mentions copyright, a licence, the UN, UNDP or GS1.
 - Against the dataset of 26 Nov: **495 of the 499 codes get a title** (42,182 of 42,198 contracts). Without

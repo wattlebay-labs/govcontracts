@@ -91,7 +91,8 @@ or other work out of this repo, its commits and its site.
   code (the first is a segment heading with its definition; the rest were not looked at); only 9 code rows
   have a definition.
   Titles carry stray spaces ("Animal feed   "): collapse them. One row reaches column 16,374, so do not
-  assume four columns. No cell mentions copyright, a licence, the UN, UNDP or GS1.
+  assume four columns. No row outside the table of codes mentions copyright, a licence, the United Nations,
+  UNDP or GS1 (the probe does not search the code rows themselves, whose titles hold words like "licences").
 - Against the dataset of 26 Nov: **495 of the 499 codes get a title** (42,182 of 42,198 contracts). Without
   one: 81111812 (9 contracts), 81112500 (5), 72130000 (1), 80141602 (1). Of the 233 codes that have a guide
   label from `describeCode`, the label matches the title in 38 and differs in 195, sometimes badly:

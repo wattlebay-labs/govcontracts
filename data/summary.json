@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T08:53:02Z",
+  "generatedAt": "2026-11-26T01:48:24Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,77 +11,77 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 15,
+  "runs": 16,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-25T08:52:17Z",
-    "contractLastModified": "2026-11-25T08:52:17Z",
-    "contractEnd": "2027-11-26T00:00:00Z"
+    "contractPublished": "2026-11-26T01:47:46Z",
+    "contractLastModified": "2026-11-26T01:47:46Z",
+    "contractEnd": "2027-11-27T00:00:00Z"
   },
   "horizon": {
     "from": "2026-11-18T00:00:00Z",
-    "fetchedTo": "2027-11-26T00:00:00Z",
-    "target": "2027-11-26T00:00:00Z",
+    "fetchedTo": "2027-11-27T00:00:00Z",
+    "target": "2027-11-27T00:00:00Z",
     "complete": true
   },
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 260,
-      "from": "2026-11-24T02:32:26Z",
-      "to": "2026-11-25T08:52:17Z",
+      "releases": 150,
+      "from": "2026-11-24T08:52:17Z",
+      "to": "2026-11-26T01:47:46Z",
       "caughtUp": true,
-      "cursor": "2026-11-25T08:52:17Z"
+      "cursor": "2026-11-26T01:47:46Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 923,
-      "from": "2026-11-24T02:32:26Z",
-      "to": "2026-11-25T08:52:17Z",
+      "releases": 698,
+      "from": "2026-11-24T08:52:17Z",
+      "to": "2026-11-26T01:47:46Z",
       "caughtUp": true,
-      "cursor": "2026-11-25T08:52:17Z"
+      "cursor": "2026-11-26T01:47:46Z"
     },
     "contractEnd": {
-      "windows": 0,
-      "releases": 0,
+      "windows": 1,
+      "releases": 59,
       "from": "2027-11-26T00:00:00Z",
-      "to": "2027-11-26T00:00:00Z",
+      "to": "2027-11-27T00:00:00Z",
       "caughtUp": true,
-      "cursor": "2027-11-26T00:00:00Z"
+      "cursor": "2027-11-27T00:00:00Z"
     }
   },
-  "requests": 15,
-  "pages": 15,
-  "seconds": 45,
+  "requests": 12,
+  "pages": 12,
+  "seconds": 37,
   "budgetSpent": false,
-  "windowsTried": 2,
-  "windowsOk": 2,
+  "windowsTried": 3,
+  "windowsOk": 3,
   "emptyWindows": 0,
-  "largestWindow": 923,
+  "largestWindow": 698,
   "windowsWithMorePages": 2,
-  "contractsBefore": 41984,
-  "contracts": 42120,
-  "contractsEndingWithinHorizon": 39250,
-  "amendedContracts": 14047,
-  "suppliers": 10037,
+  "contractsBefore": 42120,
+  "contracts": 42198,
+  "contractsEndingWithinHorizon": 39224,
+  "amendedContracts": 14088,
+  "suppliers": 10047,
   "agencies": 137,
   "categories": 499,
-  "totalValue": 134304990203,
+  "totalValue": 134514268778,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2051-02-27T13:00:00Z",
-  "bytes": 18721823,
+  "bytes": 18757543,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 741,
-      "contractAmendment": 442
+      "contract": 498,
+      "contractAmendment": 409
     },
     "lastModified": {
-      "releases": 923,
-      "amendments": 442,
-      "alsoInPublishedPull": 260,
-      "newToDataset": 39
+      "releases": 698,
+      "amendments": 382,
+      "alsoInPublishedPull": 150,
+      "newToDataset": 19
     },
     "amendmentSamples": [
       {
@@ -126,7 +126,7 @@
         "previous": {
           "id": "CN4288720",
           "notice": "CN4288720",
-          "released": "2026-11-16T02:34:39Z",
+          "released": "2026-11-25T04:57:49Z",
           "description": "Project Support Services",
           "agency": "Department of Defence",
           "agencyAbn": "62950639680",
@@ -134,12 +134,12 @@
           "supplier": "FUJITSU AUSTRALIA LIMITED",
           "supplierAbn": "19001011427",
           "supplierState": "ACT",
-          "value": 16765.45,
+          "value": 64767.93,
           "start": "2026-11-18T13:00:00Z",
           "end": "2027-06-29T14:00:00Z",
           "unspsc": "92110000",
           "method": "Open tender",
-          "amendment": false
+          "amendment": true
         }
       },
       {
@@ -184,7 +184,7 @@
         "previous": {
           "id": "CN4288420",
           "notice": "CN4288420",
-          "released": "2026-11-12T03:57:40Z",
+          "released": "2026-11-25T04:57:33Z",
           "description": "Repair Services",
           "agency": "Department of Defence",
           "agencyAbn": "62950639680",
@@ -192,12 +192,12 @@
           "supplier": "BY GROUP PTY LTD",
           "supplierAbn": "88168458302",
           "supplierState": "NSW",
-          "value": 56103260.55,
+          "value": 60397947.5,
           "start": "2026-11-18T13:00:00Z",
           "end": "2029-06-29T14:00:00Z",
           "unspsc": "72100000",
           "method": "Limited tender",
-          "amendment": false
+          "amendment": true
         }
       },
       {
@@ -242,7 +242,7 @@
         "previous": {
           "id": "CN4288038",
           "notice": "CN4288038",
-          "released": "2026-11-10T23:52:38Z",
+          "released": "2026-11-25T04:50:25Z",
           "description": "Marine Equipment",
           "agency": "Department of Defence",
           "agencyAbn": "62950639680",
@@ -250,68 +250,68 @@
           "supplier": "BIRDON PTY LTD",
           "supplierAbn": "59002810255",
           "supplierState": "NSW",
-          "value": 40162.65,
+          "value": 23513.05,
           "start": "2026-10-21T13:00:00Z",
           "end": "2027-01-21T13:00:00Z",
           "unspsc": "25110000",
           "method": "Limited tender",
-          "amendment": false
+          "amendment": true
         }
       }
     ]
   },
   "sample": [
     {
-      "id": "CN4283183",
-      "notice": "CN4283183",
-      "released": "2026-10-19T02:57:39Z",
-      "description": "Vehicle Spare Parts",
-      "agency": "Department of Defence",
-      "agencyAbn": "62950639680",
-      "division": "JCG",
-      "supplier": "RFD (AUSTRALIA) PTY. LTD. BEAUFORT GROUP AUSTRALIA",
-      "supplierAbn": "55050242601",
-      "supplierState": "VIC",
-      "value": 23655.94,
-      "start": "2026-10-14T13:00:00Z",
-      "end": "2026-11-25T13:00:00Z",
-      "unspsc": "25170000",
+      "id": "CN4284411",
+      "notice": "CN4284411",
+      "released": "2026-10-23T03:33:27Z",
+      "description": "Lamb Nutriotion Seminar logistics",
+      "agency": "Austrade",
+      "agencyAbn": "11764698227",
+      "division": "CORPORATE SERVICES GROUP",
+      "supplier": "JAPAN ADVERTISING",
+      "supplierAbn": null,
+      "supplierState": "Outside Australia",
+      "value": 38675.18,
+      "start": "2026-11-25T13:00:00Z",
+      "end": "2026-11-26T13:00:00Z",
+      "unspsc": "80141600",
       "method": "Limited tender",
       "amendment": false
     },
     {
-      "id": "CN4286615",
-      "notice": "CN4286615",
-      "released": "2026-11-04T01:03:55Z",
-      "description": "Electronic Equipment",
+      "id": "CN4284071",
+      "notice": "CN4284071",
+      "released": "2026-10-21T05:19:41Z",
+      "description": "Program Review",
+      "agency": "Department of Foreign Affairs and Trade",
+      "agencyAbn": "47065634525",
+      "division": "FINANCE DIVISION",
+      "supplier": "Strategic Development Group Pty Ltd",
+      "supplierAbn": "39158001775",
+      "supplierState": "NSW",
+      "value": 152131.52,
+      "start": "2026-10-13T13:00:00Z",
+      "end": "2026-11-26T13:00:00Z",
+      "unspsc": "80100000",
+      "method": "Open tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4283784",
+      "notice": "CN4283784",
+      "released": "2026-10-20T22:18:59Z",
+      "description": "Vehicle Maintenance",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
-      "division": "CASG",
-      "supplier": "MILSPEC SERVICES PTY LIMITED",
-      "supplierAbn": "12071999132",
+      "division": "JCG",
+      "supplier": "TOURTEC INDUSTRIES",
+      "supplierAbn": "72604635556",
       "supplierState": "QLD",
-      "value": 24431,
-      "start": "2026-10-25T13:00:00Z",
-      "end": "2026-11-25T13:00:00Z",
-      "unspsc": "40100000",
-      "method": "Limited tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4286112",
-      "notice": "CN4286112",
-      "released": "2026-11-02T03:59:54Z",
-      "description": "Equipment Maintenance",
-      "agency": "Department of Defence",
-      "agencyAbn": "62950639680",
-      "division": "JCG",
-      "supplier": "TECHNI WATERJET PTY LTD",
-      "supplierAbn": "53053413817",
-      "supplierState": "VIC",
-      "value": 14751.83,
-      "start": "2026-10-28T13:00:00Z",
-      "end": "2026-11-25T13:00:00Z",
-      "unspsc": "31160000",
+      "value": 51216,
+      "start": "2026-10-07T13:00:00Z",
+      "end": "2026-11-26T13:00:00Z",
+      "unspsc": "78181500",
       "method": "Limited tender",
       "amendment": false
     }

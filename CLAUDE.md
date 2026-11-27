@@ -61,17 +61,19 @@ or other work out of this repo, its commits and its site.
   `Australia/Sydney`. "Ending in the next 12 months" is today to today + 364 days in that zone.
   End dates outside 1990 to 2100 are treated as not stated.
 - Long tables are cut to the 150 largest contracts by value, shown in end-date order, and say so.
-- UNSPSC codes have no titles in the API. Pages show the code and, where one recurs, the most common
-  contract description under it (`describeCode`: 3 contracts and 5% of the code, or 20 contracts),
-  and say that this is not the official title. In some codes every contract is described differently
-  (seen live: research grants under 70140000), so those get no label. Do not add titles from memory.
+- UNSPSC codes have no titles in the API. Titles come from `data/unspsc-titles.json` (see "Category
+  titles" below): a category page is headed by its title, with the code in the line under it. The most
+  common contract description under a code, where one recurs (`describeCode`: 3 contracts and 5% of the
+  code, or 20 contracts), stays on the page as a description, never as the heading. In some codes every
+  contract is described differently (seen live: research grants under 70140000), so those get no
+  description label. Do not add titles from memory.
 - Suppliers are grouped by ABN under their most common name; suppliers without an ABN are named in
   tables but get no page. Agency slugs come from the name (a number is added on a clash).
 - The build fails if any internal link points at a page it did not make. Tests use made-up records.
 - The build also writes `site/build.json` (`generatedAt`, `dataUpdated`, page counts): the stamp the
   deploy check reads from the live address.
 
-## Category titles: a source was found and probed, and is not used yet (26 Nov 2026)
+## Category titles (`data/unspsc-titles.json`, on the site since 27 Nov 2026)
 - The source: "AusTender Customised UNSPSC Codeset 1 July 2023.xlsx", a resource of the dataset
   "Historical Australian Government Contract Notice Data" (Department of Finance) on data.gov.au, dataset id
   `5c7fa69b-b0e9-4553-b8df-2a022dd2e982`, resource id `bae9cb73-1500-4d45-a862-eac2706cfbd4`. The catalogue
@@ -80,31 +82,51 @@ or other work out of this repo, its commits and its site.
 - What the licence check did not settle: UNSPSC belongs to the United Nations Development Programme (its own
   site says "All rights reserved", and also that the code may be browsed and downloaded at no cost and that
   "The use of UNSPSC codes is free"). No data.gov.au page and no line in the workbook says whether the CC BY
-  label covers the UN's titles. Whoever puts the titles on the site credits the Department of Finance file
-  and says that UNSPSC is the UNDP's; the UNDP's own files are not used.
-- The probe: `scripts/probe-codeset.mjs`, workflow `probe-codeset` (by hand, or a push to that script or
-  workflow). It asks the catalogue for the licence and the workbook's address, fetches the workbook once
-  (80,887 bytes), and commits `probe/codeset.json`. Run 1: both requests answered 200 in 4 seconds.
-- What the workbook holds: one sheet, "AT UNSPSC 1 July 2023"; row 1 a heading, row 2 the column names
-  `Code`, `Title`, `Definition`, `Goods/Services`; 586 rows with an 8-digit code, each with a title, no code
-  twice (8 end in 000000, 310 in 0000, 157 in 00, 111 are full commodity codes); the other 49 rows have no
-  code (the first is a segment heading with its definition; the rest were not looked at); only 9 code rows
-  have a definition.
-  Titles carry stray spaces ("Animal feed   "): collapse them. One row reaches column 16,374, so do not
-  assume four columns. No row outside the table of codes mentions copyright, a licence, the United Nations,
-  UNDP or GS1 (the probe does not search the code rows themselves, whose titles hold words like "licences").
-- Against the dataset of 26 Nov: **495 of the 499 codes get a title** (42,182 of 42,198 contracts). Without
-  one: 81111812 (9 contracts), 81112500 (5), 72130000 (1), 80141602 (1). Of the 233 codes that have a guide
-  label from `describeCode`, the label matches the title in 38 and differs in 195, sometimes badly:
-  81110000 is "Computer services" and its commonest description is "Labour Hire". So a title should head
-  the page and the common description stay beside it as what it is.
+  label covers the UN's titles. So the site credits the Department of Finance file and says that UNSPSC is
+  the UNDP's, on every page; the UNDP's own files are not used. Keep both statements.
+- How the titles get here: `scripts/make-titles.mjs`, workflow `make-titles` (`.github/workflows/titles.yml`),
+  **started by hand only**. It asks the catalogue for the licence and the workbook's address, fetches the
+  workbook once, asks once whether the dataset's page answers (for the link in the credit), and commits
+  `data/unspsc-titles.json`: `source` (file name, publisher, addresses, licence, bytes, SHA-256), `fetchedAt`
+  and `titles` (code to title, runs of spaces collapsed). It writes nothing and fails unless the catalogue
+  still says `cc-by`, the workbook is on data.gov.au, a row holds the column names `Code` and `Title`, at
+  least 500 rows under it have an 8-digit code, every one has a title of 200 characters or fewer, and no
+  code has two titles. Run 1 (27 Nov 2026): 15 seconds, 586 codes, SHA-256 `90d9b46a…`, the same file the
+  probe read. Run it again only when the Department publishes a new codeset; the daily run never fetches
+  the workbook. A commit made by that workflow does not start `fetch-data`; the next daily run picks it up.
+- How the build uses them (`titlesOf`, `loadTitles` in `scripts/build.mjs`): the file is used only if it
+  names its source, publisher and licence and its licence id is `cc-by`; otherwise, or with no file, the
+  site is built exactly as before titles existed, and `data/build.json` says why (`titles.used`,
+  `titles.problem`). With titles: the title heads the category page and its `<title>` (cut to 70
+  characters there only), the lead line gives the code and then the common contract descriptions, the
+  categories index has a Title column beside the description column, and wherever a category is named in a
+  table the small text beside the code is the title (a code with no title shows the code alone there, not
+  the description label). A code the codeset does not list keeps its number as the heading and says so.
+- The credit: a line in the footer of every page ("Category titles are from the …, Department of Finance,
+  licensed under … . UNSPSC is the United Nations Standard Products and Services Code, of the United
+  Nations Development Programme, which has no connection with this site."), a paragraph on the about page,
+  and the same credit in every report's read-me. `check-live.mjs` (`TITLES_MUST_SAY`) fails the deploy check
+  if the category page lacks it while the build stamp's `titledCategories` is above zero; `checkReport`
+  refuses a report whose title is not the codeset's or whose read-me lacks the credit.
+- To take the titles off: delete `data/unspsc-titles.json` and push (that path starts `fetch-data`). The
+  site and reports go back to codes and description labels within one run.
+- `data/build.json` has `categoriesWithTitle`, `categoriesWithoutTitle` (code and contract count) and
+  `titles`; `data/report.json` has `reportsWithTitle` and a `title` beside each `label`.
+- What the probe of 26 Nov found (`probe/codeset.json`, `scripts/probe-codeset.mjs`, workflow
+  `probe-codeset`): one sheet, "AT UNSPSC 1 July 2023"; row 1 a heading, row 2 the column names `Code`,
+  `Title`, `Definition`, `Goods/Services`; 586 rows with an 8-digit code, each with a title, no code twice
+  (8 end in 000000, 310 in 0000, 157 in 00, 111 are full commodity codes); the other 49 rows have no code
+  (the first is a segment heading with its definition; the rest were not looked at); only 9 code rows have
+  a definition (definitions are not used). One row reaches column 16,374, so never assume a sheet's width.
+  Against the dataset of 26 Nov, 495 of 499 codes had a title; without one: 81111812, 81112500, 72130000,
+  80141602. The description label matched the title in 38 of 233 codes and differed in 195 (81110000 is
+  "Computer services"; its commonest description is "Labour Hire"), which is why the label is never a heading.
+  Do not push changes to `scripts/probe-codeset.mjs` without a reason: a push to it runs the probe.
 - `scripts/xlsx.mjs` reads the cell text of a workbook with Node's own `zlib` (no library): `readWorkbook(buffer)`
-  gives `[{ name, rows }]`, every cell a string. Tests build made-up workbooks; it was also checked against
-  3,000-row workbooks written by two other programs (0 differences). It reads text only.
-- Not done: nothing on the site or in the reports uses the titles. To use them, do not fetch the workbook in
-  every daily run: make a small committed file of code and title from it in a hand-started workflow (with the
-  source, the file's SHA-256 `90d9b46a…` and the date), let the build read that, and credit it on the about
-  page and wherever a title shows. The cloud shell cannot see the workbook, only what a workflow commits.
+  gives `[{ name, rows }]`, every cell a string. `scripts/made-up-workbook.mjs` makes workbooks for the tests
+  (`zip`, `workbookOf(rows)`). The cloud shell cannot see the real workbook, only what a workflow commits.
+- Not verified: whether the 1 July 2023 codeset is the current one (the catalogue says the file was last
+  modified 10 January 2024); whether the CC BY label reaches the UN's titles (no lawyer has looked).
 
 ## Sample Bid Draft Pack (`scripts/sample-pack.mjs`, page `sample-pack/`, live since 22 Nov 2026)
 - One worked sample: the tender at a glance, a compliance checklist (28 lines, each with its section), a

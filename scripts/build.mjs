@@ -13,6 +13,10 @@
 //   build.json                 when this build was made and how many pages it has
 // plus data/build.json: page counts and sizes, small enough to commit.
 //
+// Category titles come from data/unspsc-titles.json when it is there (made by
+// make-titles.mjs from the Department of Finance's codeset); without it a
+// category is shown by its code and its most common contract description.
+//
 // Every page credits the source and says the figures are derived. Links are
 // relative, so the site works under any address.
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -140,6 +144,61 @@ export function describeCode(descriptions) {
   return { label, typical };
 }
 
+// The official titles of the codes, from the file make-titles.mjs writes.
+// Returns { map, name, publisher, licence, licenceHref, href, sha256,
+// fetchedAt } to build with, or { problem } when the file is not one the
+// site should use: the titles are only shown with the open licence the
+// catalogue gave for them and a credit to the file they came from.
+export const TITLES_FILE = "data/unspsc-titles.json";
+export function titlesOf(json) {
+  const bad = (problem) => ({ problem });
+  if (!json || typeof json !== "object") return bad("not a titles file");
+  const src = json.source || {};
+  if (src.licenceId !== "cc-by") return bad(`the file gives its licence as "${src.licenceId ?? "none"}", not "cc-by"`);
+  const name = tidy(src.file).replace(/\.xlsx$/i, "");
+  const publisher = tidy(src.publisher);
+  const licence = tidy(src.licence);
+  if (!name || !publisher || !licence) return bad("the file does not name its source, publisher and licence");
+  const entries = json.titles && typeof json.titles === "object" ? Object.entries(json.titles) : [];
+  if (!entries.length) return bad("the file holds no titles");
+  const map = new Map();
+  for (const [code, raw] of entries) {
+    const title = typeof raw === "string" ? tidy(raw) : "";
+    if (!/^\d{8}$/.test(code) || !title || title.length > 200) return bad(`the entry for ${JSON.stringify(String(code).slice(0, 20))} is not a code and a title`);
+    map.set(code, title);
+  }
+  const onDataGovAu = (u) => (typeof u === "string" && /^https:\/\/([a-z0-9-]+\.)*data\.gov\.au\/[^\s"<>]*$/i.test(u) ? u : null);
+  const cc = typeof src.licenceUrl === "string" ? src.licenceUrl.replace(/^http:\/\//i, "https://") : "";
+  return {
+    map,
+    name,
+    publisher,
+    licence,
+    licenceHref: /^https:\/\/creativecommons\.org\/licenses\/[a-z0-9./-]+$/i.test(cc) ? cc : null,
+    href: onDataGovAu(src.datasetUrl) || onDataGovAu(src.fileUrl),
+    sha256: typeof src.sha256 === "string" ? src.sha256 : null,
+    fetchedAt: typeof json.fetchedAt === "string" ? json.fetchedAt : null,
+  };
+}
+export const UNSPSC_OWNER = "UNSPSC is the United Nations Standard Products and Services Code, of the United Nations Development Programme";
+
+// The titles to build with: null when there is no file, { problem } when the
+// file cannot be used (the site is then built without titles, and says why in
+// data/build.json).
+export async function loadTitles(path = TITLES_FILE) {
+  let text;
+  try {
+    text = await readFile(path, "utf8");
+  } catch {
+    return null;
+  }
+  try {
+    return titlesOf(JSON.parse(text));
+  } catch {
+    return { problem: "the titles file is not JSON" };
+  }
+}
+
 // ---------- the model ----------
 
 const byEnd = (a, b) => {
@@ -158,7 +217,11 @@ function tally(rows) {
 
 // Turn the raw records into rows with usable dates, and group them by
 // category, agency and supplier. `nowMs` fixes "today" for the whole build.
-export function analyse(records, nowMs) {
+// `opts.titles` is what `titlesOf` returns: with it, each category that the
+// codeset names gets its official `title`; `label` stays the guide taken from
+// the contracts' own descriptions.
+export function analyse(records, nowMs, opts = {}) {
+  const titles = opts.titles && opts.titles.map ? opts.titles : null;
   const today = localDate(new Date(nowMs).toISOString());
   const horizon = addDays(today, 365);
   const skipped = { noSupplierAbn: 0, noCategory: 0, noAgency: 0, badEndDate: 0, noValue: 0 };
@@ -209,7 +272,7 @@ export function analyse(records, nowMs) {
 
   const categories = [...group((r) => r.code).entries()]
     .map(([code, list]) => {
-      return { code, rows: list, ...describeCode(list.map((r) => r.description)), ...tally(list) };
+      return { code, title: titles?.map.get(code) || null, rows: list, ...describeCode(list.map((r) => r.description)), ...tally(list) };
     })
     .sort((a, b) => (a.code < b.code ? -1 : 1));
 
@@ -255,6 +318,10 @@ export function analyse(records, nowMs) {
     agencySlug: new Map(agencies.map((a) => [a.name, a.slug])),
     supplierName: new Map(suppliers.map((s) => [s.abn, s.name])),
     categoryLabel: new Map(categories.map((c) => [c.code, c.label])),
+    // The words shown beside a code in tables: its official title when the
+    // titles are in use, otherwise the guide label as before.
+    categoryName: new Map(categories.map((c) => [c.code, titles ? c.title : c.label])),
+    titles,
     totals: tally(rows),
     skipped,
   };
@@ -324,6 +391,14 @@ export function* pages(model, opts = {}) {
   const coverage = coverageText(opts.coverage);
   const partial = PARTIAL;
 
+  // Credit for the category titles, when the build has them.
+  const T = model.titles || null;
+  const link = (href, text, rel = "noopener") => (href ? `<a href="${esc(href)}" rel="${rel}">${text}</a>` : text);
+  const titlesCredit = T
+    ? `${link(T.href, esc(T.name))}, ${esc(T.publisher)}, licensed under ${link(T.licenceHref, esc(T.licence), "noopener license")}`
+    : "";
+  const titlesFooter = T ? `\n<p>Category titles are from the ${titlesCredit}. ${UNSPSC_OWNER}, which has no connection with this site.</p>` : "";
+
   const html = ({ path, title, description, body, noindex = false, absolute = false }) => {
     const depth = path.split("/").length - 1;
     const root = absolute ? basePath : "../".repeat(depth);
@@ -356,7 +431,7 @@ ${a("", esc(SITE_NAME), "brand")}
 ${body(a)}
 </main>
 <footer class="wrap">
-<p>Data: <a href="${SOURCE_URL}" rel="noopener">AusTender</a> contract notices, Department of Finance, licensed under <a href="${LICENCE_URL}" rel="noopener license">CC BY 3.0 AU</a>. Figures on this site are derived from that data and may differ from the source: check the original notice on AusTender before relying on them.</p>
+<p>Data: <a href="${SOURCE_URL}" rel="noopener">AusTender</a> contract notices, Department of Finance, licensed under <a href="${LICENCE_URL}" rel="noopener license">CC BY 3.0 AU</a>. Figures on this site are derived from that data and may differ from the source: check the original notice on AusTender before relying on them.</p>${titlesFooter}
 <p>This site is independent. It is not affiliated with, or endorsed by, the Australian Government. Data last updated ${fmtDate(updated)}. ${a("about/", "About this site")} · ${a(SAMPLE_PACK_LINK, "Sample Bid Draft Pack")}</p>
 </footer>
 </body>
@@ -377,7 +452,7 @@ ${body(a)}
   const agencyCell = (a, row) => (row.agency ? a(`agency/${model.agencySlug.get(row.agency)}/`, esc(row.agency)) : "not stated");
   const categoryCell = (a, row) =>
     row.code
-      ? `${a(`category/${row.code}/`, row.code)}${model.categoryLabel.get(row.code) ? ` <small>${esc(clip(model.categoryLabel.get(row.code), 40))}</small>` : ""}`
+      ? `${a(`category/${row.code}/`, row.code)}${model.categoryName.get(row.code) ? ` <small>${esc(clip(model.categoryName.get(row.code), 40))}</small>` : ""}`
       : "not stated";
 
   const COLS = {
@@ -425,7 +500,7 @@ ${list.map((g) => `<tr><td>${cell(g)}</td><td class="r">${num(g.count)}</td><td 
     g.key.startsWith("name:") ? esc(commonest(g.names, 1)[0] || "not stated") : a(`supplier/${g.key}/`, esc(model.supplierName.get(g.key)));
   const agencyLeader = (a) => (g) => a(`agency/${model.agencySlug.get(g.key)}/`, esc(g.key));
   const categoryLeader = (a) => (g) =>
-    `${a(`category/${g.key}/`, g.key)}${model.categoryLabel.get(g.key) ? ` <small>${esc(model.categoryLabel.get(g.key))}</small>` : ""}`;
+    `${a(`category/${g.key}/`, g.key)}${model.categoryName.get(g.key) ? ` <small>${esc(model.categoryName.get(g.key))}</small>` : ""}`;
 
   const top = (list, n) => [...list].sort((x, y) => y.soonValue - x.soonValue || y.count - x.count).slice(0, n);
 
@@ -473,31 +548,44 @@ ${leaderTable(
     title: `Australian Government contracts by category (UNSPSC) | ${SITE_NAME}`,
     description: `Australian Government contracts in ${num(model.categories.length)} UNSPSC categories, with the number and value ending in the next 12 months.`,
     body: (a) => `<h1>Contracts by category</h1>
-<p class="note">AusTender files every contract under a UNSPSC code. The notices give the code but not its official title, so next to each code this page shows the description that agencies most often wrote on contracts filed under it, where one recurs. It is a guide to what the code is used for, not the official name.</p>
+<p class="note">${
+      T
+        ? `AusTender files every contract under a UNSPSC code. The title of each code is from the ${titlesCredit}: the Department's list of the codes AusTender uses. Beside it is the description that agencies most often wrote on contracts filed under the code, where one recurs. That shows what the code is used for in practice, which is not always what its title suggests, and it is not part of the title.`
+        : `AusTender files every contract under a UNSPSC code. The notices give the code but not its official title, so next to each code this page shows the description that agencies most often wrote on contracts filed under it, where one recurs. It is a guide to what the code is used for, not the official name.`
+    }</p>
 <div class="scroll"><table>
-<thead><tr><th>UNSPSC code</th><th>Most common description</th><th class="r">Contracts</th><th class="r">Ending in 12 months</th><th class="r">Value ending (AUD)</th></tr></thead>
+<thead><tr><th>UNSPSC code</th>${T ? "<th>Title</th>" : ""}<th>Most common ${T ? "contract " : ""}description</th><th class="r">Contracts</th><th class="r">Ending in 12 months</th><th class="r">Value ending (AUD)</th></tr></thead>
 <tbody>
 ${model.categories
   .map(
     (c) =>
-      `<tr><td>${a(`category/${c.code}/`, c.code)}</td><td>${c.label ? esc(c.label) : "<small>varies by contract</small>"}</td><td class="r">${num(c.count)}</td><td class="r">${num(c.soonCount)}</td><td class="r nw">${money(c.soonValue)}</td></tr>`,
+      `<tr><td>${a(`category/${c.code}/`, c.code)}</td>${T ? `<td>${c.title ? esc(c.title) : "<small>not in the codeset</small>"}</td>` : ""}<td>${c.label ? esc(c.label) : "<small>varies by contract</small>"}</td><td class="r">${num(c.count)}</td><td class="r">${num(c.soonCount)}</td><td class="r nw">${money(c.soonValue)}</td></tr>`,
   )
   .join("\n")}
 </tbody></table></div>`,
   });
 
   for (const c of model.categories) {
-    const name = c.label ? `UNSPSC ${c.code}: ${c.label}` : `UNSPSC ${c.code}`;
+    // With a title from the codeset, the title heads the page and the
+    // descriptions agencies wrote stay beside it as what they are. Without
+    // one (no titles file, or a code the codeset does not list), the page is
+    // headed by its code.
+    const name = c.title ? `${clip(c.title, 70)} (UNSPSC ${c.code})` : c.label && !T ? clip(`UNSPSC ${c.code}: ${c.label}`, 70) : `UNSPSC ${c.code}`;
+    const described = c.typical.length
+      ? `Most common contract descriptions under this code: ${c.typical.map((t) => `“${esc(t)}”`).join(", ")}.`
+      : "Contracts under this code are each described differently; see the list below.";
     yield html({
       path: `category/${c.code}/index.html`,
-      title: `${clip(name, 70)} | Australian Government contracts ending soon`,
-      description: `${num(c.soonCount)} Australian Government contracts under UNSPSC ${c.code} end in the next 12 months, worth ${moneyShort(c.soonValue)}. Suppliers, agencies, values and end dates.`,
+      title: `${name} | Australian Government contracts ending soon`,
+      description: `${num(c.soonCount)} Australian Government contracts under ${c.title ? `“${c.title}” (UNSPSC ${c.code})` : `UNSPSC ${c.code}`} end in the next 12 months, worth ${moneyShort(c.soonValue)}. Suppliers, agencies, values and end dates.`,
       body: (a) => `<p class="crumb">${a("categories/", "Categories")}</p>
-<h1>UNSPSC ${c.code}</h1>
+<h1>${c.title ? esc(c.title) : `UNSPSC ${c.code}`}</h1>
 <p class="lead">${
-        c.typical.length
-          ? `Most common contract descriptions under this code: ${c.typical.map((t) => `“${esc(t)}”`).join(", ")}.`
-          : "Contracts under this code are each described differently; see the list below."
+        c.title
+          ? `UNSPSC code ${c.code}. ${described}`
+          : T
+            ? `This code is not in the codeset the category titles come from, so it is shown by its number. ${described}`
+            : described
       }</p>
 ${stats(c)}
 ${expiring(a, c.rows, ["end", "supplier", "agency", "what", "value"])}
@@ -620,7 +708,11 @@ ${table(a, shown, ["end", "agency", "what", "category", "value", "start", "metho
 <h2>Source and licence</h2>
 <p>All contract data comes from contract notices published on <a href="${SOURCE_URL}" rel="noopener">AusTender</a>, the Australian Government's procurement information system, through its public contract-notice data service. The data is © Commonwealth of Australia (Department of Finance) and is used under the <a href="${LICENCE_URL}" rel="noopener license">Creative Commons Attribution 3.0 Australia</a> licence.</p>
 <p>The figures here are derived from that data: notices are grouped, counted and summed, amendments are folded into their parent contract, and dates are shown as calendar dates in Canberra time. They may differ from the source. AusTender is the authoritative record, so check the original notice there before relying on anything shown here.</p>
-<h2>Not a government site</h2>
+${
+      T
+        ? `<p>Category titles come from the ${titlesCredit}, a file published on data.gov.au that lists the UNSPSC codes AusTender uses and the title of each. The titles are shown as that file gives them. ${UNSPSC_OWNER}; this site has no connection with it, and takes the titles only from the Department of Finance file.</p>\n`
+        : ""
+    }<h2>Not a government site</h2>
 <p>This site is independent. It is not affiliated with, or endorsed by, the Australian Government, the Department of Finance or AusTender.</p>
 <h2>What is covered</h2>
 <p>${coverage} ${partial} A supplier or agency page therefore shows current and recent contracts, not everything that supplier or agency has ever signed. State and territory government contracts are not included.</p>
@@ -628,7 +720,11 @@ ${table(a, shown, ["end", "agency", "what", "category", "value", "start", "metho
 <ul>
 <li><b>Values</b> are in Australian dollars as published on the notice. When a contract has been amended, the value is the new total, not the change.</li>
 <li><b>End dates</b> are the dates on the notice. A contract ending does not mean it will be re-tendered: it may be extended, replaced through a panel or standing offer, or simply not renewed. A few notices carry end dates that cannot be right; those are left out of the “ending” counts.</li>
-<li><b>Categories</b> are the UNSPSC codes on the notices. The notices do not give the official title of a code, so the site shows the description that agencies most often wrote on contracts under that code, where one recurs. It is a guide, not the official title.</li>
+<li><b>Categories</b> are the UNSPSC codes on the notices. ${
+      T
+        ? `The notices give a code without its title, so titles are taken from the Department of Finance codeset named above; a code that file does not list is shown by its number. Category pages also quote the descriptions that agencies most often wrote on contracts under the code, where one recurs. Those show how the code is used in practice and are not part of its title.`
+        : `The notices do not give the official title of a code, so the site shows the description that agencies most often wrote on contracts under that code, where one recurs. It is a guide, not the official title.`
+    }</li>
 <li><b>Suppliers</b> are grouped by Australian Business Number, under the name most often used on their notices. Suppliers with no ABN on the notice have no page of their own.</li>
 </ul>
 <h2>The sample Bid Draft Pack</h2>
@@ -705,7 +801,11 @@ async function main() {
   }
   const summary = (await readJson("data/summary.json")) || {};
   const nowMs = process.env.BUILD_NOW ? Date.parse(process.env.BUILD_NOW) : Date.now();
-  const model = analyse(records, nowMs);
+  // Category titles, when the committed file is there and usable.
+  const loaded = await loadTitles();
+  const titles = loaded && loaded.map ? loaded : null;
+  if (loaded && !titles) console.error(`Category titles not used: ${loaded.problem}`);
+  const model = analyse(records, nowMs, { titles });
 
   const coverage = coverageOf(summary);
 
@@ -772,13 +872,18 @@ async function main() {
     brokenLinkSamples: broken.slice(0, 10),
     months: model.months,
     categoriesWithLabel: model.categories.filter((c) => c.label).length,
-    topCategories: top(model.categories, 10).map((c) => ({ code: c.code, label: c.label, typical: c.typical, count: c.count, soonCount: c.soonCount, soonValue: Math.round(c.soonValue) })),
+    categoriesWithTitle: model.categories.filter((c) => c.title).length,
+    categoriesWithoutTitle: titles ? model.categories.filter((c) => !c.title).map((c) => ({ code: c.code, count: c.count })) : null,
+    titles: titles
+      ? { used: true, source: titles.name, publisher: titles.publisher, licence: titles.licence, codesInFile: titles.map.size, sha256: titles.sha256, fetchedAt: titles.fetchedAt }
+      : { used: false, problem: loaded ? loaded.problem : "no titles file" },
+    topCategories: top(model.categories, 10).map((c) => ({ code: c.code, title: c.title, label: c.label, typical: c.typical, count: c.count, soonCount: c.soonCount, soonValue: Math.round(c.soonValue) })),
     topAgencies: top(model.agencies, 5).map((g) => ({ name: g.name, slug: g.slug, count: g.count, soonCount: g.soonCount, soonValue: Math.round(g.soonValue) })),
   };
   await writeFile("data/build.json", JSON.stringify(build, null, 2) + "\n");
   // A stamp inside the site, so a check after a deploy can tell which build
   // the live address is serving.
-  await writeFile(join(out, "build.json"), JSON.stringify({ generatedAt: build.generatedAt, dataUpdated: build.dataUpdated, pages: counts }) + "\n");
+  await writeFile(join(out, "build.json"), JSON.stringify({ generatedAt: build.generatedAt, dataUpdated: build.dataUpdated, pages: counts, titledCategories: build.categoriesWithTitle }) + "\n");
   console.log(JSON.stringify(build, null, 2));
 
   if (broken.length) {

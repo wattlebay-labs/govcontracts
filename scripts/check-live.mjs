@@ -9,7 +9,9 @@
 //   an address that does not exist (must give the not-found page with a 404)
 // Every HTML page must return 200, credit the source, say the figures are
 // derived and say the site is not a government one. The sample pack must also
-// credit the document it was made from and say what it is and is not.
+// credit the document it was made from and say what it is and is not. When
+// the build stamp says categories carry official titles, the category page
+// must also credit the codeset the titles come from.
 //
 // Settings (environment):
 //   SITE_URL          address of the site (required)
@@ -28,6 +30,14 @@ export const MUST_SAY = [
   ["licence", /CC BY 3\.0 AU/],
   ["derived-data statement", /derived from that data/],
   ["not-affiliated statement", /not affiliated with/],
+];
+
+// What a category page must also say when the build gave categories their
+// official titles (`titledCategories` in the build stamp is above zero).
+export const TITLES_MUST_SAY = [
+  ["credit for the category titles", /Category titles are from the .*UNSPSC Codeset[^<]*(<\/a>)?, Department of Finance/],
+  ["licence of the category titles", /Category titles are from the .*Creative Commons Attribution/],
+  ["statement of whose code UNSPSC is", /United Nations Development Programme/],
 ];
 
 // What the sample Bid Draft Pack page must also say.
@@ -139,7 +149,7 @@ export async function checkSite({
       note(`${kind} page`, false, "the sitemap names none");
       continue;
     }
-    const r = await page(`${kind} page`, url);
+    const r = await page(`${kind} page`, url, 200, kind === "category" && stamp.titledCategories > 0 ? TITLES_MUST_SAY : []);
     if (r.status === 200 && !r.text.includes(`<link rel="canonical" href="${url.replace(/&/g, "&amp;")}">`)) {
       note(`${kind} page address`, false, `${url} does not name itself as its canonical address`);
     }

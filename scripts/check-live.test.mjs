@@ -3,7 +3,7 @@
 // by a stand-in for fetch, so the check and the build cannot drift apart.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { analyse, pages } from "./build.mjs";
+import { analyse, pages, titlesOf } from "./build.mjs";
 import { checkSite } from "./check-live.mjs";
 
 const SITE = "https://example.org/site";
@@ -27,8 +27,23 @@ const rec = (over = {}) => ({
 });
 
 // path -> body, as the build would write it, plus the stamp file.
-function builtSite() {
-  const model = analyse([rec(), rec({ id: "CN0000002", supplierAbn: "33333333333", supplier: "Other & Sons", agency: "Bureau of Samples" })], NOW);
+// A made-up titles file, as make-titles.mjs would write it.
+const TITLES = {
+  source: {
+    file: "Made-up Customised UNSPSC Codeset 1 July 2023.xlsx",
+    publisher: "Department of Finance",
+    datasetUrl: "https://data.gov.au/data/dataset/made-up",
+    licenceId: "cc-by",
+    licence: "Creative Commons Attribution 3.0 Australia",
+    licenceUrl: "http://creativecommons.org/licenses/by/3.0/au/",
+  },
+  titles: { 80101500: "Made-up advisory services" },
+};
+
+function builtSite({ titles = null } = {}) {
+  const model = analyse([rec(), rec({ id: "CN0000002", supplierAbn: "33333333333", supplier: "Other & Sons", agency: "Bureau of Samples" })], NOW, {
+    titles: titles ? titlesOf(titles) : null,
+  });
   const files = new Map();
   let html = 0;
   for (const f of pages(model, { siteUrl: SITE, css: "body{margin:0}", updated: "2026-11-19T00:34:21Z" })) {
@@ -36,7 +51,7 @@ function builtSite() {
     files.set(f.path, f.body);
     if (f.path.endsWith(".html")) html++;
   }
-  files.set("build.json", JSON.stringify({ generatedAt: STAMP, pages: { total: html } }));
+  files.set("build.json", JSON.stringify({ generatedAt: STAMP, pages: { total: html }, titledCategories: model.categories.filter((c) => c.title).length }));
   return { files, html };
 }
 
@@ -168,4 +183,38 @@ test("a sitemap pointing somewhere else fails", async () => {
 
 test("an address is required", async () => {
   await assert.rejects(() => checkSite({ siteUrl: "" }), /SITE_URL/);
+});
+
+test("a site built with category titles passes, and the category page is asked for their credit", async () => {
+  const { files, html } = builtSite({ titles: TITLES });
+  assert.equal(JSON.parse(files.get("build.json")).titledCategories, 1);
+  const out = await run(files, { expectPages: html });
+  assert.deepEqual(out.results.filter((r) => !r.ok), []);
+  assert.equal(out.ok, true);
+});
+
+test("category titles without the credit for the codeset, or without saying whose code it is, fail", async () => {
+  const path = "category/80101500/index.html";
+  const spoil = async (change) => {
+    const { files } = builtSite({ titles: TITLES });
+    files.set(path, change(files.get(path)));
+    const out = await run(files);
+    assert.equal(out.ok, false);
+    assert.deepEqual(out.results.filter((r) => !r.ok).map((r) => r.name), ["category page"]);
+    return out.results.find((r) => r.name === "category page").detail;
+  };
+  assert.match(await spoil((page) => page.replace(/<p>Category titles are from[^\n]*<\/p>\n/, "")), /no credit for the category titles, no licence of the category titles, no statement of whose code UNSPSC is/);
+  assert.match(await spoil((page) => page.replace(/, of the United Nations Development Programme/, "")), /: no statement of whose code UNSPSC is$/);
+  assert.match(await spoil((page) => page.replace(/, licensed under <a[^>]*>Creative Commons Attribution 3\.0 Australia<\/a>/, "")), /: no licence of the category titles$/);
+  assert.match(await spoil((page) => page.replace(/Codeset 1 July 2023<\/a>, Department of Finance,/, "Codeset 1 July 2023</a>,")), /: no credit for the category titles$/);
+});
+
+test("a site built without category titles is not asked for their credit", async () => {
+  const { files } = builtSite();
+  assert.equal(JSON.parse(files.get("build.json")).titledCategories, 0);
+  assert.doesNotMatch(files.get("category/80101500/index.html"), /Category titles/);
+  assert.equal((await run(files)).ok, true);
+  // a stamp from before titles existed says nothing about them, and still passes
+  files.set("build.json", JSON.stringify({ generatedAt: STAMP }));
+  assert.equal((await run(files)).ok, true);
 });

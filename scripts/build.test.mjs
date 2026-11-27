@@ -14,6 +14,7 @@ import {
   esc,
   fmtAbn,
   fmtDate,
+  loadTitles,
   localDate,
   money,
   moneyShort,
@@ -21,6 +22,7 @@ import {
   pick,
   plausible,
   slug,
+  titlesOf,
 } from "./build.mjs";
 
 const NOW = Date.parse("2026-11-19T08:00:00Z"); // 19 Nov 2026, evening in Canberra
@@ -383,4 +385,158 @@ test("the sample pack is linked from the home page, the about page and every foo
     if (path.endsWith(".html")) assert.match(body, /sample-pack\/">Sample Bid Draft Pack<\/a><\/p>\n<\/footer>/, path);
   }
   assert.ok(files.get("sitemap.xml").includes("<loc>https://example.org/site/sample-pack/</loc>"));
+});
+
+// ---------- category titles ----------
+
+// A made-up titles file in the shape make-titles.mjs writes.
+const titlesFile = (over = {}, source = {}) => ({
+  fetchedAt: "2026-11-27T09:00:00Z",
+  source: {
+    file: "Made-up Customised UNSPSC Codeset 1 July 2023.xlsx",
+    publisher: "Department of Made-up Things",
+    datasetUrl: "https://data.gov.au/data/dataset/made-up",
+    fileUrl: "https://data.gov.au/data/dataset/made-up/resource/r/download/made-up.xlsx",
+    licenceId: "cc-by",
+    licence: "Creative Commons Attribution 3.0 Australia",
+    licenceUrl: "http://creativecommons.org/licenses/by/3.0/au/",
+    sha256: "ab".repeat(32),
+    ...source,
+  },
+  titles: { 80101500: "Made-up advisory services", 99999999: "A code with no contracts", ...over },
+});
+const titled = (records = sample, file = titlesFile()) => {
+  const titles = titlesOf(file);
+  const model = analyse(records, NOW, { titles });
+  const files = new Map();
+  let broken = null;
+  for (const f of pages(model, { siteUrl: "https://example.org/site", css: "body{}", updated: "2026-11-19T00:34:21Z" })) {
+    if (f.path === null) broken = f.broken;
+    else files.set(f.path, f.body);
+  }
+  return { model, files, broken, titles };
+};
+
+test("a titles file is used only when it names its source and carries the open licence", () => {
+  const t = titlesOf(titlesFile());
+  assert.equal(t.map.get("80101500"), "Made-up advisory services");
+  assert.equal(t.name, "Made-up Customised UNSPSC Codeset 1 July 2023");
+  assert.equal(t.publisher, "Department of Made-up Things");
+  assert.equal(t.licence, "Creative Commons Attribution 3.0 Australia");
+  assert.equal(t.licenceHref, "https://creativecommons.org/licenses/by/3.0/au/");
+  assert.equal(t.href, "https://data.gov.au/data/dataset/made-up");
+  // the file's own address when the dataset page is not known; no link at all to anywhere else
+  assert.equal(titlesOf(titlesFile({}, { datasetUrl: null })).href, "https://data.gov.au/data/dataset/made-up/resource/r/download/made-up.xlsx");
+  assert.equal(titlesOf(titlesFile({}, { datasetUrl: "https://example.org/x", fileUrl: 'https://data.gov.au/"><script>' })).href, null);
+  assert.equal(titlesOf(titlesFile({}, { licenceUrl: "javascript:alert(1)" })).licenceHref, null);
+  assert.equal(titlesOf(titlesFile({ 80101500: "  Spaced   out " })).map.get("80101500"), "Spaced out");
+
+  assert.match(titlesOf(null).problem, /not a titles file/);
+  assert.match(titlesOf(titlesFile({}, { licenceId: "other-closed" })).problem, /licence as "other-closed"/);
+  assert.match(titlesOf(titlesFile({}, { licenceId: undefined })).problem, /licence as "none"/);
+  assert.match(titlesOf(titlesFile({}, { publisher: " " })).problem, /does not name its source/);
+  assert.match(titlesOf({ ...titlesFile(), titles: {} }).problem, /holds no titles/);
+  assert.match(titlesOf(titlesFile({ 1234: "Too short" })).problem, /not a code and a title/);
+  assert.match(titlesOf(titlesFile({ 80101500: "" })).problem, /not a code and a title/);
+  assert.match(titlesOf(titlesFile({ 80101500: 7 })).problem, /not a code and a title/);
+  assert.match(titlesOf(titlesFile({ 80101500: "x".repeat(201) })).problem, /not a code and a title/);
+});
+
+test("with titles, a category page is headed by its official title and keeps the descriptions as descriptions", () => {
+  const many = [...sample, ...Array.from({ length: 4 }, (_, i) => rec({ id: `CN10000${i}`, description: "Labour hire" }))];
+  const { files, model, broken } = titled(many);
+  assert.deepEqual(broken, []);
+  const page = files.get("category/80101500/index.html");
+  assert.match(page, /<title>Made-up advisory services \(UNSPSC 80101500\) \| Australian Government contracts ending soon<\/title>/);
+  assert.match(page, /<h1>Made-up advisory services<\/h1>/);
+  assert.match(page, /<p class="lead">UNSPSC code 80101500\. Most common contract descriptions under this code: “[^”]+”/);
+  assert.match(page, /<meta name="description" content="\d+ Australian Government contracts under “Made-up advisory services” \(UNSPSC 80101500\) end/);
+  const cat = model.categories.find((c) => c.code === "80101500");
+  assert.equal(cat.title, "Made-up advisory services");
+  assert.ok(cat.label && cat.label !== cat.title, "the guide label is kept, as a description");
+  assert.doesNotMatch(page, new RegExp(`<h1>[^<]*${cat.label}`));
+  // tables elsewhere name the code by its title, not by the guide label
+  assert.match(files.get("agency/department-of-examples/index.html"), /category\/80101500\/">80101500<\/a> <small>Made-up advisory services<\/small>/);
+  assert.match(files.get("index.html"), /category\/80101500\/">80101500<\/a> <small>Made-up advisory services<\/small>/);
+  assert.equal(model.categoryName.get("80101500"), "Made-up advisory services");
+});
+
+test("with titles, a code the codeset does not list is shown by its number and says why", () => {
+  const { files, model } = titled();
+  const page = files.get("category/43230000/index.html");
+  assert.match(page, /<title>UNSPSC 43230000 \| /);
+  assert.match(page, /<h1>UNSPSC 43230000<\/h1>/);
+  assert.match(page, /not in the codeset the category titles come from/);
+  assert.equal(model.categories.find((c) => c.code === "43230000").title, null);
+  assert.equal(model.categoryName.get("43230000"), null);
+  const index = files.get("categories/index.html");
+  assert.match(index, /<th>UNSPSC code<\/th><th>Title<\/th><th>Most common contract description<\/th>/);
+  assert.match(index, /80101500<\/a><\/td><td>Made-up advisory services<\/td>/);
+  assert.match(index, /43230000<\/a><\/td><td><small>not in the codeset<\/small><\/td>/);
+  assert.doesNotMatch(index, /A code with no contracts/);
+});
+
+test("with titles, every page credits the codeset and says whose code UNSPSC is", () => {
+  const { files } = titled();
+  let html = 0;
+  for (const [path, body] of files) {
+    if (!path.endsWith(".html")) continue;
+    html++;
+    assert.match(body, /Category titles are from the <a href="https:\/\/data\.gov\.au\/data\/dataset\/made-up" rel="noopener">Made-up Customised UNSPSC Codeset 1 July 2023<\/a>, Department of Made-up Things, licensed under <a href="https:\/\/creativecommons\.org\/licenses\/by\/3\.0\/au\/" rel="noopener license">Creative Commons Attribution 3\.0 Australia<\/a>\./, path);
+    assert.match(body, /United Nations Standard Products and Services Code, of the United Nations Development Programme, which has no connection with this site/, path);
+    // the credits the site already carried are still there
+    assert.match(body, /AusTender<\/a> contract notices, Department of Finance/, path);
+    assert.match(body, /derived from that data/, path);
+    assert.match(body, /not affiliated with, or endorsed by, the Australian Government/, path);
+    assert.ok(!/undefined|NaN|\[object/.test(body), `${path} prints a missing value`);
+  }
+  assert.ok(html > 15);
+  const about = files.get("about/index.html");
+  assert.match(about, /Category titles come from the <a href="https:\/\/data\.gov\.au\/data\/dataset\/made-up"/);
+  assert.match(about, /takes the titles only from the Department of Finance file/);
+  assert.match(about, /titles are taken from the Department of Finance codeset named above/);
+  assert.doesNotMatch(about, /It is a guide, not the official title/);
+});
+
+test("without a titles file the site is as it was: no titles and no mention of a codeset", () => {
+  const { files, model } = build();
+  assert.equal(model.titles, null);
+  for (const [path, body] of files) {
+    assert.doesNotMatch(body, /UNSPSC Codeset|United Nations Development Programme|United Nations Standard|Category titles/, path);
+  }
+  assert.match(files.get("category/80101500/index.html"), /<h1>UNSPSC 80101500<\/h1>/);
+  assert.match(files.get("categories/index.html"), /<th>UNSPSC code<\/th><th>Most common description<\/th>/);
+  assert.match(files.get("about/index.html"), /It is a guide, not the official title/);
+  // a file that cannot be used is the same as no file
+  const unusable = analyse(sample, NOW, { titles: titlesOf(titlesFile({}, { licenceId: "other-closed" })) });
+  assert.equal(unusable.titles, null);
+  assert.equal(unusable.categories[0].title, null);
+});
+
+test("a title is escaped like any other text, and a long one is cut in the page title only", () => {
+  const long = "Management and provision of all made-up facilities engineering modification and maintenance services for a site";
+  const { files } = titled(sample, titlesFile({ 80101500: 'Pens & <b>"paper"</b>', 43230000: long }));
+  const page = files.get("category/80101500/index.html");
+  assert.match(page, /<h1>Pens &amp; &lt;b&gt;&quot;paper&quot;&lt;\/b&gt;<\/h1>/);
+  for (const [path, body] of files) assert.ok(!body.includes('<b>"paper"'), `${path} lets markup in a title through`);
+  const other = files.get("category/43230000/index.html");
+  assert.match(other, new RegExp(`<h1>${long}</h1>`));
+  assert.match(other, /<title>Management and provision of all made-up facilities engineering modifi… \(UNSPSC 43230000\) \| /);
+});
+
+test("the committed titles file, when there is one, is one the build will use", async () => {
+  const loaded = await loadTitles(new URL("../data/unspsc-titles.json", import.meta.url));
+  if (loaded === null) return; // no file: the site is built without titles
+  assert.equal(loaded.problem, undefined);
+  assert.ok(loaded.map.size >= 500, `${loaded.map.size} titles`);
+  assert.match(loaded.name, /UNSPSC Codeset/);
+  assert.equal(loaded.publisher, "Department of Finance");
+  assert.match(loaded.sha256, /^[0-9a-f]{64}$/);
+  assert.ok(loaded.href && loaded.licenceHref);
+  for (const [code, title] of loaded.map) assert.ok(/^\d{8}$/.test(code) && title === title.trim() && !/\s{2}|[<>]/.test(title), `${code}: ${title}`);
+});
+
+test("loadTitles: no file is no titles; a broken file is a problem, not a crash", async () => {
+  assert.equal(await loadTitles(new URL("./no-such-file.json", import.meta.url)), null);
+  assert.match((await loadTitles(new URL("./style.css", import.meta.url))).problem, /not JSON/);
 });

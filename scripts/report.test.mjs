@@ -7,7 +7,7 @@ import { mkdtemp, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { analyse, coverageOf } from "./build.mjs";
+import { analyse, coverageOf, titlesOf } from "./build.mjs";
 import { HEADERS, README_MUST_SAY, categoryReport, cell, checkReport, codesFrom, csv, outsideSite, parseCsv, sizeBands } from "./report.mjs";
 
 const NOW = Date.parse("2026-11-19T08:00:00Z"); // 19 Nov 2026, evening in Canberra
@@ -46,6 +46,19 @@ const sample = [
 ];
 
 const model = () => analyse(sample, NOW);
+// The same records with a made-up titles file, as make-titles.mjs would write it.
+const TITLES = {
+  source: {
+    file: "Made-up Customised UNSPSC Codeset 1 July 2023.xlsx",
+    publisher: "Department of Made-up Things",
+    datasetUrl: "https://data.gov.au/data/dataset/made-up",
+    licenceId: "cc-by",
+    licence: "Creative Commons Attribution 3.0 Australia",
+    licenceUrl: "http://creativecommons.org/licenses/by/3.0/au/",
+  },
+  titles: { 80101500: "Made-up advisory services" },
+};
+const titledModel = () => analyse(sample, NOW, { titles: titlesOf(TITLES) });
 const make = (code = "80101500", opts = {}) => categoryReport(model(), code, { dataDate: "2026-11-19", ...opts });
 const table = (report, suffix) => {
   const rows = parseCsv(report.files.find((f) => f.name.endsWith(suffix)).body);
@@ -251,6 +264,10 @@ test("a report offers nothing for sale and names no one behind it", () => {
     assert.doesNotMatch(f.body, /\bprice|\bbuy\b|\bpurchase|\bpay|subscri|\$99|\$29|\$490|refund|stripe|\border (now|a|your|form)|@[a-z0-9-]+\.[a-z]/i, f.name);
     assert.doesNotMatch(f.body, /https?:\/\/(?!www\.tenders\.gov\.au\/|creativecommons\.org\/|example\.org)/, f.name);
   }
+  for (const f of categoryReport(titledModel(), "80101500", { dataDate: "2026-11-19" }).files) {
+    assert.doesNotMatch(f.body, /\bprice|\bbuy\b|\bpurchase|\bpay|subscri|\$99|\$29|\$490|refund|stripe|\border (now|a|your|form)|@[a-z0-9-]+\.[a-z]/i, f.name);
+    assert.doesNotMatch(f.body, /https?:\/\/(?!www\.tenders\.gov\.au\/|creativecommons\.org\/|example\.org|data\.gov\.au\/)/, f.name);
+  }
 });
 
 test("a finished report passes its own check, and a spoiled one does not", () => {
@@ -396,4 +413,53 @@ test("command: refuses to write into the site folder", async () => {
   const moved = await run(dir, ["80101500"], { REPORT_DIR: "public/reports", SITE_DIR: "public" });
   assert.equal(moved.code, 2);
   assert.deepEqual((await readdir(dir)).sort(), ["data"]);
+});
+
+test("with titles, the read-me gives the code's title, credits the codeset and says whose code UNSPSC is", () => {
+  const m = titledModel();
+  const report = categoryReport(m, "80101500", { dataDate: "2026-11-19" });
+  const text = readme(report);
+  assert.equal(report.title, "Made-up advisory services");
+  assert.ok(text.startsWith("\uFEFFCATEGORY REPORT: UNSPSC 80101500\r\nMade-up advisory services\r\n"));
+  assert.match(text, /The title of this code is "Made-up advisory services", as given in the Made-up Customised UNSPSC Codeset 1 July 2023 \(Department of Made-up Things\)\./);
+  assert.match(text, /Category title: Made-up Customised UNSPSC Codeset 1 July 2023, Department of Made-up Things, Creative Commons Attribution 3\.0 Australia, https:\/\/data\.gov\.au\/data\/dataset\/made-up\. UNSPSC is the United Nations Standard Products and Services Code, of the United Nations Development Programme\./);
+  // what agencies wrote is still there, still as a guide
+  assert.match(text, /That is a guide to what the code is used for, not the official title/);
+  for (const [what, pattern] of README_MUST_SAY) assert.match(text, pattern, what);
+  assert.ok(!/[^\r]\n/.test(text));
+  assert.deepEqual(checkReport(report, m), []);
+
+  // a code the codeset does not list: no title, and the read-me says so
+  const other = categoryReport(m, "43230000", { dataDate: "2026-11-19" });
+  assert.equal(other.title, null);
+  assert.match(readme(other), /This code is not in the Made-up Customised UNSPSC Codeset 1 July 2023 \(Department of Made-up Things\)/);
+  assert.match(readme(other), /Category title: Made-up Customised UNSPSC Codeset/);
+  assert.deepEqual(checkReport(other, m), []);
+});
+
+test("with titles, a report whose title or title credit has gone does not pass its own check", () => {
+  const m = titledModel();
+  const fresh = () => categoryReport(m, "80101500", { dataDate: "2026-11-19" });
+  const spoil = (change) => {
+    const report = fresh();
+    const f = report.files.find((x) => x.name.endsWith("-read-me.txt"));
+    f.body = change(f.body);
+    return checkReport(report, m);
+  };
+  assert.deepEqual(spoil((t) => t.replace(/Category title: [^\r]*\r\n/, "")), ["read-me: the credit for the category title is missing"]);
+  assert.deepEqual(spoil((t) => t.replace(/, of the United Nations Development Programme/, "")), ["read-me: the credit for the category title is missing"]);
+  assert.deepEqual(spoil((t) => t.replace(/"Made-up advisory services"/, '"Something else"')), ["read-me: the title is missing"]);
+  const renamed = fresh();
+  renamed.title = "Something else";
+  assert.deepEqual(checkReport(renamed, m), ["read-me: the title is not the one the codeset gives this code"]);
+  // a report made without titles is not one for a dataset that has them
+  assert.deepEqual(checkReport(make(), m), [
+    "read-me: the title is not the one the codeset gives this code",
+    "read-me: the title is missing",
+    "read-me: the credit for the category title is missing",
+  ]);
+  // and without titles nothing about them is asked for or said
+  assert.deepEqual(checkReport(make(), model()), []);
+  assert.equal(make().title, null);
+  assert.doesNotMatch(readme(make()), /Codeset|United Nations|Category title/);
 });

@@ -27,12 +27,14 @@ import {
   PARTIAL,
   SITE_NAME,
   SOURCE_URL,
+  UNSPSC_OWNER,
   addDays,
   analyse,
   commonest,
   coverageOf,
   coverageText,
   fmtDate,
+  loadTitles,
   localDate,
   money,
   num,
@@ -191,6 +193,7 @@ export function categoryReport(model, code, opts = {}) {
   if (!category) return null;
   const today = model.today;
   const dataDate = opts.dataDate || today;
+  const titles = model.titles || null;
   const rows = category.rows;
   const lastDay = addDays(model.horizon, -1);
 
@@ -258,12 +261,17 @@ export function categoryReport(model, code, opts = {}) {
   // text editor reads accented letters in it correctly.
   const readme = [
     `\uFEFFCATEGORY REPORT: UNSPSC ${category.code}`,
+    ...(category.title ? [category.title] : []),
     `Australian Government contracts filed under this code on AusTender.`,
     ``,
     `Made ${fmtDate(today)} from data last updated ${fmtDate(dataDate)}.`,
     ``,
     `WHAT THE CODE COVERS`,
-    `AusTender files every contract under a UNSPSC code. The notices give the code but not its official title.`,
+    category.title
+      ? `AusTender files every contract under a UNSPSC code. The title of this code is "${category.title}", as given in the ${titles.name} (${titles.publisher}).`
+      : titles
+        ? `AusTender files every contract under a UNSPSC code. This code is not in the ${titles.name} (${titles.publisher}), which this report takes titles from, so it is shown by its number.`
+        : `AusTender files every contract under a UNSPSC code. The notices give the code but not its official title.`,
     category.typical.length
       ? `Agencies most often described contracts under this code as: ${category.typical.map((t) => `"${t}"`).join(", ")}. That is a guide to what the code is used for, not the official title.`
       : `Contracts under this code are each described differently, so no description stands for the code: see the Description column.`,
@@ -293,6 +301,9 @@ export function categoryReport(model, code, opts = {}) {
     `Source: ${SOURCE_URL}   Licence: ${LICENCE_URL}`,
     `The data is (c) Commonwealth of Australia (Department of Finance), used under the Creative Commons Attribution 3.0 Australia licence.`,
     `Figures in this report are derived from that data and may differ from the source: notices are grouped, counted and summed, and amendments are folded into their parent contract. AusTender is the authoritative record, so check the original notice there before relying on anything in this report.`,
+    ...(titles
+      ? [`Category title: ${titles.name}, ${titles.publisher}, ${titles.licence}${titles.href ? `, ${titles.href}` : ""}. ${UNSPSC_OWNER}.`]
+      : []),
     ``,
     `NOT A GOVERNMENT DOCUMENT`,
     `This report is independent. It is not affiliated with, or endorsed by, the Australian Government, the Department of Finance or AusTender.`,
@@ -304,6 +315,7 @@ export function categoryReport(model, code, opts = {}) {
 
   return {
     code: category.code,
+    title: category.title || null,
     label: category.label,
     typical: category.typical,
     today,
@@ -391,6 +403,11 @@ export function checkReport(report, model, opts = {}) {
   else {
     for (const [what, pattern] of README_MUST_SAY) if (!pattern.test(readme.body)) problems.push(`read-me: ${what} is missing`);
     if (!readme.body.includes(`UNSPSC ${report.code}`)) problems.push("read-me: the code is missing");
+    // A title is only ever the codeset's own, and never goes out without its credit.
+    if ((category.title || null) !== (report.title || null)) problems.push("read-me: the title is not the one the codeset gives this code");
+    if (category.title && !readme.body.includes(`"${category.title}"`)) problems.push("read-me: the title is missing");
+    if (model.titles && !(readme.body.includes(`Category title: ${model.titles.name}, ${model.titles.publisher}`) && readme.body.includes("United Nations Development Programme")))
+      problems.push("read-me: the credit for the category title is missing");
   }
   return problems;
 }
@@ -470,7 +487,9 @@ async function main() {
   const summary = (await readJson("data/summary.json")) || {};
   const state = (await readJson("data/state.json")) || {};
   const nowMs = process.env.REPORT_NOW ? Date.parse(process.env.REPORT_NOW) : Date.now();
-  const model = analyse(records, nowMs);
+  const loaded = await loadTitles();
+  const titles = loaded && loaded.map ? loaded : null;
+  const model = analyse(records, nowMs, { titles });
   const updated = state.updatedAt || summary.generatedAt || null;
   const byCode = new Map(model.categories.map((c) => [c.code, c]));
   const opts = { byCode, dataDate: localDate(updated) || model.today, coverage: coverageOf(summary) };
@@ -489,14 +508,14 @@ async function main() {
       continue; // a report that does not add up is not written
     }
     await writeReport(out, report);
-    made.push({ code, label: report.label, ...report.totals, bytes: sizeOf(report) });
+    made.push({ code, title: report.title, label: report.label, ...report.totals, bytes: sizeOf(report) });
   }
   const seconds = Math.round((Date.now() - started) / 100) / 10;
 
   if (all) {
     const bySize = [...made].sort((a, b) => b.contracts - a.contracts || (a.code < b.code ? -1 : 1));
     const counts = bySize.map((r) => r.contracts);
-    const brief = (r) => r && { code: r.code, label: r.label, contracts: r.contracts, suppliers: r.suppliers, agencies: r.agencies, value: Math.round(r.value), soonCount: r.soonCount, bytes: r.bytes };
+    const brief = (r) => r && { code: r.code, title: r.title, label: r.label, contracts: r.contracts, suppliers: r.suppliers, agencies: r.agencies, value: Math.round(r.value), soonCount: r.soonCount, bytes: r.bytes };
     const result = {
       generatedAt: stamp(),
       dataUpdated: updated,
@@ -506,6 +525,7 @@ async function main() {
       problemCount: problems.length,
       categories: model.categories.length,
       reports: made.length,
+      reportsWithTitle: made.filter((r) => r.title).length,
       files: made.length * 4,
       bytes: made.reduce((s, r) => s + r.bytes, 0),
       seconds,

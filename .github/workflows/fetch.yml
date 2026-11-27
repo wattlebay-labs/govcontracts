@@ -18,6 +18,7 @@ on:
       - "scripts/style.css"
       - "scripts/check-live.mjs"
       - "scripts/report.mjs"
+      - "data/unspsc-titles.json"
       - ".github/workflows/fetch.yml"
 
 permissions:

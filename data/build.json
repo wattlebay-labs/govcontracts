@@ -1,39 +1,39 @@
 {
-  "generatedAt": "2026-11-26T01:48:31Z",
-  "dataUpdated": "2026-11-26T01:48:24Z",
+  "generatedAt": "2026-11-27T01:46:29Z",
+  "dataUpdated": "2026-11-27T01:46:23Z",
   "siteUrl": "https://wattlebay-labs.github.io/govcontracts",
-  "today": "2026-11-26",
+  "today": "2026-11-27",
   "pages": {
-    "total": 10717,
+    "total": 10757,
     "home": 1,
-    "category": 499,
+    "category": 500,
     "agency": 137,
-    "supplier": 10047,
+    "supplier": 10086,
     "index": 30,
     "other": 3
   },
-  "directories": 10716,
-  "bytes": 58557837,
+  "directories": 10756,
+  "bytes": 58791454,
   "largestPage": {
     "path": "suppliers/a/index.html",
-    "bytes": 167855
+    "bytes": 168513
   },
-  "seconds": 3.6,
-  "records": 42198,
+  "seconds": 3.4,
+  "records": 42484,
   "contracts": {
-    "count": 42198,
-    "value": 134514268778.39005,
-    "soonCount": 39268,
-    "soonValue": 121128586541.93027
+    "count": 42484,
+    "value": 135993335717.14005,
+    "soonCount": 39341,
+    "soonValue": 121771481521.70029
   },
-  "suppliers": 10047,
+  "suppliers": 10086,
   "agencies": 137,
-  "categories": 499,
+  "categories": 500,
   "skipped": {
-    "noSupplierAbn": 3232,
+    "noSupplierAbn": 3256,
     "noCategory": 0,
     "noAgency": 0,
-    "badEndDate": 9,
+    "badEndDate": 18,
     "noValue": 0
   },
   "brokenLinks": 0,
@@ -41,71 +41,71 @@
   "months": [
     {
       "ym": "2026-11",
-      "count": 1366,
-      "value": 1111988977.2799997
+      "count": 1287,
+      "value": 1091891771.8099985
     },
     {
       "ym": "2026-12",
-      "count": 5863,
-      "value": 26870191478.749943
+      "count": 5864,
+      "value": 26876657352.339947
     },
     {
       "ym": "2027-01",
-      "count": 2025,
-      "value": 2184710462.58
+      "count": 2045,
+      "value": 2130300603.9899993
     },
     {
       "ym": "2027-02",
-      "count": 2021,
-      "value": 2514830953.4000006
+      "count": 2032,
+      "value": 2517990374.0300007
     },
     {
       "ym": "2027-03",
-      "count": 2475,
-      "value": 5833174041.0199995
+      "count": 2488,
+      "value": 5829252402.92
     },
     {
       "ym": "2027-04",
-      "count": 1706,
-      "value": 1889554734.6199982
+      "count": 1713,
+      "value": 1952471591.0899982
     },
     {
       "ym": "2027-05",
-      "count": 1776,
-      "value": 4439313868.469998
+      "count": 1789,
+      "value": 4458687692.659997
     },
     {
       "ym": "2027-06",
-      "count": 15206,
-      "value": 57420999279.61938
+      "count": 15236,
+      "value": 58016657909.12935
     },
     {
       "ym": "2027-07",
-      "count": 1644,
-      "value": 2697090038.1999993
+      "count": 1647,
+      "value": 2697522786.0099993
     },
     {
       "ym": "2027-08",
-      "count": 1475,
-      "value": 3439665436.770001
+      "count": 1480,
+      "value": 3440619087.2400007
     },
     {
       "ym": "2027-09",
-      "count": 1741,
-      "value": 6482452091.269988
+      "count": 1742,
+      "value": 6482593830.669988
     },
     {
       "ym": "2027-10",
-      "count": 1402,
-      "value": 3844360046.8199983
+      "count": 1407,
+      "value": 3845857271.129998
     },
     {
       "ym": "2027-11",
-      "count": 568,
-      "value": 2400255133.1300006
+      "count": 611,
+      "value": 2430978848.68
     }
   ],
-  "categoriesWithLabel": 233,
+  "categoriesWithLabel": 234,
   "topCategories": [
     {
       "code": "85100000",
@@ -115,9 +115,9 @@
         "Community Nursing",
         "Health Technology Assessment"
       ],
-      "count": 558,
-      "soonCount": 496,
-      "soonValue": 10784828683
+      "count": 561,
+      "soonCount": 498,
+      "soonValue": 10784909721
     },
     {
       "code": "93141805",
@@ -139,9 +139,9 @@
         "Building Works",
         "Refurbishment Works"
       ],
-      "count": 981,
-      "soonCount": 859,
-      "soonValue": 7657615868
+      "count": 994,
+      "soonCount": 861,
+      "soonValue": 7655998728
     },
     {
       "code": "25102000",
@@ -151,9 +151,9 @@
         "LAND 400 Ph2 - Mounted Combat Reconnaissance Capability RFT",
         "Vehicle Maintenance"
       ],
-      "count": 109,
+      "count": 111,
       "soonCount": 108,
-      "soonValue": 6141981004
+      "soonValue": 6141967417
     },
     {
       "code": "81110000",
@@ -163,9 +163,9 @@
         "ICT Labour Hire",
         "ICT Contractor Services"
       ],
-      "count": 2447,
-      "soonCount": 2368,
-      "soonValue": 5614455958
+      "count": 2451,
+      "soonCount": 2350,
+      "soonValue": 5597871151
     },
     {
       "code": "92110000",
@@ -187,9 +187,9 @@
         "Marine Components",
         "Ship Parts"
       ],
-      "count": 191,
-      "soonCount": 162,
-      "soonValue": 4867070650
+      "count": 194,
+      "soonCount": 164,
+      "soonValue": 4867183748
     },
     {
       "code": "25130000",
@@ -211,9 +211,9 @@
         "Temporary Personnel",
         "ICT Contractor Services"
       ],
-      "count": 6981,
-      "soonCount": 6744,
-      "soonValue": 4214427836
+      "count": 7010,
+      "soonCount": 6760,
+      "soonValue": 4214941186
     },
     {
       "code": "80161500",
@@ -223,18 +223,18 @@
         "Management Support Services",
         "Support Services"
       ],
-      "count": 1188,
-      "soonCount": 1141,
-      "soonValue": 4170603679
+      "count": 1194,
+      "soonCount": 1146,
+      "soonValue": 4176521728
     }
   ],
   "topAgencies": [
     {
       "name": "Department of Defence",
       "slug": "department-of-defence",
-      "count": 10771,
-      "soonCount": 9561,
-      "soonValue": 65827129168
+      "count": 10931,
+      "soonCount": 9628,
+      "soonValue": 66469895658
     },
     {
       "name": "Department of Employment and Workplace Relations",
@@ -246,16 +246,16 @@
     {
       "name": "Department of Home Affairs",
       "slug": "department-of-home-affairs",
-      "count": 1518,
-      "soonCount": 1430,
-      "soonValue": 7492518919
+      "count": 1520,
+      "soonCount": 1429,
+      "soonValue": 7492499356
     },
     {
       "name": "Services Australia",
       "slug": "services-australia",
-      "count": 2354,
-      "soonCount": 2202,
-      "soonValue": 5266424661
+      "count": 2365,
+      "soonCount": 2185,
+      "soonValue": 5255818548
     },
     {
       "name": "Department of Health, Disability and Ageing",

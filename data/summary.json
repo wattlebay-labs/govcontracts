@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T01:48:24Z",
+  "generatedAt": "2026-11-27T01:46:23Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,79 +11,193 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 16,
+  "runs": 17,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-26T01:47:46Z",
-    "contractLastModified": "2026-11-26T01:47:46Z",
-    "contractEnd": "2027-11-27T00:00:00Z"
+    "contractPublished": "2026-11-27T01:45:19Z",
+    "contractLastModified": "2026-11-27T01:45:19Z",
+    "contractEnd": "2027-11-28T00:00:00Z"
   },
   "horizon": {
     "from": "2026-11-18T00:00:00Z",
-    "fetchedTo": "2027-11-27T00:00:00Z",
-    "target": "2027-11-27T00:00:00Z",
+    "fetchedTo": "2027-11-28T00:00:00Z",
+    "target": "2027-11-28T00:00:00Z",
     "complete": true
   },
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 150,
-      "from": "2026-11-24T08:52:17Z",
-      "to": "2026-11-26T01:47:46Z",
+      "releases": 323,
+      "from": "2026-11-25T01:47:46Z",
+      "to": "2026-11-27T01:45:19Z",
       "caughtUp": true,
-      "cursor": "2026-11-26T01:47:46Z"
+      "cursor": "2026-11-27T01:45:19Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 698,
-      "from": "2026-11-24T08:52:17Z",
-      "to": "2026-11-26T01:47:46Z",
+      "releases": 1266,
+      "from": "2026-11-25T01:47:46Z",
+      "to": "2026-11-27T01:45:19Z",
       "caughtUp": true,
-      "cursor": "2026-11-26T01:47:46Z"
+      "cursor": "2026-11-27T01:45:19Z"
     },
     "contractEnd": {
       "windows": 1,
-      "releases": 59,
-      "from": "2027-11-26T00:00:00Z",
-      "to": "2027-11-27T00:00:00Z",
+      "releases": 50,
+      "from": "2027-11-27T00:00:00Z",
+      "to": "2027-11-28T00:00:00Z",
       "caughtUp": true,
-      "cursor": "2027-11-27T00:00:00Z"
+      "cursor": "2027-11-28T00:00:00Z"
     }
   },
-  "requests": 12,
-  "pages": 12,
-  "seconds": 37,
+  "requests": 20,
+  "pages": 20,
+  "seconds": 64,
   "budgetSpent": false,
   "windowsTried": 3,
   "windowsOk": 3,
   "emptyWindows": 0,
-  "largestWindow": 698,
+  "largestWindow": 1266,
   "windowsWithMorePages": 2,
-  "contractsBefore": 42120,
-  "contracts": 42198,
-  "contractsEndingWithinHorizon": 39224,
-  "amendedContracts": 14088,
-  "suppliers": 10047,
+  "contractsBefore": 42198,
+  "contracts": 42484,
+  "contractsEndingWithinHorizon": 39193,
+  "amendedContracts": 14182,
+  "suppliers": 10086,
   "agencies": 137,
-  "categories": 499,
-  "totalValue": 134514268778,
+  "categories": 500,
+  "totalValue": 135993335717,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2051-02-27T13:00:00Z",
-  "bytes": 18757543,
+  "bytes": 18881776,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 498,
-      "contractAmendment": 409
+      "contract": 944,
+      "contractAmendment": 695
     },
     "lastModified": {
-      "releases": 698,
-      "amendments": 382,
-      "alsoInPublishedPull": 150,
-      "newToDataset": 19
+      "releases": 1266,
+      "amendments": 669,
+      "alsoInPublishedPull": 323,
+      "newToDataset": 70
     },
     "amendmentSamples": [
+      {
+        "dateType": "contractPublished",
+        "ocid": "prod-aaa6a487c1e04b47b1fb2afa6a7a90e6",
+        "releaseDate": "2026-11-26T02:45:56Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4291166",
+          "awardID": "CN4291166-496362813fc64872b336fc136053f9d9",
+          "dateSigned": "2026-11-26T02:30:22Z",
+          "description": "Professional Translation and Video Editing of 10 additional cancer awareness videos in 10 languages (100 videos in total) ",
+          "items": [
+            {
+              "id": "82111804-b941078bc5a3442186dd9ce46e104b09",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "82111804"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-11-16T13:00:00Z",
+            "endDate": "2027-03-30T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "21780.00"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4291166-A1",
+              "releaseID": "prod-aaa6a487c1e04b47b1fb2afa6a7a90e6-e6e3c27846453f83920997052b250770",
+              "amendsReleaseID": "prod-aaa6a487c1e04b47b1fb2afa6a7a90e6-97d883182ef23f95854127234b2c2341"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4291166",
+          "notice": "CN4291166",
+          "released": "2026-11-26T02:30:22Z",
+          "description": "Professional Translation and Video Editing of 10 additional cancer awareness videos in 10 languages (100 videos in total)",
+          "agency": "Cancer Australia",
+          "agencyAbn": "21075951918",
+          "division": "Media and Communications Unit",
+          "supplier": "Ethnolink Pty Ltd trading as Ethnolink",
+          "supplierAbn": "49601462677",
+          "supplierState": "VIC",
+          "value": 20900,
+          "start": "2026-11-16T13:00:00Z",
+          "end": "2027-03-30T13:00:00Z",
+          "unspsc": "82111804",
+          "method": "Limited tender",
+          "amendment": false
+        }
+      },
+      {
+        "dateType": "contractLastModified",
+        "ocid": "prod-aaa6a487c1e04b47b1fb2afa6a7a90e6",
+        "releaseDate": "2026-11-26T02:45:56Z",
+        "tag": [
+          "contractAmendment"
+        ],
+        "contract": {
+          "id": "CN4291166",
+          "awardID": "CN4291166-496362813fc64872b336fc136053f9d9",
+          "dateSigned": "2026-11-26T02:30:22Z",
+          "description": "Professional Translation and Video Editing of 10 additional cancer awareness videos in 10 languages (100 videos in total) ",
+          "items": [
+            {
+              "id": "82111804-b941078bc5a3442186dd9ce46e104b09",
+              "classification": {
+                "scheme": "UNSPSC",
+                "id": "82111804"
+              }
+            }
+          ],
+          "period": {
+            "startDate": "2026-11-16T13:00:00Z",
+            "endDate": "2027-03-30T13:00:00Z"
+          },
+          "value": {
+            "currency": "AUD",
+            "amount": "21780.00"
+          },
+          "status": "active",
+          "amendments": [
+            {
+              "id": "CN4291166-A1",
+              "releaseID": "prod-aaa6a487c1e04b47b1fb2afa6a7a90e6-e6e3c27846453f83920997052b250770",
+              "amendsReleaseID": "prod-aaa6a487c1e04b47b1fb2afa6a7a90e6-97d883182ef23f95854127234b2c2341"
+            }
+          ]
+        },
+        "previous": {
+          "id": "CN4291166",
+          "notice": "CN4291166",
+          "released": "2026-11-26T02:45:56Z",
+          "description": "Professional Translation and Video Editing of 10 additional cancer awareness videos in 10 languages (100 videos in total)",
+          "agency": "Cancer Australia",
+          "agencyAbn": "21075951918",
+          "division": "Media and Communications Unit",
+          "supplier": "Ethnolink Pty Ltd trading as Ethnolink",
+          "supplierAbn": "49601462677",
+          "supplierState": "VIC",
+          "value": 21780,
+          "start": "2026-11-16T13:00:00Z",
+          "end": "2027-03-30T13:00:00Z",
+          "unspsc": "82111804",
+          "method": "Limited tender",
+          "amendment": true
+        }
+      },
       {
         "dateType": "contractLastModified",
         "ocid": "prod-e4bafc9bbf104263b6269b534685dfed",
@@ -141,177 +255,61 @@
           "method": "Open tender",
           "amendment": true
         }
-      },
-      {
-        "dateType": "contractLastModified",
-        "ocid": "prod-c936f8e549fb4795be7167b258ca7f16",
-        "releaseDate": "2026-11-25T04:57:33Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4288420",
-          "awardID": "CN4288420-e4bd049f0b79446da54ce7b24e6d41ff",
-          "dateSigned": "2026-11-12T03:57:40Z",
-          "description": "Repair Services",
-          "title": "4610006442",
-          "items": [
-            {
-              "id": "72100000-5bc417f60d83430fbfd3df9a6f609568",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "72100000"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2026-11-18T13:00:00Z",
-            "endDate": "2029-06-29T14:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "60397947.50"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4288420-A1",
-              "releaseID": "prod-c936f8e549fb4795be7167b258ca7f16-161c17bd3897318cb1d8f78bd2bee343",
-              "amendsReleaseID": "prod-c936f8e549fb4795be7167b258ca7f16-55284d9505a036ab932c055bed9cd602"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4288420",
-          "notice": "CN4288420",
-          "released": "2026-11-25T04:57:33Z",
-          "description": "Repair Services",
-          "agency": "Department of Defence",
-          "agencyAbn": "62950639680",
-          "division": "SP&I",
-          "supplier": "BY GROUP PTY LTD",
-          "supplierAbn": "88168458302",
-          "supplierState": "NSW",
-          "value": 60397947.5,
-          "start": "2026-11-18T13:00:00Z",
-          "end": "2029-06-29T14:00:00Z",
-          "unspsc": "72100000",
-          "method": "Limited tender",
-          "amendment": true
-        }
-      },
-      {
-        "dateType": "contractLastModified",
-        "ocid": "prod-0721ea968a1541c5b023a0f79962cbc6",
-        "releaseDate": "2026-11-25T04:50:25Z",
-        "tag": [
-          "contractAmendment"
-        ],
-        "contract": {
-          "id": "CN4288038",
-          "awardID": "CN4288038-68991149052f43d7900a2db59e428d48",
-          "dateSigned": "2026-11-10T23:52:38Z",
-          "description": "Marine Equipment",
-          "title": "3000886659",
-          "items": [
-            {
-              "id": "25110000-65b15ab2717d4a26b4e41a0562eb7c19",
-              "classification": {
-                "scheme": "UNSPSC",
-                "id": "25110000"
-              }
-            }
-          ],
-          "period": {
-            "startDate": "2026-10-21T13:00:00Z",
-            "endDate": "2027-01-21T13:00:00Z"
-          },
-          "value": {
-            "currency": "AUD",
-            "amount": "23513.05"
-          },
-          "status": "active",
-          "amendments": [
-            {
-              "id": "CN4288038-A1",
-              "releaseID": "prod-0721ea968a1541c5b023a0f79962cbc6-319e50a150f23fecb480ea7275bbe90b",
-              "amendsReleaseID": "prod-0721ea968a1541c5b023a0f79962cbc6-5a17d0a6124a31df9598c05a3f334281"
-            }
-          ]
-        },
-        "previous": {
-          "id": "CN4288038",
-          "notice": "CN4288038",
-          "released": "2026-11-25T04:50:25Z",
-          "description": "Marine Equipment",
-          "agency": "Department of Defence",
-          "agencyAbn": "62950639680",
-          "division": "JCG",
-          "supplier": "BIRDON PTY LTD",
-          "supplierAbn": "59002810255",
-          "supplierState": "NSW",
-          "value": 23513.05,
-          "start": "2026-10-21T13:00:00Z",
-          "end": "2027-01-21T13:00:00Z",
-          "unspsc": "25110000",
-          "method": "Limited tender",
-          "amendment": true
-        }
       }
     ]
   },
   "sample": [
     {
-      "id": "CN4284411",
-      "notice": "CN4284411",
-      "released": "2026-10-23T03:33:27Z",
-      "description": "Lamb Nutriotion Seminar logistics",
-      "agency": "Austrade",
-      "agencyAbn": "11764698227",
-      "division": "CORPORATE SERVICES GROUP",
-      "supplier": "JAPAN ADVERTISING",
-      "supplierAbn": null,
-      "supplierState": "Outside Australia",
-      "value": 38675.18,
-      "start": "2026-11-25T13:00:00Z",
-      "end": "2026-11-26T13:00:00Z",
-      "unspsc": "80141600",
-      "method": "Limited tender",
-      "amendment": false
-    },
-    {
-      "id": "CN4284071",
-      "notice": "CN4284071",
-      "released": "2026-10-21T05:19:41Z",
-      "description": "Program Review",
-      "agency": "Department of Foreign Affairs and Trade",
-      "agencyAbn": "47065634525",
-      "division": "FINANCE DIVISION",
-      "supplier": "Strategic Development Group Pty Ltd",
-      "supplierAbn": "39158001775",
-      "supplierState": "NSW",
-      "value": 152131.52,
-      "start": "2026-10-13T13:00:00Z",
-      "end": "2026-11-26T13:00:00Z",
-      "unspsc": "80100000",
+      "id": "CN4286012",
+      "notice": "CN4286012",
+      "released": "2026-11-02T03:44:04Z",
+      "description": "Rations",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "NAVY",
+      "supplier": "BIDFOOD AUSTRALIA LIMITED",
+      "supplierAbn": "33000228231",
+      "supplierState": "WA",
+      "value": 16008.56,
+      "start": "2026-10-22T13:00:00Z",
+      "end": "2026-11-27T13:00:00Z",
+      "unspsc": "50000000",
       "method": "Open tender",
       "amendment": false
     },
     {
-      "id": "CN4283784",
-      "notice": "CN4283784",
-      "released": "2026-10-20T22:18:59Z",
-      "description": "Vehicle Maintenance",
+      "id": "CN4286011",
+      "notice": "CN4286011",
+      "released": "2026-11-02T03:44:03Z",
+      "description": "Rations",
       "agency": "Department of Defence",
       "agencyAbn": "62950639680",
-      "division": "JCG",
-      "supplier": "TOURTEC INDUSTRIES",
-      "supplierAbn": "72604635556",
-      "supplierState": "QLD",
-      "value": 51216,
-      "start": "2026-10-07T13:00:00Z",
-      "end": "2026-11-26T13:00:00Z",
-      "unspsc": "78181500",
+      "division": "NAVY",
+      "supplier": "BIDFOOD AUSTRALIA LIMITED",
+      "supplierAbn": "33000228231",
+      "supplierState": "WA",
+      "value": 14598.44,
+      "start": "2026-10-22T13:00:00Z",
+      "end": "2026-11-27T13:00:00Z",
+      "unspsc": "50000000",
+      "method": "Open tender",
+      "amendment": false
+    },
+    {
+      "id": "CN4288135",
+      "notice": "CN4288135",
+      "released": "2026-11-11T02:45:49Z",
+      "description": "Vehicle Hire",
+      "agency": "Department of Defence",
+      "agencyAbn": "62950639680",
+      "division": "ARMY",
+      "supplier": "WELGEIST ENTERPRISES",
+      "supplierAbn": null,
+      "supplierState": "Outside Australia",
+      "value": 19363.76,
+      "start": "2026-11-08T13:00:00Z",
+      "end": "2026-11-27T13:00:00Z",
+      "unspsc": "25100000",
       "method": "Limited tender",
       "amendment": false
     }

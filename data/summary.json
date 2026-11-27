@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T01:46:23Z",
+  "generatedAt": "2026-11-27T08:53:42Z",
   "source": "AusTender OCDS API, Department of Finance, CC BY 3.0 AU",
   "settings": {
     "PUBLISHED_DAYS": 30,
@@ -11,11 +11,11 @@
     "HARD_SECONDS": 2400
   },
   "resumed": true,
-  "runs": 17,
+  "runs": 18,
   "datasetStarted": "2026-11-18T08:49:35Z",
   "cursors": {
-    "contractPublished": "2026-11-27T01:45:19Z",
-    "contractLastModified": "2026-11-27T01:45:19Z",
+    "contractPublished": "2026-11-27T08:52:39Z",
+    "contractLastModified": "2026-11-27T08:52:39Z",
     "contractEnd": "2027-11-28T00:00:00Z"
   },
   "horizon": {
@@ -27,24 +27,24 @@
   "perPull": {
     "contractPublished": {
       "windows": 1,
-      "releases": 323,
-      "from": "2026-11-25T01:47:46Z",
-      "to": "2026-11-27T01:45:19Z",
+      "releases": 460,
+      "from": "2026-11-26T01:45:19Z",
+      "to": "2026-11-27T08:52:39Z",
       "caughtUp": true,
-      "cursor": "2026-11-27T01:45:19Z"
+      "cursor": "2026-11-27T08:52:39Z"
     },
     "contractLastModified": {
       "windows": 1,
-      "releases": 1266,
-      "from": "2026-11-25T01:47:46Z",
-      "to": "2026-11-27T01:45:19Z",
+      "releases": 1244,
+      "from": "2026-11-26T01:45:19Z",
+      "to": "2026-11-27T08:52:39Z",
       "caughtUp": true,
-      "cursor": "2026-11-27T01:45:19Z"
+      "cursor": "2026-11-27T08:52:39Z"
     },
     "contractEnd": {
-      "windows": 1,
-      "releases": 50,
-      "from": "2027-11-27T00:00:00Z",
+      "windows": 0,
+      "releases": 0,
+      "from": "2027-11-28T00:00:00Z",
       "to": "2027-11-28T00:00:00Z",
       "caughtUp": true,
       "cursor": "2027-11-28T00:00:00Z"
@@ -52,36 +52,36 @@
   },
   "requests": 20,
   "pages": 20,
-  "seconds": 64,
+  "seconds": 63,
   "budgetSpent": false,
-  "windowsTried": 3,
-  "windowsOk": 3,
+  "windowsTried": 2,
+  "windowsOk": 2,
   "emptyWindows": 0,
-  "largestWindow": 1266,
+  "largestWindow": 1244,
   "windowsWithMorePages": 2,
-  "contractsBefore": 42198,
-  "contracts": 42484,
-  "contractsEndingWithinHorizon": 39193,
-  "amendedContracts": 14182,
-  "suppliers": 10086,
+  "contractsBefore": 42484,
+  "contracts": 42801,
+  "contractsEndingWithinHorizon": 39395,
+  "amendedContracts": 14248,
+  "suppliers": 10123,
   "agencies": 137,
-  "categories": 500,
-  "totalValue": 135993335717,
+  "categories": 501,
+  "totalValue": 146583578885,
   "earliestEnd": "1900-01-01T00:00:00Z",
   "latestEnd": "2051-02-27T13:00:00Z",
-  "bytes": 18881776,
+  "bytes": 19018984,
   "errors": [],
   "errorCount": 0,
   "diagnostics": {
     "tags": {
-      "contract": 944,
-      "contractAmendment": 695
+      "contract": 1172,
+      "contractAmendment": 532
     },
     "lastModified": {
-      "releases": 1266,
-      "amendments": 669,
-      "alsoInPublishedPull": 323,
-      "newToDataset": 70
+      "releases": 1244,
+      "amendments": 531,
+      "alsoInPublishedPull": 460,
+      "newToDataset": 53
     },
     "amendmentSamples": [
       {
@@ -125,7 +125,7 @@
         "previous": {
           "id": "CN4291166",
           "notice": "CN4291166",
-          "released": "2026-11-26T02:30:22Z",
+          "released": "2026-11-26T02:45:56Z",
           "description": "Professional Translation and Video Editing of 10 additional cancer awareness videos in 10 languages (100 videos in total)",
           "agency": "Cancer Australia",
           "agencyAbn": "21075951918",
@@ -133,12 +133,12 @@
           "supplier": "Ethnolink Pty Ltd trading as Ethnolink",
           "supplierAbn": "49601462677",
           "supplierState": "VIC",
-          "value": 20900,
+          "value": 21780,
           "start": "2026-11-16T13:00:00Z",
           "end": "2027-03-30T13:00:00Z",
           "unspsc": "82111804",
           "method": "Limited tender",
-          "amendment": false
+          "amendment": true
         }
       },
       {
@@ -200,59 +200,59 @@
       },
       {
         "dateType": "contractLastModified",
-        "ocid": "prod-e4bafc9bbf104263b6269b534685dfed",
-        "releaseDate": "2026-11-25T04:57:49Z",
+        "ocid": "prod-a65fd7c7ef294bc3870bed9b4e526261",
+        "releaseDate": "2026-11-27T01:07:35Z",
         "tag": [
           "contractAmendment"
         ],
         "contract": {
-          "id": "CN4288720",
-          "awardID": "CN4288720-276066d5ef9a472b9dd6842a8c1ed6a5",
-          "dateSigned": "2026-11-16T02:34:39Z",
-          "description": "Project Support Services",
-          "title": "4610006512",
+          "id": "CN4287801",
+          "awardID": "CN4287801-f9678084cf1f47ba84041fc4cb72e5f2",
+          "dateSigned": "2026-11-10T01:55:23Z",
+          "description": "CRN01/2026",
+          "title": "4610006346",
           "items": [
             {
-              "id": "92110000-44b6be852b0c405ca65fd18d6bb4bf05",
+              "id": "81110000-19284d5fa4aa48f4ae69fc8efc25ba5f",
               "classification": {
                 "scheme": "UNSPSC",
-                "id": "92110000"
+                "id": "81110000"
               }
             }
           ],
           "period": {
-            "startDate": "2026-11-18T13:00:00Z",
-            "endDate": "2027-06-29T14:00:00Z"
+            "startDate": "1900-01-01T00:00:00Z",
+            "endDate": "1900-01-01T00:00:00Z"
           },
           "value": {
             "currency": "AUD",
-            "amount": "64767.93"
+            "amount": "0.11"
           },
-          "status": "active",
+          "status": "cancelled",
           "amendments": [
             {
-              "id": "CN4288720-A1",
-              "releaseID": "prod-e4bafc9bbf104263b6269b534685dfed-ab71a65b1c3a39008cecea658fa362ab",
-              "amendsReleaseID": "prod-e4bafc9bbf104263b6269b534685dfed-915a6c4bd77638f784fe8f7a9ed28acb"
+              "id": "CN4287801-A1",
+              "releaseID": "prod-a65fd7c7ef294bc3870bed9b4e526261-222d6cdef16d331eb872aea1353e19f7",
+              "amendsReleaseID": "prod-a65fd7c7ef294bc3870bed9b4e526261-266ceec9d49b34589d9946d29b5492ee"
             }
           ]
         },
         "previous": {
-          "id": "CN4288720",
-          "notice": "CN4288720",
-          "released": "2026-11-25T04:57:49Z",
-          "description": "Project Support Services",
+          "id": "CN4287801",
+          "notice": "CN4287801",
+          "released": "2026-11-27T00:19:47Z",
+          "description": "CRN01/2026",
           "agency": "Department of Defence",
           "agencyAbn": "62950639680",
-          "division": "DDG",
-          "supplier": "FUJITSU AUSTRALIA LIMITED",
-          "supplierAbn": "19001011427",
+          "division": "SEG",
+          "supplier": "TELSTRA CORPORATION (ACCOUNTS)",
+          "supplierAbn": "33051775556",
           "supplierState": "ACT",
-          "value": 64767.93,
-          "start": "2026-11-18T13:00:00Z",
-          "end": "2027-06-29T14:00:00Z",
-          "unspsc": "92110000",
-          "method": "Open tender",
+          "value": 0.11,
+          "start": "1900-01-01T00:00:00Z",
+          "end": "1900-01-01T00:00:00Z",
+          "unspsc": "81110000",
+          "method": "Limited tender",
           "amendment": true
         }
       }

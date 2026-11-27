@@ -1,16 +1,17 @@
 {
-  "generatedAt": "2026-11-27T01:46:35Z",
-  "dataUpdated": "2026-11-27T01:46:23Z",
+  "generatedAt": "2026-11-27T08:53:53Z",
+  "dataUpdated": "2026-11-27T08:53:42Z",
   "today": "2026-11-27",
   "ok": true,
   "problems": [],
   "problemCount": 0,
-  "categories": 500,
-  "reports": 500,
-  "files": 2000,
-  "bytes": 22899731,
-  "seconds": 2.4,
-  "contractsInReports": 42484,
+  "categories": 501,
+  "reports": 501,
+  "reportsWithTitle": 497,
+  "files": 2004,
+  "bytes": 23261326,
+  "seconds": 2.6,
+  "contractsInReports": 42801,
   "medianContracts": 13,
   "categoriesBySize": [
     {
@@ -31,119 +32,130 @@
     },
     {
       "contracts": "1,000 or more",
-      "categories": 8
+      "categories": 9
     }
   ],
   "largest": [
     {
       "code": "80111600",
+      "title": "Temporary personnel services",
       "label": "Labour Hire",
-      "contracts": 7010,
-      "suppliers": 923,
+      "contracts": 7044,
+      "suppliers": 929,
       "agencies": 100,
-      "value": 4571339884,
-      "soonCount": 6760,
-      "bytes": 2756813
+      "value": 4583165986,
+      "soonCount": 6775,
+      "bytes": 2770802
     },
     {
       "code": "80120000",
+      "title": "Legal services",
       "label": "Legal Services",
-      "contracts": 3374,
-      "suppliers": 557,
+      "contracts": 3396,
+      "suppliers": 561,
       "agencies": 89,
-      "value": 1111577952,
-      "soonCount": 3137,
-      "bytes": 1314380
+      "value": 1114536884,
+      "soonCount": 3144,
+      "bytes": 1323043
     },
     {
       "code": "81110000",
+      "title": "Computer services",
       "label": "Labour Hire",
-      "contracts": 2451,
-      "suppliers": 552,
-      "agencies": 65,
-      "value": 6269214174,
-      "soonCount": 2350,
-      "bytes": 1002871
+      "contracts": 2455,
+      "suppliers": 554,
+      "agencies": 66,
+      "value": 6269706654,
+      "soonCount": 2352,
+      "bytes": 1005510
     },
     {
       "code": "43230000",
+      "title": "Software",
       "label": "Software",
-      "contracts": 1708,
-      "suppliers": 760,
+      "contracts": 1711,
+      "suppliers": 762,
       "agencies": 87,
-      "value": 1595692054,
+      "value": 1596750365,
       "soonCount": 1598,
-      "bytes": 803178
+      "bytes": 805043
     },
     {
       "code": "86000000",
+      "title": "Education and Training Services",
       "label": "Training Services",
-      "contracts": 1580,
-      "suppliers": 768,
+      "contracts": 1584,
+      "suppliers": 770,
       "agencies": 86,
-      "value": 2095160630,
-      "soonCount": 1434,
-      "bytes": 790474
+      "value": 2095556321,
+      "soonCount": 1438,
+      "bytes": 793000
     },
     {
       "code": "80100000",
+      "title": "Management advisory services",
       "label": "Management advisory services",
-      "contracts": 1258,
-      "suppliers": 562,
+      "contracts": 1264,
+      "suppliers": 565,
       "agencies": 98,
-      "value": 1547589332,
-      "soonCount": 1204,
-      "bytes": 648021
+      "value": 1549970020,
+      "soonCount": 1208,
+      "bytes": 651413
     },
     {
       "code": "80161500",
+      "title": "Management support services",
       "label": "Project Support Services",
-      "contracts": 1194,
-      "suppliers": 395,
+      "contracts": 1203,
+      "suppliers": 397,
       "agencies": 46,
-      "value": 4545010976,
-      "soonCount": 1146,
-      "bytes": 511129
+      "value": 4572623573,
+      "soonCount": 1149,
+      "bytes": 514753
     },
     {
       "code": "93140000",
+      "title": "Community and social services",
       "label": "Delivery of Counselling Services",
       "contracts": 1090,
       "suppliers": 1076,
       "agencies": 11,
       "value": 142323619,
       "soonCount": 1077,
-      "bytes": 635587
+      "bytes": 636027
     },
     {
       "code": "72100000",
+      "title": "Building construction and support and maintenance and repair services",
       "label": "Project Management",
-      "contracts": 994,
-      "suppliers": 322,
+      "contracts": 1000,
+      "suppliers": 324,
       "agencies": 43,
-      "value": 10097239745,
-      "soonCount": 861,
-      "bytes": 440984
+      "value": 10139032213,
+      "soonCount": 863,
+      "bytes": 444205
     },
     {
-      "code": "81112200",
-      "label": "Maintenance and support",
-      "contracts": 916,
-      "suppliers": 499,
-      "agencies": 90,
-      "value": 1041059864,
-      "soonCount": 868,
-      "bytes": 477915
+      "code": "43210000",
+      "title": "Computer Equipment and Accessories",
+      "label": "ICT Equipment",
+      "contracts": 931,
+      "suppliers": 125,
+      "agencies": 55,
+      "value": 981713659,
+      "soonCount": 771,
+      "bytes": 366365
     }
   ],
   "smallest": {
     "code": "95122403",
+    "title": "Warehouse store",
     "label": null,
     "contracts": 1,
     "suppliers": 1,
     "agencies": 1,
     "value": 91879,
     "soonCount": 1,
-    "bytes": 4785
+    "bytes": 5197
   }
 }

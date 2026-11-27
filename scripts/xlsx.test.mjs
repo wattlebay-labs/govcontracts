@@ -2,51 +2,9 @@
 // Every workbook here is made up, built in the test from its parts.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { deflateRawSync } from "node:zlib";
+import { zip } from "./made-up-workbook.mjs";
 import { columnIndex, decodeXml, readWorkbook, unzip } from "./xlsx.mjs";
 import { coverage, describeWorkbook, findCodeTable, pickResource } from "./probe-codeset.mjs";
-
-// A zip archive of the given files. `stored` names are kept without compression.
-function zip(files, { stored = [], comment = "" } = {}) {
-  const locals = [];
-  const central = [];
-  let offset = 0;
-  for (const [name, text] of Object.entries(files)) {
-    const data = Buffer.isBuffer(text) ? text : Buffer.from(text, "utf8");
-    const keep = stored.includes(name);
-    const packed = keep ? data : deflateRawSync(data);
-    const nameBuf = Buffer.from(name, "utf8");
-    const local = Buffer.alloc(30);
-    local.writeUInt32LE(0x04034b50, 0);
-    local.writeUInt16LE(20, 4);
-    local.writeUInt16LE(keep ? 0 : 8, 8);
-    local.writeUInt32LE(packed.length, 18);
-    local.writeUInt32LE(data.length, 22);
-    local.writeUInt16LE(nameBuf.length, 26);
-    locals.push(local, nameBuf, packed);
-    const entry = Buffer.alloc(46);
-    entry.writeUInt32LE(0x02014b50, 0);
-    entry.writeUInt16LE(20, 4);
-    entry.writeUInt16LE(20, 6);
-    entry.writeUInt16LE(keep ? 0 : 8, 10);
-    entry.writeUInt32LE(packed.length, 20);
-    entry.writeUInt32LE(data.length, 24);
-    entry.writeUInt16LE(nameBuf.length, 28);
-    entry.writeUInt32LE(offset, 42);
-    central.push(entry, nameBuf);
-    offset += 30 + nameBuf.length + packed.length;
-  }
-  const directory = Buffer.concat(central);
-  const commentBuf = Buffer.from(comment, "utf8");
-  const end = Buffer.alloc(22);
-  end.writeUInt32LE(0x06054b50, 0);
-  end.writeUInt16LE(Object.keys(files).length, 8);
-  end.writeUInt16LE(Object.keys(files).length, 10);
-  end.writeUInt32LE(directory.length, 12);
-  end.writeUInt32LE(offset, 16);
-  end.writeUInt16LE(commentBuf.length, 20);
-  return Buffer.concat([...locals, directory, end, commentBuf]);
-}
 
 const WORKBOOK = `<?xml version="1.0" encoding="UTF-8"?>
 <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">

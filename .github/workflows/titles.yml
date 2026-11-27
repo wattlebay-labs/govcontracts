@@ -1,0 +1,38 @@
+name: make-titles
+# Started by hand, not by the daily run. Makes data/unspsc-titles.json: the
+# title of each UNSPSC code AusTender uses, read once from the "AusTender
+# Customised UNSPSC Codeset" workbook the Department of Finance publishes on
+# data.gov.au (Creative Commons Attribution 3.0 Australia). The site build
+# reads that file; it never fetches the workbook itself. Run this again only
+# when the Department publishes a new codeset.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: make-titles
+  cancel-in-progress: false
+
+jobs:
+  titles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test scripts/xlsx.test.mjs scripts/make-titles.test.mjs
+      # Writes nothing, and fails, unless the catalogue still gives the open
+      # licence and the workbook holds a clean table of codes.
+      - run: node scripts/make-titles.mjs
+      - name: Commit the titles
+        run: |
+          git config user.name "govcontracts-bot"
+          git config user.email "govcontracts-bot@users.noreply.github.com"
+          git add data/unspsc-titles.json
+          git commit -m "Category titles from the AusTender customised UNSPSC codeset" || echo "nothing to commit"
+          git pull --rebase --autostash
+          git push

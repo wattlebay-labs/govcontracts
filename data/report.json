@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-28T08:48:51Z",
-  "dataUpdated": "2026-11-28T08:48:40Z",
+  "generatedAt": "2026-11-28T08:51:48Z",
+  "dataUpdated": "2026-11-28T08:51:36Z",
   "today": "2026-11-28",
   "ok": true,
   "problems": [],
@@ -10,7 +10,7 @@
   "reportsWithTitle": 497,
   "files": 2004,
   "bytes": 23271848,
-  "seconds": 2.2,
+  "seconds": 2.1,
   "contractsInReports": 42832,
   "medianContracts": 13,
   "categoriesBySize": [

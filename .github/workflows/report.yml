@@ -19,14 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
+          package-manager-cache: false
       # The newest dataset saved by fetch-data. Read only: this workflow
       # never saves a cache.
       - name: Restore the dataset
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: |
             data/contracts.json
@@ -42,7 +43,7 @@ jobs:
         run: node scripts/report.mjs
         env:
           REPORT_CODES: ${{ inputs.codes }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: category-reports-${{ github.run_number }}
           path: reports/

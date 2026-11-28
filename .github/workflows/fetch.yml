@@ -52,28 +52,6 @@ jobs:
           key: dataset-v1-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             dataset-v1-
-      # For the change of cache action only: the dataset on hand was saved by
-      # the release before this one. If the step above found nothing, ask the
-      # way it was saved, so the change cannot cost the dataset. Taken out
-      # again once a run has restored a dataset with the step above.
-      - name: Restore dataset the old way if that found nothing
-        if: ${{ hashFiles('data/contracts.json') == '' }}
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            data/contracts.json
-            data/state.json
-          key: dataset-v1-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            dataset-v1-
-      # Also for the change only: a dataset was saved hours ago, so finding
-      # none now would be a fault of the change, not a lost cache. Stop
-      # before a new, near-empty dataset is started and published.
-      - name: Stop if no dataset was restored either way
-        if: ${{ hashFiles('data/contracts.json') == '' }}
-        run: |
-          echo "::error::No dataset was restored by either release of the cache action."
-          exit 1
       - run: node scripts/fetch.mjs
         env:
           # Seconds of fetching per run; the next run resumes where this stops.

@@ -121,7 +121,8 @@ or other work out of this repo, its commits and its site.
   Against the dataset of 26 Nov, 495 of 499 codes had a title; without one: 81111812, 81112500, 72130000,
   80141602. The description label matched the title in 38 of 233 codes and differed in 195 (81110000 is
   "Computer services"; its commonest description is "Labour Hire"), which is why the label is never a heading.
-  Do not push changes to `scripts/probe-codeset.mjs` without a reason: a push to it runs the probe.
+  Since 28 Nov 2026 `probe-codeset` and `probe-sources` start by hand only (a push no longer runs
+  either); both are kept as a record of the first look and are not needed for anything.
 - `scripts/xlsx.mjs` reads the cell text of a workbook with Node's own `zlib` (no library): `readWorkbook(buffer)`
   gives `[{ name, rows }]`, every cell a string. `scripts/made-up-workbook.mjs` makes workbooks for the tests
   (`zip`, `workbookOf(rows)`). The cloud shell cannot see the real workbook, only what a workflow commits.
@@ -207,9 +208,20 @@ or other work out of this repo, its commits and its site.
   the `fetch` job before `deploy` starts. The previous deploy stays live until a new one succeeds.
 - The site shows no contact details and does not link to this repository. Keep it that way until
   told otherwise.
-- The log warns that `actions/checkout@v4` and `actions/setup-node@v4` target Node 20 and are forced
-  onto Node 24 (they run). Moving the `@v4` actions to current majors is a small later job; check
-  the cache action's notes first, because the dataset lives in that cache.
+- Action versions (moved 28 Nov 2026, from each action's own releases page or README read that day):
+  `checkout@v7`, `setup-node@v7`, `upload-artifact@v7`, `cache/restore@v6` and `cache/save@v6` in all
+  five workflows; the Pages actions stay at `@v5`. Before that the `@v4` releases targeted Node 20 and
+  the runner forced them onto Node 24. `setup-node` has `package-manager-cache: false` (since v5 it
+  can cache packages by itself when a `package.json` names a package manager; there is none here).
+  What the runs showed: the v6 restore action read the dataset the v4 action had saved (run 24) and the
+  one the v6 action saved (`make-report` run 2), so the change cost no data; `git pull --rebase` and
+  `git push` in a later step still work with `checkout@v7` (it keeps the token in a file under the
+  runner's temp folder instead of `.git/config`); `upload-artifact@v7` still zips by default
+  (`archive: true`). Not read: the cache action's releases page (refused to the reading tool), so
+  nothing is known from its notes about v5 or v6 beyond its README. `make-titles` and the two probe
+  workflows were changed the same way and have not been run since.
+- Do not read the `fetch` job's log from its end with many lines: the Pages packaging step lists every
+  file of the site there. The steps' results, the committed summaries and a short tail are enough.
 
 ## How to run things
 - The cloud shell has no internet. Push code; let GitHub Actions run it; pull the results.

@@ -1,12 +1,9 @@
 name: probe-sources
 # One-off diagnostic: fetch each candidate public data source once and
 # commit a small sample so the pipeline can be written against real data.
+# Its job is done, so it starts by hand only: a push no longer runs it.
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/probe.yml"
-      - "scripts/probe.mjs"
 
 permissions:
   contents: write
@@ -15,10 +12,11 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
+          package-manager-cache: false
       - run: node scripts/probe.mjs
       - name: Commit samples
         run: |

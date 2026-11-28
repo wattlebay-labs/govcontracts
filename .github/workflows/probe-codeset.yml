@@ -4,13 +4,10 @@ name: probe-codeset
 # data.gov.au. Asks the catalogue for the dataset's licence and the workbook's
 # address, fetches the workbook once, compares its codes with the contract
 # dataset, and commits what it found as probe/codeset.json. Nothing here
-# touches the site.
+# touches the site. Its job is done (the titles now come from make-titles),
+# so it starts by hand only: a push no longer runs it.
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/probe-codeset.yml"
-      - "scripts/probe-codeset.mjs"
 
 permissions:
   contents: write
@@ -20,15 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
+          package-manager-cache: false
       - run: node --test scripts/xlsx.test.mjs
       # The newest dataset saved by fetch-data, to count how many of its
       # codes get a title. Read only: this workflow never saves a cache.
       - name: Restore the dataset
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: |
             data/contracts.json

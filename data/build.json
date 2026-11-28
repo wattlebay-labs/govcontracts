@@ -1,36 +1,36 @@
 {
-  "generatedAt": "2026-11-27T08:53:48Z",
-  "dataUpdated": "2026-11-27T08:53:42Z",
+  "generatedAt": "2026-11-28T01:28:58Z",
+  "dataUpdated": "2026-11-28T01:28:52Z",
   "siteUrl": "https://wattlebay-labs.github.io/govcontracts",
-  "today": "2026-11-27",
+  "today": "2026-11-28",
   "pages": {
-    "total": 10795,
+    "total": 10796,
     "home": 1,
     "category": 501,
     "agency": 137,
-    "supplier": 10123,
+    "supplier": 10124,
     "index": 30,
     "other": 3
   },
-  "directories": 10794,
-  "bytes": 65101967,
+  "directories": 10795,
+  "bytes": 65086839,
   "largestPage": {
     "path": "suppliers/a/index.html",
     "bytes": 169292
   },
   "seconds": 3.8,
-  "records": 42801,
+  "records": 42832,
   "contracts": {
-    "count": 42801,
-    "value": 146583578885.28998,
-    "soonCount": 39541,
-    "soonValue": 121826482242.46031
+    "count": 42832,
+    "value": 146665234962.84,
+    "soonCount": 39405,
+    "soonValue": 121816953944.44032
   },
-  "suppliers": 10123,
+  "suppliers": 10124,
   "agencies": 137,
   "categories": 501,
   "skipped": {
-    "noSupplierAbn": 3273,
+    "noSupplierAbn": 3285,
     "noCategory": 0,
     "noAgency": 0,
     "badEndDate": 19,
@@ -41,43 +41,43 @@
   "months": [
     {
       "ym": "2026-11",
-      "count": 1286,
-      "value": 1091936037.5099986
+      "count": 1106,
+      "value": 960632621.6899981
     },
     {
       "ym": "2026-12",
-      "count": 5892,
-      "value": 26866976070.14996
+      "count": 5889,
+      "value": 26858877535.599957
     },
     {
       "ym": "2027-01",
       "count": 2065,
-      "value": 2130250772.3699992
+      "value": 2129969939.6399992
     },
     {
       "ym": "2027-02",
       "count": 2061,
-      "value": 2521572373.4800005
+      "value": 2521593819.8900003
     },
     {
       "ym": "2027-03",
-      "count": 2512,
-      "value": 5832791412.349999
+      "count": 2516,
+      "value": 5833523426.65
     },
     {
       "ym": "2027-04",
-      "count": 1725,
-      "value": 1954092776.059998
+      "count": 1724,
+      "value": 1953696776.059998
     },
     {
       "ym": "2027-05",
-      "count": 1803,
-      "value": 4459841150.919998
+      "count": 1805,
+      "value": 4468289705.289997
     },
     {
       "ym": "2027-06",
-      "count": 15280,
-      "value": 58038402713.50937
+      "count": 15286,
+      "value": 58039876140.69936
     },
     {
       "ym": "2027-07",
@@ -92,7 +92,7 @@
     {
       "ym": "2027-09",
       "count": 1748,
-      "value": 6483319263.519988
+      "value": 6483330795.389988
     },
     {
       "ym": "2027-10",
@@ -101,8 +101,8 @@
     },
     {
       "ym": "2027-11",
-      "count": 623,
-      "value": 2462138340.34
+      "count": 659,
+      "value": 2582001851.28
     }
   ],
   "categoriesWithLabel": 235,
@@ -144,9 +144,9 @@
         "Community Nursing",
         "Health Technology Assessment"
       ],
-      "count": 563,
-      "soonCount": 500,
-      "soonValue": 10785022686
+      "count": 564,
+      "soonCount": 498,
+      "soonValue": 10784856486
     },
     {
       "code": "93141805",
@@ -170,9 +170,9 @@
         "Building Works",
         "Refurbishment Works"
       ],
-      "count": 1000,
-      "soonCount": 863,
-      "soonValue": 7647597123
+      "count": 1003,
+      "soonCount": 859,
+      "soonValue": 7585415591
     },
     {
       "code": "25102000",
@@ -184,8 +184,8 @@
         "Vehicle Maintenance"
       ],
       "count": 112,
-      "soonCount": 109,
-      "soonValue": 6142007900
+      "soonCount": 107,
+      "soonValue": 6141735994
     },
     {
       "code": "81110000",
@@ -197,8 +197,8 @@
         "ICT Contractor Services"
       ],
       "count": 2455,
-      "soonCount": 2352,
-      "soonValue": 5596272325
+      "soonCount": 2350,
+      "soonValue": 5595779815
     },
     {
       "code": "92110000",
@@ -240,6 +240,19 @@
       "soonValue": 4530344398
     },
     {
+      "code": "43190000",
+      "title": "Communications Devices and Accessories",
+      "label": "Communications Devices and Accessories",
+      "typical": [
+        "Communications Devices and Accessories",
+        "Communication Equipment",
+        "Communications Equipment"
+      ],
+      "count": 219,
+      "soonCount": 200,
+      "soonValue": 4243392046
+    },
+    {
       "code": "80111600",
       "title": "Temporary personnel services",
       "label": "Labour Hire",
@@ -248,45 +261,32 @@
         "Temporary Personnel",
         "ICT Labour Hire"
       ],
-      "count": 7044,
-      "soonCount": 6775,
-      "soonValue": 4216866077
-    },
-    {
-      "code": "80161500",
-      "title": "Management support services",
-      "label": "Project Support Services",
-      "typical": [
-        "Project Support Services",
-        "Management Support Services",
-        "Support Services"
-      ],
-      "count": 1203,
-      "soonCount": 1149,
-      "soonValue": 4177463027
+      "count": 7049,
+      "soonCount": 6763,
+      "soonValue": 4212782153
     }
   ],
   "topAgencies": [
     {
       "name": "Department of Defence",
       "slug": "department-of-defence",
-      "count": 11121,
-      "soonCount": 9769,
-      "soonValue": 66500168560
+      "count": 11125,
+      "soonCount": 9674,
+      "soonValue": 66470427225
     },
     {
       "name": "Department of Employment and Workplace Relations",
       "slug": "department-of-employment-and-workplace-relations",
       "count": 1321,
-      "soonCount": 1302,
-      "soonValue": 9006497744
+      "soonCount": 1299,
+      "soonValue": 9005458303
     },
     {
       "name": "Department of Home Affairs",
       "slug": "department-of-home-affairs",
-      "count": 1520,
-      "soonCount": 1429,
-      "soonValue": 7492499356
+      "count": 1521,
+      "soonCount": 1430,
+      "soonValue": 7495018327
     },
     {
       "name": "Services Australia",
@@ -299,8 +299,8 @@
       "name": "Department of Health, Disability and Ageing",
       "slug": "department-of-health-disability-and-ageing",
       "count": 2008,
-      "soonCount": 1859,
-      "soonValue": 4248425836
+      "soonCount": 1855,
+      "soonValue": 4247880171
     }
   ]
 }

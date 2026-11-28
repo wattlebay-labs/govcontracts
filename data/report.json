@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-27T08:53:53Z",
-  "dataUpdated": "2026-11-27T08:53:42Z",
-  "today": "2026-11-27",
+  "generatedAt": "2026-11-28T01:29:04Z",
+  "dataUpdated": "2026-11-28T01:28:52Z",
+  "today": "2026-11-28",
   "ok": true,
   "problems": [],
   "problemCount": 0,
@@ -9,14 +9,14 @@
   "reports": 501,
   "reportsWithTitle": 497,
   "files": 2004,
-  "bytes": 23261326,
-  "seconds": 2.6,
-  "contractsInReports": 42801,
+  "bytes": 23271848,
+  "seconds": 2.4,
+  "contractsInReports": 42832,
   "medianContracts": 13,
   "categoriesBySize": [
     {
       "contracts": "1 to 9",
-      "categories": 207
+      "categories": 206
     },
     {
       "contracts": "10 to 49",
@@ -24,7 +24,7 @@
     },
     {
       "contracts": "50 to 199",
-      "categories": 77
+      "categories": 78
     },
     {
       "contracts": "200 to 999",
@@ -40,23 +40,23 @@
       "code": "80111600",
       "title": "Temporary personnel services",
       "label": "Labour Hire",
-      "contracts": 7044,
-      "suppliers": 929,
+      "contracts": 7049,
+      "suppliers": 930,
       "agencies": 100,
-      "value": 4583165986,
-      "soonCount": 6775,
-      "bytes": 2770802
+      "value": 4605493560,
+      "soonCount": 6763,
+      "bytes": 2772596
     },
     {
       "code": "80120000",
       "title": "Legal services",
       "label": "Legal Services",
-      "contracts": 3396,
+      "contracts": 3397,
       "suppliers": 561,
       "agencies": 89,
-      "value": 1114536884,
-      "soonCount": 3144,
-      "bytes": 1323043
+      "value": 1115040338,
+      "soonCount": 3138,
+      "bytes": 1323259
     },
     {
       "code": "81110000",
@@ -66,30 +66,30 @@
       "suppliers": 554,
       "agencies": 66,
       "value": 6269706654,
-      "soonCount": 2352,
-      "bytes": 1005510
+      "soonCount": 2350,
+      "bytes": 1005464
     },
     {
       "code": "43230000",
       "title": "Software",
       "label": "Software",
-      "contracts": 1711,
+      "contracts": 1712,
       "suppliers": 762,
       "agencies": 87,
-      "value": 1596750365,
-      "soonCount": 1598,
-      "bytes": 805043
+      "value": 1596905604,
+      "soonCount": 1599,
+      "bytes": 805404
     },
     {
       "code": "86000000",
       "title": "Education and Training Services",
       "label": "Training Services",
-      "contracts": 1584,
-      "suppliers": 770,
+      "contracts": 1585,
+      "suppliers": 771,
       "agencies": 86,
-      "value": 2095556321,
-      "soonCount": 1438,
-      "bytes": 793000
+      "value": 2096045821,
+      "soonCount": 1428,
+      "bytes": 793385
     },
     {
       "code": "80100000",
@@ -99,19 +99,19 @@
       "suppliers": 565,
       "agencies": 98,
       "value": 1549970020,
-      "soonCount": 1208,
-      "bytes": 651413
+      "soonCount": 1205,
+      "bytes": 651323
     },
     {
       "code": "80161500",
       "title": "Management support services",
       "label": "Project Support Services",
-      "contracts": 1203,
+      "contracts": 1204,
       "suppliers": 397,
       "agencies": 46,
-      "value": 4572623573,
-      "soonCount": 1149,
-      "bytes": 514753
+      "value": 4572658831,
+      "soonCount": 1150,
+      "bytes": 515128
     },
     {
       "code": "93140000",
@@ -128,12 +128,12 @@
       "code": "72100000",
       "title": "Building construction and support and maintenance and repair services",
       "label": "Project Management",
-      "contracts": 1000,
+      "contracts": 1003,
       "suppliers": 324,
       "agencies": 43,
-      "value": 10139032213,
-      "soonCount": 863,
-      "bytes": 444205
+      "value": 10142191164,
+      "soonCount": 859,
+      "bytes": 445083
     },
     {
       "code": "43210000",
@@ -143,8 +143,8 @@
       "suppliers": 125,
       "agencies": 55,
       "value": 981713659,
-      "soonCount": 771,
-      "bytes": 366365
+      "soonCount": 769,
+      "bytes": 366307
     }
   ],
   "smallest": {
